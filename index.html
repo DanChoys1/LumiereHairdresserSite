@@ -140,59 +140,6 @@
             box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
         }
 
-        /* Mobile Menu */
-        .mobile-menu {
-            display: none;
-            font-size: 24px;
-            cursor: pointer;
-            z-index: 1002;
-            background: none;
-            border: none;
-            color: var(--dark);
-        }
-
-        .mobile-nav {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 100%;
-            max-width: 400px;
-            height: 100vh;
-            background: white;
-            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-            transition: var(--transition);
-            z-index: 1001;
-            padding: 100px 30px 30px;
-            overflow-y: auto;
-        }
-
-        .mobile-nav.active {
-            right: 0;
-        }
-
-        .mobile-nav-links {
-            list-style: none;
-        }
-
-        .mobile-nav-links li {
-            margin-bottom: 25px;
-        }
-
-        .mobile-nav-links a {
-            text-decoration: none;
-            color: var(--dark);
-            font-size: 20px;
-            font-weight: 500;
-            transition: var(--transition);
-            display: block;
-            padding: 10px 0;
-        }
-
-        .mobile-nav-links a:hover {
-            color: var(--primary);
-            transform: translateX(10px);
-        }
-
         .close-menu {
             position: absolute;
             top: 30px;
@@ -789,9 +736,9 @@
                 display: none;
             }
 
-            .mobile-menu {
+            /* .mobile-menu {
                 display: block;
-            }
+            } */
 
             .hero-buttons {
                 flex-direction: column;
@@ -842,7 +789,7 @@
                 height: 250px;
             }
 
-            .mobile-nav {
+            /* .mobile-nav {
                 width: 100%;
                 max-width: 300px;
                 padding: 90px 25px 25px;
@@ -850,7 +797,7 @@
 
             .mobile-nav-links a {
                 font-size: 18px;
-            }
+            } */
 
             .close-menu {
                 top: 25px;
@@ -894,10 +841,10 @@
                 transform: translateX(-50%);
             }
 
-            .mobile-nav {
+            /* .mobile-nav {
                 max-width: 280px;
                 padding: 80px 20px 20px;
-            }
+            } */
 
             .team-grid {
                 max-width: 100%;
@@ -918,38 +865,97 @@
             }
         }
 
-        /* Улучшения для мобильного меню */
-.mobile-nav {
-    z-index: 1003; /* Повышен z-index */
+/* Mobile Menu - ПОЛНОСТЬЮ ПЕРЕПИСАННЫЕ СТИЛИ */
+.mobile-menu {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1001;
+    background: none;
+    border: none;
+    color: var(--dark);
+    position: relative;
 }
 
-.mobile-menu {
-    z-index: 1004; /* Выше чем меню */
+.mobile-nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 300px;
+    height: 100vh;
+    background: white;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s ease-in-out;
+    z-index: 1000;
+    padding: 80px 20px 20px;
+    overflow-y: auto;
+}
+
+.mobile-nav.active {
+    right: 0;
+}
+
+.mobile-nav-links {
+    list-style: none;
+}
+
+.mobile-nav-links li {
+    margin-bottom: 20px;
+}
+
+.mobile-nav-links a {
+    text-decoration: none;
+    color: var(--dark);
+    font-size: 18px;
+    font-weight: 500;
+    transition: var(--transition);
+    display: block;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.mobile-nav-links a:hover {
+    color: var(--primary);
+    transform: translateX(10px);
 }
 
 .close-menu {
-    z-index: 1005; /* Самый высокий */
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: var(--dark);
+    z-index: 1002;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Улучшение плавного скролла */
-html {
-    scroll-behavior: smooth;
+/* Overlay для фона */
+.mobile-nav-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 999;
 }
 
-/* Гарантия что header всегда поверх всего */
-header {
-    z-index: 1002 !important;
+.mobile-nav-overlay.active {
+    display: block;
 }
 
-/* Улучшение отзывчивости на тач-устройствах */
-@media (max-width: 768px) {
-    .mobile-nav-links a {
-        padding: 15px 0;
-        border-bottom: 1px solid rgba(0,0,0,0.1);
-    }
-    
-    .mobile-nav-links li:last-child a {
-        border-bottom: none;
+@media (max-width: 992px) {
+    .mobile-menu {
+        display: block;
     }
 }
     </style>
@@ -990,6 +996,7 @@ header {
             <li><a href="#contact">Контакты</a></li>
         </ul>
     </div>
+    <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
@@ -1737,99 +1744,85 @@ ${formData.message ? `💬 Пожелания: ${formData.message}` : ''}
     </footer>
 
     <script>
-       // Mobile Menu Functionality
-const mobileMenu = document.getElementById('mobileMenu');
-const mobileNav = document.getElementById('mobileNav');
-const closeMenu = document.getElementById('closeMenu');
-
-// Open mobile menu
-mobileMenu.addEventListener('click', (e) => {
-    e.stopPropagation();
-    mobileNav.classList.add('active');
-    document.body.style.overflow = 'hidden';
-});
-
-// Close mobile menu
-closeMenu.addEventListener('click', () => {
-    mobileNav.classList.remove('active');
-    document.body.style.overflow = '';
-});
-
-// Close mobile menu when clicking on links
-const mobileNavLinks = document.querySelectorAll('.mobile-nav-links a');
-mobileNavLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-        // Закрываем меню
-        mobileNav.classList.remove('active');
-        document.body.style.overflow = '';
-        
-        // Плавный скролл к секции
-        const targetId = link.getAttribute('href');
-        if (targetId && targetId !== '#') {
-            e.preventDefault();
-            smoothScrollToSection(targetId);
-        }
-    });
-});
-
-// Close mobile menu when clicking outside
-document.addEventListener('click', (e) => {
-    if (mobileNav.classList.contains('active') && 
-        !mobileNav.contains(e.target) && 
-        !mobileMenu.contains(e.target)) {
-        mobileNav.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-});
-
-// Enhanced smooth scroll function
-function smoothScrollToSection(targetId) {
-    const targetElement = document.querySelector(targetId);
-    if (targetElement) {
-        const headerHeight = document.getElementById('header').offsetHeight;
-        const targetPosition = targetElement.offsetTop - headerHeight;
-        
-        window.scrollTo({
-            top: targetPosition,
-            behavior: 'smooth'
-        });
-    }
-}
-
-// Smooth scroll for all anchor links (desktop and mobile)
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        const href = this.getAttribute('href');
-        
-        // Пропускаем ссылки без якоря или те, которые уже обработаны
-        if (href === '#' || this.classList.contains('cta-button')) {
-            return;
-        }
-        
-        e.preventDefault();
-        
-        // Закрываем мобильное меню если открыто
-        if (mobileNav.classList.contains('active')) {
-            mobileNav.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-        
-        smoothScrollToSection(href);
-    });
-});
-
-// Header scroll effect
-window.addEventListener('scroll', () => {
-    const header = document.getElementById('header');
-    if (window.scrollY > 100) {
-        header.classList.add('scrolled');
-    } else {
-        header.classList.remove('scrolled');
-    }
-});
-
-// Add loading animation
+   // Mobile Menu - ПРОСТОЙ И РАБОЧИЙ ВАРИАНТ
 document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileNav = document.getElementById('mobileNav');
+    const closeMenu = document.getElementById('closeMenu');
+    const mobileNavOverlay = document.getElementById('mobileNavOverlay');
+
+    // Функция открытия меню
+    function openMobileMenu() {
+        console.log('Opening mobile menu');
+        mobileNav.classList.add('active');
+        mobileNavOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    // Функция закрытия меню
+    function closeMobileMenu() {
+        console.log('Closing mobile menu');
+        mobileNav.classList.remove('active');
+        mobileNavOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    // Открытие меню
+    if (mobileMenu) {
+        mobileMenu.addEventListener('click', openMobileMenu);
+    }
+
+    // Закрытие меню
+    if (closeMenu) {
+        closeMenu.addEventListener('click', closeMobileMenu);
+    }
+
+    // Закрытие по клику на overlay
+    if (mobileNavOverlay) {
+        mobileNavOverlay.addEventListener('click', closeMobileMenu);
+    }
+
+    // Закрытие по клику на ссылки
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-links a');
+    mobileNavLinks.forEach(link => {
+        link.addEventListener('click', closeMobileMenu);
+    });
+
+    // Smooth scroll для всех ссылок
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            
+            if (href === '#' || this.classList.contains('no-scroll')) {
+                return;
+            }
+            
+            e.preventDefault();
+            
+            const target = document.querySelector(href);
+            if (target) {
+                const headerHeight = document.getElementById('header').offsetHeight;
+                const targetPosition = target.offsetTop - headerHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+        const header = document.getElementById('header');
+        if (window.scrollY > 100) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+
+    // Hero animation
     const heroContent = document.querySelector('.hero-content');
     if (heroContent) {
         heroContent.style.opacity = '0';
@@ -1841,20 +1834,15 @@ document.addEventListener('DOMContentLoaded', function() {
             heroContent.style.transform = 'translateY(0)';
         }, 300);
     }
-});
 
-// Prevent horizontal scroll on mobile
-window.addEventListener('load', function() {
-    document.body.style.overflowX = 'hidden';
+    // Initialize date picker
+    const dateInput = document.getElementById('date');
+    if (dateInput) {
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        dateInput.min = tomorrow.toISOString().split('T')[0];
+    }
 });
-
-// Initialize date picker with tomorrow as minimum date
-const dateInput = document.getElementById('date');
-if (dateInput) {
-    const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    dateInput.min = tomorrow.toISOString().split('T')[0];
-}
     </script>
 </body>
 </html>
