@@ -120,7 +120,7 @@
             color: var(--primary);
         }
 
-        .cta-button {
+        .ms_booking {
             background: var(--primary);
             color: white;
             border: none;
@@ -134,7 +134,7 @@
             display: inline-block;
         }
 
-        .cta-button:hover {
+        .ms_booking:hover {
             background: var(--primary-dark);
             transform: translateY(-3px);
             box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
@@ -213,19 +213,19 @@
             gap: 15px;
         }
 
-        .hero-buttons .cta-button {
+        .hero-buttons .ms_booking {
             margin: 0;
             flex: 1;
             min-width: 200px;
             text-align: center;
         }
 
-        .hero-buttons .cta-button.outline {
+        .hero-buttons .ms_booking.outline {
             background: transparent;
             border: 2px solid white;
         }
 
-        .hero-buttons .cta-button.outline:hover {
+        .hero-buttons .ms_booking.outline:hover {
             background: white;
             color: var(--dark);
         }
@@ -732,7 +732,7 @@
             }
 
             .nav-links,
-            .navbar .cta-button {
+            .navbar .ms_booking {
                 display: none;
             }
 
@@ -744,7 +744,7 @@
                 flex-direction: column;
             }
 
-            .hero-buttons .cta-button {
+            .hero-buttons .ms_booking {
                 min-width: auto;
                 width: 100%;
                 max-width: 300px;
@@ -817,7 +817,7 @@
                 min-height: 600px;
             }
 
-            .hero-buttons .cta-button {
+            .hero-buttons .ms_booking {
                 padding: 10px 20px;
                 font-size: 14px;
             }
@@ -974,7 +974,7 @@
                     <li><a href="#booking">Запись</a></li>
                     <li><a href="#contact">Контакты</a></li>
                 </ul>
-                <a href="#booking" class="cta-button">Записаться онлайн</a>
+                <a href="#" class="ms_booking" data-yclients-widget>Записаться онлайн</a>
                 <button class="mobile-menu" id="mobileMenu">
                     <i class="fas fa-bars"></i>
                 </button>
@@ -1005,8 +1005,8 @@
                 <h1>Искусство в каждой прядке</h1>
                 <p>Добро пожаловать в салон красоты Lumière, где мы создаем стиль, который подчеркивает вашу индивидуальность и красоту. Профессиональные мастера и премиальные продукты.</p>
                 <div class="hero-buttons">
-                    <a href="#booking" class="cta-button">Записаться онлайн</a>
-                    <a href="#services" class="cta-button outline">Наши услуги</a>
+                    <a href="#" class="ms_booking" data-yclients-widget>Записаться онлайн</a>
+                    <a href="#services" class="ms_booking outline">Наши услуги</a>
                 </div>
             </div>
         </div>
@@ -1351,7 +1351,7 @@
         pointer-events: none;
     }
 
-    .loading .cta-button::after {
+    .loading .ms_booking::after {
         content: '...';
         animation: loading 1.5s infinite;
     }
@@ -1494,16 +1494,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 300);
     }
 
-    // Initialize date picker
-    const dateInput = document.getElementById('date');
-    if (dateInput) {
-        const tomorrow = new Date();
-        tomorrow.setDate(tomorrow.getDate() + 1);
-        dateInput.min = tomorrow.toISOString().split('T')[0];
-    }
-});
     </script>
 <script type="text/javascript" src="https://w948450.yclients.com/widgetJS" charset="UTF-8"></script>
+
 
 </body>
 </html>
