@@ -1,0 +1,1785 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumière - Салон красоты премиум-класса</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="c63635fba1eb11f0a547b62e65e43737_1.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #d4af37;
+            --primary-dark: #b8941f;
+            --dark: #1a1a1a;
+            --light: #f8f5f0;
+            --gray: #8a8a8a;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+            padding: 20px 0;
+        }
+
+        header.scrolled {
+            padding: 15px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            z-index: 1002;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 16px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .cta-button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 15px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1002;
+            background: none;
+            border: none;
+            color: var(--dark);
+        }
+
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 400px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            z-index: 1001;
+            padding: 100px 30px 30px;
+            overflow-y: auto;
+        }
+
+        .mobile-nav.active {
+            right: 0;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+        }
+
+        .mobile-nav-links li {
+            margin-bottom: 25px;
+        }
+
+        .mobile-nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-size: 20px;
+            font-weight: 500;
+            transition: var(--transition);
+            display: block;
+            padding: 10px 0;
+        }
+
+        .mobile-nav-links a:hover {
+            color: var(--primary);
+            transform: translateX(10px);
+        }
+
+        .close-menu {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            font-size: 28px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--dark);
+            z-index: 1002;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.8) 0%, rgba(26, 26, 26, 0.6) 100%), url('eebebd35a1d711f0988e4ec14a599804_1.jpg') no-repeat center center/cover;
+            color: white;
+            overflow: hidden;
+            margin-top: 0;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(212, 175, 55, 0.08) 0%, transparent 50%);
+            animation: gradientShift 8s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 650px;
+            position: relative;
+            z-index: 2;
+            text-align: left;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards 0.5s;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards 0.8s;
+        }
+
+        .hero-buttons {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards 1.1s;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .hero-buttons .cta-button {
+            margin: 0;
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+        }
+
+        .hero-buttons .cta-button.outline {
+            background: transparent;
+            border: 2px solid white;
+        }
+
+        .hero-buttons .cta-button.outline:hover {
+            background: white;
+            color: var(--dark);
+        }
+
+        /* Services Section - ОБНОВЛЕНА */
+        .section {
+            padding: clamp(50px, 8vw, 100px) 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: clamp(30px, 6vw, 60px);
+        }
+
+        .section-title h2 {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        .section-title p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
+            gap: clamp(20px, 4vw, 30px);
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-media {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .service-image,
+        .service-gif {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .service-card:hover .service-image,
+        .service-card:hover .service-gif {
+            transform: scale(1.1);
+        }
+
+        /* .media-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--primary);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            z-index: 2;
+        } */
+
+        .service-content {
+            padding: clamp(20px, 4vw, 25px);
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .service-content h3 {
+            font-size: clamp(1.2rem, 3vw, 1.4rem);
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .service-content p {
+            color: var(--gray);
+            margin-bottom: 15px;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            flex-grow: 1;
+            line-height: 1.5;
+        }
+
+        .service-duration {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .service-duration i {
+            color: var(--primary);
+        }
+
+        .service-price {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: clamp(1.1rem, 2.5vw, 1.2rem);
+            margin-top: auto;
+            padding-top: 15px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .price-range {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-top: 5px;
+        }
+
+        /* Team Section */
+        .team-section {
+            background: #f9f9f9;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
+            gap: clamp(20px, 4vw, 30px);
+            justify-items: center;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .team-card {
+            text-align: center;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .team-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .team-image {
+            height: 350px;
+            overflow: hidden;
+            background: url('fa729392-cd15-468b-8839-547d0e1f800b.jpg') no-repeat center center/cover;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .team-info {
+            padding: clamp(20px, 4vw, 30px);
+        }
+
+        .team-info h3 {
+            margin-bottom: 10px;
+            font-size: clamp(1.3rem, 3vw, 1.6rem);
+            color: var(--dark);
+        }
+
+        .team-info .specialty {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .team-info p {
+            color: var(--gray);
+            margin-bottom: 20px;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            line-height: 1.6;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-links a {
+            color: var(--dark);
+            transition: var(--transition);
+            font-size: clamp(1.3rem, 3vw, 1.5rem);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .social-links a:hover {
+            color: white;
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        /* Portfolio Section */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+            gap: clamp(15px, 3vw, 20px);
+        }
+
+        .portfolio-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            height: 300px;
+            cursor: pointer;
+            background: linear-gradient(45deg, var(--primary), #f4e4a0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .portfolio-gif {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover .portfolio-gif {
+            transform: scale(1.05);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(212, 175, 55, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: var(--transition);
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .gif-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--primary);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        /* Booking Section */
+        .booking-section {
+            background: linear-gradient(135deg, var(--dark) 0%, #2a2a2a 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .booking-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.05) 0%, transparent 50%);
+        }
+
+        .booking-section .section-title h2,
+        .booking-section .section-title p {
+            color: white;
+            position: relative;
+            z-index: 2;
+        }
+
+        .booking-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: clamp(25px, 5vw, 40px);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 2;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.9);
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: clamp(40px, 8vw, 70px) 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+            gap: clamp(25px, 5vw, 40px);
+            margin-bottom: 50px;
+        }
+
+        .footer-column h3 {
+            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+            padding-left: 5px;
+        }
+
+        .contact-info {
+            list-style: none;
+        }
+
+        .contact-info li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+
+        .contact-info i {
+            margin-right: 10px;
+            color: var(--primary);
+            min-width: 20px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bbb;
+            font-size: clamp(0.8rem, 1.5vw, 0.9rem);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+        }
+
+        @keyframes gradientShift {
+            0%, 100% {
+                opacity: 0.1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.15;
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes hairFlow {
+            0%, 100% {
+                transform: rotate(45deg) translateX(0);
+                opacity: 0.7;
+            }
+            50% {
+                transform: rotate(50deg) translateX(10px);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: clamp(2rem, 6vw, 3rem);
+            }
+
+            .nav-links,
+            .navbar .cta-button {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .hero-buttons .cta-button {
+                min-width: auto;
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .team-grid {
+                max-width: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                text-align: center;
+            }
+
+            .hero-content {
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: clamp(1.8rem, 8vw, 2.5rem);
+            }
+
+            .section {
+                padding: 40px 0;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .service-media {
+                height: 200px;
+            }
+
+            .team-image {
+                height: 280px;
+            }
+
+            .portfolio-item {
+                height: 250px;
+            }
+
+            .mobile-nav {
+                width: 100%;
+                max-width: 300px;
+                padding: 90px 25px 25px;
+            }
+
+            .mobile-nav-links a {
+                font-size: 18px;
+            }
+
+            .close-menu {
+                top: 25px;
+                right: 25px;
+                font-size: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                width: 95%;
+                padding: 0 15px;
+            }
+
+            .hero {
+                height: 90vh;
+                min-height: 600px;
+            }
+
+            .hero-buttons .cta-button {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            .service-content,
+            .team-info {
+                padding: 15px;
+            }
+
+            .booking-form {
+                padding: 20px 15px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-column h3:after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .mobile-nav {
+                max-width: 280px;
+                padding: 80px 20px 20px;
+            }
+
+            .team-grid {
+                max-width: 100%;
+            }
+        }
+
+        /* Touch device improvements */
+        @media (hover: none) {
+            .service-card:hover,
+            .team-card:hover,
+            .portfolio-item:hover {
+                transform: none;
+            }
+
+            .service-card:active,
+            .team-card:active {
+                transform: scale(0.98);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">Lumi<span>ère</span></a>
+                <ul class="nav-links">
+                    <li><a href="#home">Главная</a></li>
+                    <li><a href="#services">Услуги</a></li>
+                    <li><a href="#team">Мастер</a></li>
+                    <li><a href="#portfolio">Портфолио</a></li>
+                    <li><a href="#booking">Запись</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                </ul>
+                <a href="#booking" class="cta-button">Записаться онлайн</a>
+                <button class="mobile-menu" id="mobileMenu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+        <button class="close-menu" id="closeMenu">
+            <i class="fas fa-times"></i>
+        </button>
+        <ul class="mobile-nav-links">
+            <li><a href="#home">Главная</a></li>
+            <li><a href="#services">Услуги</a></li>
+            <li><a href="#team">Мастер</a></li>
+            <li><a href="#portfolio">Портфолио</a></li>
+            <li><a href="#booking">Запись</a></li>
+            <li><a href="#contact">Контакты</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Искусство в каждой прядке</h1>
+                <p>Добро пожаловать в салон красоты Lumière, где мы создаем стиль, который подчеркивает вашу индивидуальность и красоту. Профессиональные мастера и премиальные продукты.</p>
+                <div class="hero-buttons">
+                    <a href="#booking" class="cta-button">Записаться онлайн</a>
+                    <a href="#services" class="cta-button outline">Наши услуги</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section - ПОЛНАЯ ВЕРСИЯ -->
+    <section class="section" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Наши услуги</h2>
+                <p>Профессиональные парикмахерские услуги премиум-класса</p>
+            </div>
+            <div class="services-grid">
+                
+                <!-- Сложное окрашивание Airtouch | Шатуш -->
+                <div class="service-card">
+                    <div class="service-media">
+                        <img src="0af97492a1e011f0a178e6378db1d023_1.jpg" 
+                             alt="Сложное окрашивание Airtouch" 
+                             class="service-gif">
+                        <div class="media-badge">GIF</div>
+                    </div>
+                    <div class="service-content">
+                        <h3>Сложное окрашивание Airtouch | Шатуш</h3>
+                        <div class="service-duration">
+                            <i class="fas fa-clock"></i> 4 часа
+                        </div>
+                        <p>Создание естественных плавных переходов цвета. Идеально для тех, кто хочет мягкое обновление образа.</p>
+                        <div class="service-price">
+                            от 15 000 ₽
+                            <span class="price-range">Короткие: 15 000 ₽ • Средние: 16 500 ₽ • Длинные: 18 000 ₽</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Total Blonde (Осветление корня 1-2 см) -->
+                <div class="service-card">
+                    <div class="service-media">
+                        <img src="da78849aa1e011f0bdb57a0e412210ab_1.jpg" 
+                             alt="Total Blonde окрашивание" 
+                             class="service-image">
+                        <div class="media-badge">ФОТО</div>
+                    </div>
+                    <div class="service-content">
+                        <h3>Total Blonde (корень 1-2 см)</h3>
+                        <div class="service-duration">
+                            <i class="fas fa-clock"></i> 2 часа 30 минут
+                        </div>
+                        <p>Осветление корня 1-2 см + тонирование длины. Идеальное блондирование с сохранением здоровья волос.</p>
+                        <div class="service-price">8 000 – 10 000 ₽</div>
+                    </div>
+                </div>
+
+                <!-- Total Blonde (Осветление от 2 см) -->
+                <div class="service-card">
+                    <div class="service-media">
+                        <img src="da78849aa1e011f0bdb57a0e412210ab_1.jpg" 
+                             alt="Total Blonde полное осветление" 
+                             class="service-image">
+                        <div class="media-badge">ФОТО</div>
+                    </div>
+                    <div class="service-content">
+                        <h3>Total Blonde (от 2 см)</h3>
+                        <div class="service-duration">
+                            <i class="fas fa-clock"></i> 4 часа
+                        </div>
+                        <p>Осветление корня от 2 см или полностью + тонирование длины. Профессиональный подход к блондированию.</p>
+                        <div class="service-price">12 000 – 18 000 ₽</div>
+                    </div>
+                </div>
+
+                <!-- Выход из чёрного | тёмного -->
+                <div class="service-card">
+                    <div class="service-media">
+                        <img src="f38a913ea1e011f09faf867d5f9d46e5_1.jpg" 
+                             alt="Выход из чёрного цвета" 
+                             class="service-gif">
+                        <div class="media-badge">GIF</div>
+                    </div>
+                    <div class="service-content">
+                        <h3>Выход из чёрного | тёмного</h3>
+                        <div class="service-duration">
+                            <i class="fas fa-clock"></i> 7 часов
+                        </div>
+                        <p>Бережный выход из темных оттенков без вреда для волос. Многоэтапная процедура с профессиональными средствами.</p>
+                        <div class="service-price">18 000 – 22 000 ₽</div>
+                    </div>
+                </div>
+
+                <!-- Тонирование -->
+                <div class="service-card">
+                    <div class="service-media">
+                        <img src="" 
+                             alt="Тонирование волос" 
+                             class="service-image">
+                        <div class="media-badge">ФОТО</div>
+                    </div>
+                    <div class="service-content">
+                        <h3>Тонирование</h3>
+                        <div class="service-duration">
+                            <i class="fas fa-clock"></i> 2 часа
+                        </div>
+                        <p>Обновление цвета, нейтрализация нежелательных оттенков. Придание волосам блеска и насыщенности.</p>
+                        <div class="service-price">
+                            от 6 000 ₽
+                            <span class="price-range">Короткие: 6 000 ₽ • Средние: 7 500 ₽ • Длинные: 9 000 ₽</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Окрашивание в один тон -->
+                <div class="service-card">
+                    <div class="service-media">
+                        <img src="" 
+                             alt="Окрашивание в один тон" 
+                             class="service-image">
+                        <div class="media-badge">ФОТО</div>
+                    </div>
+                    <div class="service-content">
+                        <h3>Окрашивание в один тон</h3>
+                        <div class="service-duration">
+                            <i class="fas fa-clock"></i> 2 часа
+                        </div>
+                        <p>Равномерное окрашивание в один цвет. Идеально для тех, кто предпочитает классический однотонный образ.</p>
+                        <div class="service-price">
+                            от 6 000 ₽
+                            <span class="price-range">Короткие: 6 000 ₽ • Средние: 7 500 ₽ • Длинные: 9 000 ₽</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Уход от Lebel -->
+                <div class="service-card">
+                    <div class="service-media">
+                        <img src="" 
+                             alt="Уход Lebel для волос" 
+                             class="service-gif">
+                        <div class="media-badge">GIF</div>
+                    </div>
+                    <div class="service-content">
+                        <h3>Уход от Lebel</h3>
+                        <div class="service-duration">
+                            <i class="fas fa-clock"></i> 1-1.5 часа
+                        </div>
+                        <p>Профессиональный уход "Счастье для волос". Восстановление, увлажнение и сияние ваших волос.</p>
+                        <div class="service-price">
+                            от 4 000 ₽
+                            <span class="price-range">Средние: 4 000 ₽ • Длинные: 5 000 ₽</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Моделирование чёлки -->
+                <div class="service-card">
+                    <div class="service-media">
+                        <img src="" 
+                             alt="Моделирование чёлки" 
+                             class="service-image">
+                        <div class="media-badge">ФОТО</div>
+                    </div>
+                    <div class="service-content">
+                        <h3>Моделирование чёлки</h3>
+                        <div class="service-duration">
+                            <i class="fas fa-clock"></i> 20 минут
+                        </div>
+                        <p>Корректировка формы и длины чёлки. Создание идеальной формы, подчеркивающей черты лица.</p>
+                        <p class="form-note">* В стоимость не входит мытье головы</p>
+                        <div class="service-price">1 500 ₽</div>
+                    </div>
+                </div>
+
+                <!-- Стрижка ровный срез -->
+                <div class="service-card">
+                    <div class="service-media">
+                        <img src="" 
+                             alt="Стрижка ровный срез" 
+                             class="service-image">
+                        <div class="media-badge">ФОТО</div>
+                    </div>
+                    <div class="service-content">
+                        <h3>Стрижка ровный срез</h3>
+                        <div class="service-duration">
+                            <i class="fas fa-clock"></i> 1 час 30 минут
+                        </div>
+                        <p>Идеально ровный срез по всей длине. Классическая техника для здоровых и ухоженных волос.</p>
+                        <div class="service-price">2 500 ₽</div>
+                    </div>
+                </div>
+
+                <!-- Стрижка Каскад | Слои -->
+                <div class="service-card">
+                    <div class="service-media">
+                        <img src="" 
+                             alt="Стрижка каскад" 
+                             class="service-image">
+                        <div class="media-badge">ФОТО</div>
+                    </div>
+                    <div class="service-content">
+                        <h3>Стрижка Каскад | Слои</h3>
+                        <div class="service-duration">
+                            <i class="fas fa-clock"></i> 2 часа
+                        </div>
+                        <p>Многоуровневая стрижка с плавными переходами. Создает объем и динамику в прическе.</p>
+                        <div class="service-price">4 000 ₽</div>
+                    </div>
+                </div>
+
+                <!-- Стрижка Каре -->
+                <div class="service-card">
+                    <div class="service-media">
+                        <img src="" 
+                             alt="Стрижка каре" 
+                             class="service-image">
+                        <div class="media-badge">ФОТО</div>
+                    </div>
+                    <div class="service-content">
+                        <h3>Стрижка Каре</h3>
+                        <div class="service-duration">
+                            <i class="fas fa-clock"></i> 2 часа
+                        </div>
+                        <p>Классическое или градуированное каре. Универсальная стрижка, подходящая для любого типа волос.</p>
+                        <div class="service-price">4 000 ₽</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="section team-section" id="team">
+        <div class="container">
+            <div class="section-title">
+                <h2>Наш мастер</h2>
+                <p>Профессиональный стилист с многолетним опытом и любовью к своему делу</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-image"></div>
+                    <div class="team-info">
+                        <h3>Юлия Абдрахманова</h3>
+                        <span class="specialty">Топ-стилист и колорист</span>
+                        <p>Специализация: сложное окрашивание, стрижки, уходовые процедуры. Опыт работы более 5 лет. Постоянно совершенствую свои навыки на международных мастер-классах.</p>
+                        <div class="social-links">
+                            <a href="https://www.instagram.com/julia.abdrakhmanova?igsh=MXQyeDNvZ2R1djhtZg%3D%3D&utm_source=qr"><i class="fab fa-instagram"></i></a>
+                            <a href="https://web.telegram.org/a/#1272181952"><i class="fab fa-telegram"></i></a>
+                            <a href="https://api.whatsapp.com/send/?phone=89123527720&text&type=phone_number&app_absent=0"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="section" id="portfolio">
+        <div class="container">
+            <div class="section-title">
+                <h2>Наши работы</h2>
+                <p>Анимированные примеры наших лучших работ</p>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <img src="cabelo-calor.gif" 
+                         alt="Процесс окрашивания" 
+                         class="portfolio-gif">
+                    <!-- <div class="gif-badge">GIF</div> -->
+                    <div class="portfolio-overlay">
+                        <h3>Сложное окрашивание</h3>
+                        <p>Техника Airtouch и шатуш</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="hair-flip-shiny-hair.webp" 
+                         alt="Процесс стрижки" 
+                         class="portfolio-gif">
+                    <!-- <div class="gif-badge">GIF</div> -->
+                    <div class="portfolio-overlay">
+                        <h3>Профессиональная стрижка</h3>
+                        <p>Точные срезы и филировка</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="guy-long-hair.gif" 
+                         alt="Создание укладки" 
+                         class="portfolio-gif">
+                    <!-- <div class="gif-badge">GIF</div> -->
+                    <div class="portfolio-overlay">
+                        <h3>Вечерняя укладка</h3>
+                        <p>Элегантные волны и объем</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Booking Section с Telegram -->
+    <section class="section booking-section" id="booking">
+        <div class="container">
+            <div class="section-title">
+                <h2>Запись онлайн</h2>
+                <p>Забронируйте удобное время посещения нашего салона</p>
+            </div>
+            <div class="booking-form">
+                <form id="bookingForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Ваше имя *</label>
+                            <input type="text" id="name" class="form-control" required placeholder="Иван Иванов">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Телефон *</label>
+                            <input type="tel" id="phone" class="form-control" required placeholder="+7 (912) 345-67-89">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="service">Услуга *</label>
+                            <select id="service" class="form-control" required>
+                                <option value="">-- Выберите услугу --</option>
+                                <optgroup label="Сложное окрашивание">
+                                    <option value="airtouch_short">Airtouch/Шатуш (короткие) - 15 000 ₽</option>
+                                    <option value="airtouch_medium">Airtouch/Шатуш (средние) - 16 500 ₽</option>
+                                    <option value="airtouch_long">Airtouch/Шатуш (длинные) - 18 000 ₽</option>
+                                </optgroup>
+                                <optgroup label="Total Blonde">
+                                    <option value="total_blonde_1">Total Blonde (1-2 см) - 8 000-10 000 ₽</option>
+                                    <option value="total_blonde_2">Total Blonde (от 2 см) - 12 000-18 000 ₽</option>
+                                </optgroup>
+                                <optgroup label="Окрашивание">
+                                    <option value="black_exit">Выход из чёрного - 18 000-22 000 ₽</option>
+                                    <option value="toning_short">Тонирование (короткие) - 6 000 ₽</option>
+                                    <option value="toning_medium">Тонирование (средние) - 7 500 ₽</option>
+                                    <option value="toning_long">Тонирование (длинные) - 9 000 ₽</option>
+                                    <option value="coloring_short">Окрашивание в один тон (короткие) - 6 000 ₽</option>
+                                    <option value="coloring_medium">Окрашивание в один тон (средние) - 7 500 ₽</option>
+                                    <option value="coloring_long">Окрашивание в один тон (длинные) - 9 000 ₽</option>
+                                </optgroup>
+                                <optgroup label="Уход">
+                                    <option value="lebel_medium">Уход Lebel (средние) - 4 000 ₽</option>
+                                    <option value="lebel_long">Уход Lebel (длинные) - 5 000 ₽</option>
+                                </optgroup>
+                                <optgroup label="Стрижки">
+                                    <option value="straight_cut">Стрижка ровный срез - 2 500 ₽</option>
+                                    <option value="cascade_cut">Стрижка Каскад/Слои - 4 000 ₽</option>
+                                    <option value="bob_cut">Стрижка Каре - 4 000 ₽</option>
+                                    <option value="bang_modeling">Моделирование чёлки - 1 500 ₽</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Дата *</label>
+                            <input type="date" id="date" class="form-control" required>
+                        </div>
+                    </div>
+                    <!-- <div class="form-group">
+                        <label for="time">Предпочтительное время *</label>
+                        <select id="time" class="form-control" required>
+                            <option value="">-- Выберите время --</option>
+                            <option value="09:00">09:00</option>
+                            <option value="10:00">10:00</option>
+                            <option value="11:00">11:00</option>
+                            <option value="12:00">12:00</option>
+                            <option value="13:00">13:00</option>
+                            <option value="14:00">14:00</option>
+                            <option value="15:00">15:00</option>
+                            <option value="16:00">16:00</option>
+                            <option value="17:00">17:00</option>
+                            <option value="18:00">18:00</option>
+                            <option value="19:00">19:00</option>
+                            <option value="20:00">20:00</option>
+                        </select>
+                    </div> -->
+                    <div class="form-group">
+                        <label for="message">Дополнительные пожелания</label>
+                        <textarea id="message" class="form-control" rows="4" placeholder="Расскажите о ваших пожеланиях..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="form-note">
+                            <i class="fas fa-info-circle"></i>
+                            После отправки формы мы свяжемся с вами для подтверждения записи в течение дня
+                        </div>
+                    </div>
+
+                    <button type="submit" class="cta-button" style="width: 100%;" id="submitBtn">
+                        <i class="fas fa-paper-plane"></i> Отправить заявку
+                    </button>
+                </form>
+
+                <!-- Сообщение об успехе -->
+                <div class="success-message" id="successMessage" style="display: none;">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>Заявка отправлена!</h3>
+                    <p>Мы свяжемся с вами в течение дня для подтверждения записи.</p>
+                    <div id="bookingDetails"></div>
+                    <button type="button" class="cta-button outline" onclick="resetBookingForm()" style="margin-top: 15px;">
+                        <i class="fas fa-plus"></i> Новая запись
+                    </button>
+                </div>
+
+                <!-- Сообщение об ошибке -->
+                <div class="error-message" id="errorMessage" style="display: none;">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>Ошибка отправки</h3>
+                    <p>Пожалуйста, попробуйте еще раз или свяжитесь с нами по телефону.</p>
+                    <button type="button" class="cta-button outline" onclick="hideError()" style="margin-top: 15px;">
+                        Понятно
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<style>
+    .success-message {
+        background: rgba(76, 175, 80, 0.9);
+        color: white;
+        padding: 30px;
+        border-radius: 15px;
+        text-align: center;
+        margin-top: 20px;
+        animation: fadeIn 0.5s ease-in;
+    }
+
+    .success-message i {
+        font-size: 3rem;
+        margin-bottom: 15px;
+        display: block;
+    }
+
+    .error-message {
+        background: rgba(244, 67, 54, 0.9);
+        color: white;
+        padding: 30px;
+        border-radius: 15px;
+        text-align: center;
+        margin-top: 20px;
+        animation: fadeIn 0.5s ease-in;
+    }
+
+    .error-message i {
+        font-size: 3rem;
+        margin-bottom: 15px;
+        display: block;
+    }
+
+    .loading {
+        opacity: 0.7;
+        pointer-events: none;
+    }
+
+    .loading .cta-button::after {
+        content: '...';
+        animation: loading 1.5s infinite;
+    }
+
+    @keyframes loading {
+        0%, 100% { content: '.'; }
+        33% { content: '..'; }
+        66% { content: '...'; }
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+
+<script>
+    // Конфигурация Telegram бота
+    const TELEGRAM_CONFIG = {
+        botToken: '8222258596:AAHpNS_XL9SoCKYfMiuxBoNOyoklIffOb1g',
+        chatId: '2058181779' 
+    };
+
+    // Маска для телефона
+    document.getElementById('phone').addEventListener('input', function(e) {
+        let x = e.target.value.replace(/\D/g, '').match(/(\d{0,1})(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
+        e.target.value = '+7' + (x[2] ? ' (' + x[2] : '') + (x[3] ? ') ' + x[3] : '') + (x[4] ? '-' + x[4] : '') + (x[5] ? '-' + x[5] : '');
+    });
+
+    // Установка минимальной даты (завтра)
+    const dateInput = document.getElementById('date');
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    dateInput.min = tomorrow.toISOString().split('T')[0];
+
+    // Отправка формы
+    document.getElementById('bookingForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const submitBtn = document.getElementById('submitBtn');
+        const form = e.target;
+        
+        // Валидация формы
+        if (!validateForm()) {
+            return;
+        }
+
+        // Показываем состояние загрузки
+        form.classList.add('loading');
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Отправка';
+
+        try {
+            // Собираем данные формы
+            const formData = {
+                name: document.getElementById('name').value.trim(),
+                phone: document.getElementById('phone').value.trim(),
+                service: document.getElementById('service').options[document.getElementById('service').selectedIndex].text,
+                date: formatDate(document.getElementById('date').value),
+                // time: document.getElementById('time').value,
+                message: document.getElementById('message').value.trim(),
+                timestamp: new Date().toLocaleString('ru-RU')
+            };
+
+            // Отправляем в Telegram
+            const isSent = await sendToTelegram(formData);
+            
+            if (isSent) {
+                showSuccessMessage(formData);
+                form.reset();
+            } else {
+                showErrorMessage();
+            }
+        } catch (error) {
+            console.error('Ошибка отправки:', error);
+            showErrorMessage();
+        } finally {
+            form.classList.remove('loading');
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Отправить заявку';
+        }
+    });
+
+    // Валидация формы
+    function validateForm() {
+        const name = document.getElementById('name').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const service = document.getElementById('service').value;
+        const date = document.getElementById('date').value;
+        // const time = document.getElementById('time').value;
+
+        if (!name) {
+            alert('Пожалуйста, введите ваше имя');
+            return false;
+        }
+
+        if (!phone || phone.length < 16) {
+            alert('Пожалуйста, введите корректный номер телефона');
+            return false;
+        }
+
+        if (!service) {
+            alert('Пожалуйста, выберите услугу');
+            return false;
+        }
+
+        if (!date) {
+            alert('Пожалуйста, выберите дату');
+            return false;
+        }
+
+        // if (!time) {
+        //     alert('Пожалуйста, выберите время');
+        //     return false;
+        // }
+
+        return true;
+    }
+
+    // Отправка в Telegram
+    async function sendToTelegram(formData) {
+        const message = `
+🎉 НОВАЯ ЗАЯВКА С САЙТА!
+
+👤 Клиент: ${formData.name}
+📞 Телефон: ${formData.phone}
+💇 Услуга: ${formData.service}
+📅 Дата: ${formData.date}
+${formData.message ? `💬 Пожелания: ${formData.message}` : ''}
+🕐 Заявка получена: ${formData.timestamp}
+
+#заявка #новаязапись
+        `.trim();
+
+        try {
+            const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_CONFIG.botToken}/sendMessage`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: TELEGRAM_CONFIG.chatId,
+                    text: message,
+                    parse_mode: 'HTML'
+                })
+            });
+
+            const result = await response.json();
+            return result.ok;
+        } catch (error) {
+            console.error('Ошибка отправки в Telegram:', error);
+            return false;
+        }
+    }
+
+    // Показать сообщение об успехе
+    function showSuccessMessage(formData) {
+        const details = document.getElementById('bookingDetails');
+        details.innerHTML = `
+            <div style="text-align: left; margin-top: 15px; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 10px;">
+                <p><strong>Детали заявки:</strong></p>
+                <p>👤 ${formData.name}</p>
+                <p>📞 ${formData.phone}</p>
+                <p>💇 ${formData.service}</p>
+                <p>📅 ${formData.date}</p>
+                ${formData.message ? `<p>💬 ${formData.message}</p>` : ''}
+            </div>
+        `;
+
+        document.getElementById('bookingForm').style.display = 'none';
+        document.getElementById('successMessage').style.display = 'block';
+        document.getElementById('errorMessage').style.display = 'none';
+    }
+
+    // Показать сообщение об ошибке
+    function showErrorMessage() {
+        document.getElementById('bookingForm').style.display = 'block';
+        document.getElementById('successMessage').style.display = 'none';
+        document.getElementById('errorMessage').style.display = 'block';
+    }
+
+    // Скрыть ошибку
+    function hideError() {
+        document.getElementById('errorMessage').style.display = 'none';
+    }
+
+    // Сброс формы
+    function resetBookingForm() {
+        document.getElementById('bookingForm').style.display = 'block';
+        document.getElementById('successMessage').style.display = 'none';
+        document.getElementById('errorMessage').style.display = 'none';
+        document.getElementById('bookingForm').reset();
+    }
+
+    // Форматирование даты
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('ru-RU', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        });
+    }
+
+    // Автозаполнение времени доступными слотами
+    // function updateTimeSlots() {
+    //     const dateInput = document.getElementById('date');
+    //     const timeSelect = document.getElementById('time');
+        
+    //     // Очищаем текущие опции, кроме первой
+    //     while (timeSelect.options.length > 1) {
+    //         timeSelect.remove(1);
+    //     }
+
+    //     const times = [
+    //         '09:00', '10:00', '11:00', '12:00', '13:00', 
+    //         '14:00', '15:00', '16:00', '17:00', '18:00', 
+    //         '19:00', '20:00'
+    //     ];
+
+    //     times.forEach(time => {
+    //         const option = document.createElement('option');
+    //         option.value = time;
+    //         option.textContent = time;
+            
+    //         // Можно добавить логику для блокировки занятых времени
+    //         // if (isTimeBooked(dateInput.value, time)) {
+    //         //     option.disabled = true;
+    //         //     option.textContent += ' (занято)';
+    //         // }
+            
+    //         timeSelect.appendChild(option);
+    //     });
+    // }
+
+    // // Обновляем слоты времени при изменении даты
+    // document.getElementById('date').addEventListener('change', updateTimeSlots);
+
+    // // Инициализация слотов времени
+    // updateTimeSlots();
+</script>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Lumière</h3>
+                    <p>Салон красоты премиум-класса, где мы создаем стиль, который подчеркивает вашу индивидуальность и красоту.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Контакты</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> г. Санкт-Петербург, ул. Александра Невского, 12</li>
+                        <li><i class="fas fa-phone"></i> +7 (912) 352-77-20</li>
+                        <li><i class="fas fa-envelope"></i> info@lumiere-salon.ru</li>
+                        <li><i class="fas fa-clock"></i> Пн-Вс: 9:00 - 21:00</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Быстрые ссылки</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Главная</a></li>
+                        <li><a href="#services">Услуги</a></li>
+                        <li><a href="#team">Мастер</a></li>
+                        <li><a href="#portfolio">Портфолио</a></li>
+                        <li><a href="#booking">Запись онлайн</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Lumière. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileNav = document.getElementById('mobileNav');
+        const closeMenu = document.getElementById('closeMenu');
+
+        mobileMenu.addEventListener('click', () => {
+            mobileNav.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeMenu.addEventListener('click', () => {
+            mobileNav.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // Close mobile menu when clicking on links
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-links a');
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (mobileNav.classList.contains('active') && 
+                !mobileNav.contains(e.target) && 
+                !mobileMenu.contains(e.target)) {
+                mobileNav.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Form submission
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Спасибо за вашу заявку! Мы свяжемся с вами в ближайшее время для подтверждения записи.');
+            this.reset();
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add loading animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const heroContent = document.querySelector('.hero-content');
+            heroContent.style.opacity = '0';
+            heroContent.style.transform = 'translateY(50px)';
+            
+            setTimeout(() => {
+                heroContent.style.transition = 'all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                heroContent.style.opacity = '1';
+                heroContent.style.transform = 'translateY(0)';
+            }, 300);
+        });
+
+        // Prevent horizontal scroll on mobile
+        window.addEventListener('load', function() {
+            document.body.style.overflowX = 'hidden';
+        });
+
+        // Initialize date picker with tomorrow as minimum date
+        const dateInput = document.getElementById('date');
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        dateInput.min = tomorrow.toISOString().split('T')[0];
+    </script>
+</body>
+</html>
