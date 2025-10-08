@@ -935,37 +935,36 @@
                 min-width: 280px;
             }
 
-            /* УВЕЛИЧЕННЫЕ КАРТОЧКИ ДЛЯ ПЛАНШЕТОВ */
             .product-card {
-                width: 280px !important;
-                height: 520px !important;
+                width: 240px;
+                height: 480px;
             }
 
             .product-image {
-                height: 320px !important;
+                height: 320px;
             }
 
             .product-content {
-                height: 200px !important;
-                padding: 20px !important;
+                height: 160px;
+                padding: 15px;
             }
 
             .product-content h3 {
-                font-size: 1.2rem !important;
+                font-size: 1.1rem;
                 -webkit-line-clamp: 2;
-                max-height: 2.6em !important;
-                min-height: 2.6em !important;
+                max-height: 2.4em;
+                min-height: 2.4em;
             }
 
             .product-description {
-                font-size: 0.95rem !important;
-                max-height: 6.5em !important;
-                min-height: 5em !important;
+                font-size: 0.9rem;
+                max-height: 5em;
+                min-height: 4em;
             }
 
             .product-price {
-                font-size: 1.3rem !important;
-                padding-top: 15px !important;
+                font-size: 1.2rem;
+                padding-top: 12px;
             }
 
             .close-menu {
@@ -1000,67 +999,42 @@
                 min-width: 250px;
             }
 
-            /* УВЕЛИЧЕННЫЕ КАРТОЧКИ ДЛЯ МОБИЛЬНЫХ */
             .product-card {
-                width: 300px !important;
-                height: 550px !important;
-                margin: 0 auto;
+                width: 200px;
+                height: 420px;
             }
 
             .product-image {
-                height: 350px !important;
+                height: 280px;
             }
 
             .product-content {
-                height: 200px !important;
-                padding: 25px !important;
+                height: 140px;
+                padding: 12px;
             }
 
             .product-content h3 {
-                font-size: 1.3rem !important;
+                font-size: 1rem;
                 -webkit-line-clamp: 2;
-                max-height: 2.8em !important;
-                min-height: 2.8em !important;
-                margin-bottom: 12px !important;
+                max-height: 2.2em;
+                min-height: 2.2em;
+                margin-bottom: 8px;
             }
 
             .product-description {
-                font-size: 1rem !important;
-                max-height: 7em !important;
-                min-height: 5.5em !important;
-                margin-bottom: 15px !important;
+                font-size: 0.85rem;
+                max-height: 4em;
+                min-height: 3.5em;
+                margin-bottom: 10px;
             }
 
             .product-price {
-                font-size: 1.4rem !important;
-                padding-top: 15px !important;
-            }
-
-            /* Увеличиваем отступы между карточками */
-            .home-care-scroll {
-                gap: 30px !important;
-                padding: 25px 0 !important;
+                font-size: 1.1rem;
+                padding-top: 10px;
             }
 
             .team-grid {
                 max-width: 100%;
-            }
-        }
-
-        /* Для очень маленьких экранов */
-        @media (max-width: 360px) {
-            .product-card {
-                width: 280px !important;
-                height: 520px !important;
-            }
-
-            .product-image {
-                height: 320px !important;
-            }
-
-            .product-content {
-                height: 200px !important;
-                padding: 20px !important;
             }
         }
 
@@ -1583,62 +1557,6 @@
                     heroContent.style.transform = 'translateY(0)';
                 }, 300);
             }
-
-            // Адаптация скролла для мобильных устройств
-            function initMobileScroll() {
-                const homeCareScroll = document.querySelector('.home-care-scroll');
-                if (!homeCareScroll) return;
-
-                let isDown = false;
-                let startX;
-                let scrollLeft;
-
-                homeCareScroll.addEventListener('mousedown', (e) => {
-                    isDown = true;
-                    startX = e.pageX - homeCareScroll.offsetLeft;
-                    scrollLeft = homeCareScroll.scrollLeft;
-                });
-
-                homeCareScroll.addEventListener('mouseleave', () => {
-                    isDown = false;
-                });
-
-                homeCareScroll.addEventListener('mouseup', () => {
-                    isDown = false;
-                });
-
-                homeCareScroll.addEventListener('mousemove', (e) => {
-                    if (!isDown) return;
-                    e.preventDefault();
-                    const x = e.pageX - homeCareScroll.offsetLeft;
-                    const walk = (x - startX) * 2;
-                    homeCareScroll.scrollLeft = scrollLeft - walk;
-                });
-
-                // Touch events для мобильных
-                homeCareScroll.addEventListener('touchstart', (e) => {
-                    isDown = true;
-                    startX = e.touches[0].pageX - homeCareScroll.offsetLeft;
-                    scrollLeft = homeCareScroll.scrollLeft;
-                });
-
-                homeCareScroll.addEventListener('touchend', () => {
-                    isDown = false;
-                });
-
-                homeCareScroll.addEventListener('touchmove', (e) => {
-                    if (!isDown) return;
-                    const x = e.touches[0].pageX - homeCareScroll.offsetLeft;
-                    const walk = (x - startX) * 2;
-                    homeCareScroll.scrollLeft = scrollLeft - walk;
-                });
-            }
-
-            // Инициализация скролла
-            initMobileScroll();
-            
-            // Переинициализация при изменении размера окна
-            window.addEventListener('resize', initMobileScroll);
         });
     </script>
     <script type="text/javascript" src="https://w948450.yclients.com/widgetJS" charset="UTF-8"></script>
