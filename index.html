@@ -1,337 +1,212 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Lumière - Салон красоты премиум-класса</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="c63635fba1eb11f0a547b62e65e43737_1.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        /* ---------------------------
-           Reset & variables
-           --------------------------- */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            --primary: #d4af37;
-            --primary-dark: #b8941f;
-            --dark: #1a1a1a;
-            --light: #f8f5f0;
-            --gray: #8a8a8a;
-            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        /* ===========================
+           RESET & VARIABLES
+           =========================== */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        :root{
+            --primary:#d4af37;
+            --primary-dark:#b8941f;
+            --dark:#1a1a1a;
+            --light:#f8f5f0;
+            --gray:#8a8a8a;
+            --transition: all 0.32s cubic-bezier(.2,.8,.2,1);
         }
-
-        body {
+        body{
             font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: var(--dark);
-            background-color: var(--light);
+            color:var(--dark);
+            background:var(--light);
             -webkit-font-smoothing:antialiased;
             -moz-osx-font-smoothing:grayscale;
-            overflow-x: hidden;
+            line-height:1.6;
+            overflow-x:hidden;
         }
+        h1,h2,h3,h4,h5 { font-family: 'Playfair Display', serif; font-weight:600; }
+        .container { width:90%; max-width:1200px; margin:0 auto; padding:0 20px; }
 
-        h1,h2,h3,h4,h5 { font-family: 'Playfair Display', serif; font-weight: 600; line-height: 1.2; }
-        .container { width: 90%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-
-        /* ---------------------------
-           Header & Navigation
-           --------------------------- */
+        /* ===========================
+           HEADER / NAV
+           =========================== */
         header {
-            position: fixed;
-            top: 0; left: 0; width: 100%;
-            z-index: 1000;
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(10px);
+            position: fixed; top:0; left:0; width:100%; z-index:1000;
+            background: rgba(255,255,255,0.96);
+            backdrop-filter: blur(8px);
+            padding:18px 0;
             transition: var(--transition);
-            padding: 20px 0;
         }
-        header.scrolled { padding: 15px 0; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
-
-        .navbar { display:flex; justify-content:space-between; align-items:center; }
-        .logo { font-family:'Playfair Display', serif; font-size:28px; font-weight:700; color:var(--dark); text-decoration:none; display:flex; align-items:center; z-index:1002; }
+        header.scrolled { box-shadow:0 6px 24px rgba(0,0,0,0.08); padding:14px 0; }
+        .navbar { display:flex; justify-content:space-between; align-items:center; gap:20px; }
+        .logo { font-family:'Playfair Display'; font-size:26px; color:var(--dark); text-decoration:none; font-weight:700; display:flex; gap:6px; align-items:center; }
         .logo span { color:var(--primary); }
-
-        .nav-links { display:flex; list-style:none; }
-        .nav-links li { margin-left:30px; }
-        .nav-links a { text-decoration:none; color:var(--dark); font-weight:500; font-size:16px; transition:var(--transition); position:relative; }
-        .nav-links a:after { content:''; position:absolute; bottom:-5px; left:0; width:0; height:2px; background:var(--primary); transition:var(--transition); }
+        .nav-links { display:flex; list-style:none; gap:24px; align-items:center; }
+        .nav-links a { color:var(--dark); text-decoration:none; font-weight:500; font-size:15px; position:relative; }
+        .nav-links a:after { content:''; position:absolute; left:0; bottom:-6px; width:0; height:2px; background:var(--primary); transition:var(--transition); }
         .nav-links a:hover:after { width:100%; }
-        .nav-links a:hover { color:var(--primary); }
+        .ms_booking { background:var(--primary); color:white; padding:10px 20px; border-radius:30px; text-decoration:none; font-weight:700; display:inline-block; }
+        .ms_booking:hover { background:var(--primary-dark); transform:translateY(-3px); }
 
-        .ms_booking {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 30px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            font-size: 15px;
-            text-decoration: none;
-            display: inline-block;
-        }
-        .ms_booking:hover { background: var(--primary-dark); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(212,175,55,0.3); }
+        .mobile-menu { display:none; background:none; border:0; font-size:22px; cursor:pointer; color:var(--dark); }
 
-        .mobile-menu { display: none; font-size:24px; cursor:pointer; z-index:1001; background:none; border:none; color:var(--dark); }
-
-        /* ---------------------------
-           Hero
-           --------------------------- */
+        /* ===========================
+           HERO
+           =========================== */
         .hero {
-            height: 100vh;
-            display:flex;
-            align-items:center;
-            position:relative;
-            background: linear-gradient(135deg, rgba(26,26,26,0.8) 0%, rgba(26,26,26,0.6) 100%), url('eebebd35a1d711f0988e4ec14a599804_1.jpg') no-repeat center center/cover;
-            color: white;
-            overflow: hidden;
-            margin-top: 0;
+            height:100vh; display:flex; align-items:center; position:relative;
+            background: linear-gradient(135deg, rgba(26,26,26,0.75), rgba(26,26,26,0.45)), url('eebebd35a1d711f0988e4ec14a599804_1.jpg') no-repeat center/cover;
+            color:white; margin-top:0;
         }
-        .hero::before {
-            content:''; position:absolute; top:0; left:0; width:100%; height:100%;
-            background:
-                radial-gradient(circle at 20% 80%, rgba(212,175,55,0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(212,175,55,0.05) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(212,175,55,0.08) 0%, transparent 50%);
-            animation: gradientShift 8s ease-in-out infinite; z-index:1;
-        }
-        .hero-content { max-width:650px; position:relative; z-index:2; text-align:left; }
-        .hero h1 { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom:20px; text-shadow: 0 0 20px rgba(212,175,55,0.3); line-height:1.1; }
-        .hero p { font-size: clamp(1rem,2.5vw,1.2rem); margin-bottom:30px; }
+        .hero-content { max-width:680px; z-index:2; padding: 40px 0; }
+        .hero h1 { font-size:clamp(2.2rem,5vw,3.6rem); margin-bottom:18px; line-height:1.05; text-shadow:0 0 18px rgba(212,175,55,0.25); }
+        .hero p { font-size:clamp(1rem,2.2vw,1.15rem); color: rgba(255,255,255,0.9); margin-bottom:20px; }
+        .hero-buttons { display:flex; gap:14px; flex-wrap:wrap; }
 
-        .hero-buttons { display:flex; gap:15px; flex-wrap:wrap; }
-        .hero-buttons .ms_booking { margin:0; flex:1; min-width:200px; text-align:center; }
-        .hero-buttons .ms_booking.outline { background:transparent; border:2px solid white; }
-        .hero-buttons .ms_booking.outline:hover { background:white; color:var(--dark); }
+        /* ===========================
+           SECTION TITLES
+           =========================== */
+        .section { padding: clamp(48px, 6vw, 90px) 0; }
+        .section-title { text-align:center; margin-bottom: clamp(24px,4vw,48px); }
+        .section-title h2 { font-size:clamp(1.6rem,4vw,2.4rem); display:inline-block; position:relative; }
+        .section-title h2:after { content:''; position:absolute; left:50%; transform:translateX(-50%); bottom:-12px; width:80px; height:3px; background:var(--primary); }
 
-        /* ---------------------------
-           Sections common
-           --------------------------- */
-        .section { padding: clamp(50px, 0vw, 100px) 0; }
-        .section-title { text-align:center; margin-bottom: clamp(30px, 6vw, 60px); }
-        .section-title h2 { font-size: clamp(2rem, 4vw, 2.5rem); margin-bottom:15px; display:inline-block; position:relative; }
-        .section-title h2:after { content:''; position:absolute; bottom:-10px; left:50%; transform:translateX(-50%); width:80px; height:3px; background:var(--primary); }
-        .section-title p { color:var(--gray); max-width:600px; margin:0 auto; font-size: clamp(0.9rem, 2vw, 1rem); }
+        .section-title p { color:var(--gray); margin-top:10px; max-width:700px; margin-left:auto; margin-right:auto; }
 
-        /* ---------------------------
-           Services grid
-           --------------------------- */
-        .services-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(min(350px,100%), 1fr)); gap: clamp(20px, 4vw, 30px); }
-        .service-card { background:white; border-radius:15px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.08); transition:var(--transition); position:relative; display:flex; flex-direction:column; padding:30px; }
-        .service-card:hover { transform:translateY(-10px); box-shadow:0 20px 40px rgba(0,0,0,0.15); }
-        .service-content { display:flex; flex-direction:column; height:100%; }
-        .service-content h3 { font-size:clamp(1.2rem,3vw,1.4rem); margin-bottom:15px; color:var(--dark); }
-        .service-content p { color:var(--gray); margin-bottom:15px; font-size:clamp(0.9rem,2vw,1rem); line-height:1.5; flex-grow:1; }
-        .service-duration { color:var(--gray); font-size:0.9rem; margin-bottom:15px; display:flex; align-items:center; gap:5px; }
-        .service-duration i { color:var(--primary); }
-        .service-price { font-weight:600; color:var(--primary); font-size:clamp(1.1rem,2.5vw,1.2rem); margin-top:auto; padding-top:15px; border-top:1px solid rgba(0,0,0,0.1); text-align:center; }
+        /* ===========================
+           SERVICES (общие карточки)
+           =========================== */
+        .services-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(min(300px,100%),1fr)); gap:24px; }
+        .service-card { background:white; border-radius:14px; padding:24px; box-shadow:0 12px 30px rgba(0,0,0,0.06); display:flex; flex-direction:column; min-height:220px; }
+        .service-content h3 { margin-bottom:8px; font-size:1.15rem; color:var(--dark); }
+        .service-duration { color:var(--gray); font-size:0.95rem; margin-bottom:10px; display:flex; gap:8px; align-items:center; }
+        .service-content p { color:var(--gray); margin-bottom:12px; flex:1; }
+        .service-price { color:var(--primary); font-weight:700; text-align:center; margin-top:auto; padding-top:12px; border-top:1px solid rgba(0,0,0,0.04); font-size:1.05rem; }
+        .price-range { display:block; color:var(--gray); font-size:0.9rem; margin-top:6px; font-weight:400; }
 
-        /* ---------------------------
-           Portfolio (horizontal scroll)
-           --------------------------- */
-        .portfolio-section { background:#f9f9f9; }
-        .portfolio-scroll { display:flex; gap:20px; overflow-x:auto; scroll-behavior:smooth; padding:20px 0; scrollbar-width:thin; scrollbar-color:var(--primary) transparent; -webkit-overflow-scrolling: touch; }
-        .portfolio-item { position:relative; border-radius:15px; overflow:hidden; height:400px; min-width:300px; cursor:pointer; background:linear-gradient(45deg,var(--primary),#f4e4a0); display:flex; align-items:center; justify-content:center; transition:var(--transition); flex-shrink:0; }
-        .portfolio-gif { width:100%; height:100%; object-fit:cover; border-radius:15px; transition:var(--transition); }
-        .portfolio-overlay { position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(212,175,55,0.9); display:flex; flex-direction:column; justify-content:center; align-items:center; opacity:0; transition:var(--transition); padding:20px; text-align:center; color:white; }
-        .portfolio-item:hover { transform:translateY(-10px); }
-        .portfolio-item:hover .portfolio-gif { transform:scale(1.05); }
-        .portfolio-item:hover .portfolio-overlay { opacity:1; }
+        /* ===========================
+           PORTFOLIO (horiz scroll)
+           =========================== */
+        .portfolio-scroll { display:flex; gap:18px; overflow-x:auto; padding:12px 0; -webkit-overflow-scrolling:touch; scroll-behavior:smooth; }
+        .portfolio-item { min-width:280px; height:360px; border-radius:12px; overflow:hidden; flex-shrink:0; background:#f4e9c8; display:flex; align-items:center; justify-content:center; position:relative; box-shadow:0 10px 30px rgba(0,0,0,0.06); }
+        .portfolio-item img { width:100%; height:100%; object-fit:cover; display:block; }
 
-        /* ---------------------------
-           HOME CARE — улучшенная секция карточек (flex-based)
-           --------------------------- */
-        .home-care-section { background: white; }
-        .home-care-scroll-container { position: relative; }
+        /* ===========================
+           HOME CARE (продукты) — FLEX-BASED
+           =========================== */
+        .home-care-section { background: #ffffff; }
         .home-care-scroll {
-            display: flex;
-            gap: 25px;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            padding: 20px 0;
-            scrollbar-width: thin;
-            scrollbar-color: var(--primary) transparent;
+            display:flex;
+            gap:22px;
+            overflow-x:auto;
+            padding:18px 0;
             -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
         }
+        .home-care-scroll::-webkit-scrollbar { height:8px; }
+        .home-care-scroll::-webkit-scrollbar-thumb { background:var(--primary); border-radius:6px; }
+        .home-care-scroll.grabbing { cursor: grabbing; cursor:-webkit-grabbing; }
 
-        /* Product card: use flex column so price can stick to bottom */
         .product-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            transition: var(--transition);
-            width: 350px;
-            flex: 0 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: stretch;
+            width:350px;
+            flex:0 0 auto;
+            background:white;
+            border-radius:14px;
+            overflow:hidden;
+            display:flex;
+            flex-direction:column;
+            box-shadow:0 12px 32px rgba(0,0,0,0.06);
+            transition:var(--transition);
         }
-
-        .product-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
-
-        .product-image {
-            overflow: hidden;
-            flex: 0 0 420px; /* fixed visual height on desktop */
-            height: 420px;
-            position: relative;
-            display: block;
-            background: #f8f5f0;
-        }
-
-        .product-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: var(--transition);
-        }
-
-        .product-card:hover .product-image img { transform: scale(1.06); }
+        .product-card:hover { transform:translateY(-6px); }
+        /* Image area — use fixed visual height on larger screens but flexible behaviour overall */
+        .product-image { flex:0 0 420px; height:420px; background:#f8f5f0; overflow:hidden; }
+        .product-image img { width:100%; height:100%; object-fit:cover; display:block; transition:var(--transition); }
+        .product-card:hover .product-image img { transform:scale(1.05); }
 
         .product-content {
-            padding: 25px;
-            display: flex;
-            flex-direction: column;
-            flex: 1 1 auto; /* allow content to grow/shrink */
-            min-height: 0; /* important for flex children with overflow */
+            padding:20px;
+            display:flex;
+            flex-direction:column;
+            flex:1 1 auto; /* grow/shrink */
+            min-height:0; /* important for flex children */
         }
+        .product-content h3 { font-size:1.15rem; color:var(--dark); margin-bottom:8px; line-height:1.2; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; text-overflow:ellipsis; }
+        .product-description { color:var(--gray); font-size:0.98rem; line-height:1.45; flex:1 1 auto; overflow:auto; margin-bottom:10px; min-height:0; padding-right:6px; }
+        .product-price { color:var(--primary); font-weight:700; font-size:1.25rem; text-align:center; margin-top:auto; padding-top:12px; border-top:1px solid rgba(0,0,0,0.04); background:white; }
 
-        .product-content h3 {
-            font-size: 1.3rem;
-            margin-bottom: 12px;
-            color: var(--dark);
-            line-height: 1.3;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
+        /* Ensure price stays inside and pinned to bottom at all sizes */
+        .product-card, .product-content { height:auto; }
 
-        .product-description {
-            color: var(--gray);
-            font-size: 1rem;
-            line-height: 1.5;
-            flex: 1 1 auto; /* take remaining space */
-            overflow: auto; /* if text very long -> scroll inside */
-            min-height: 0; /* essential for proper flex overflow behaviour */
-            margin-bottom: 12px;
-            padding-right: 6px;
-        }
+        /* Improve internal scrollbars in product-description */
+        .product-description::-webkit-scrollbar { width:6px; }
+        .product-description::-webkit-scrollbar-thumb { background:rgba(0,0,0,0.08); border-radius:4px; }
+        .product-description::-webkit-scrollbar-thumb:hover { background:rgba(0,0,0,0.12); }
 
-        .product-description::-webkit-scrollbar { width: 6px; }
-        .product-description::-webkit-scrollbar-track { background: transparent; border-radius: 2px; }
-        .product-description::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 2px; }
-        .product-description::-webkit-scrollbar-thumb:hover { background: var(--primary-dark); }
-
-        .product-price {
-            font-weight: 600;
-            color: var(--primary);
-            font-size: 1.4rem;
-            text-align: center;
-            margin-top: auto; /* crucial: keeps price at bottom */
-            padding-top: 15px;
-            border-top: 1px solid rgba(0,0,0,0.08);
-            background: white;
-        }
-
-        /* ---------------------------
-           Team / Footer etc
-           --------------------------- */
+        /* ===========================
+           TEAM / Mастер
+           =========================== */
         .team-section { background:#f9f9f9; }
-        .team-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(min(350px,100%), 1fr)); gap: clamp(20px,4vw,30px); justify-items:center; max-width:500px; margin:0 auto; }
-        .team-card { text-align:center; background:white; border-radius:15px; overflow:hidden; box-shadow:0 15px 40px rgba(0,0,0,0.1); transition:var(--transition); max-width:400px; width:100%; }
-        .team-card:hover { transform: translateY(-15px); box-shadow:0 25px 50px rgba(0,0,0,0.15); }
-        .team-image { height:350px; overflow:hidden; background: url('fa729392-cd15-468b-8839-547d0e1f800b.jpg') no-repeat center/cover; display:flex; align-items:center; justify-content:center; }
+        .team-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:20px; align-items:start; }
+        .team-card { background:white; border-radius:14px; overflow:hidden; box-shadow:0 12px 30px rgba(0,0,0,0.06); display:flex; flex-direction:column; }
+        .team-image { height:320px; background-image: url('fa729392-cd15-468b-8839-547d0e1f800b.jpg'); background-size:cover; background-position:center; }
+        .team-info { padding:20px; text-align:center; }
+        .team-info h3 { font-size:1.25rem; margin-bottom:6px; color:var(--dark); }
+        .team-info .specialty { color:var(--primary); display:block; margin-bottom:10px; font-weight:600; }
+        .team-info p { color:var(--gray); margin-bottom:12px; }
+        .social-links { display:flex; justify-content:center; gap:14px; }
+        .social-links a { color:var(--dark); font-size:1.2rem; display:inline-flex; width:40px; height:40px; align-items:center; justify-content:center; border-radius:50%; background: rgba(212,175,55,0.06); transition:var(--transition); text-decoration:none; }
+        .social-links a:hover { color:white; background:var(--primary); transform:translateY(-4px); }
 
-        footer { background: var(--dark); color: white; padding: clamp(40px,8vw,70px) 0 20px; }
-        .footer-content { display:grid; grid-template-columns: repeat(auto-fit, minmax(min(250px,100%), 1fr)); gap: clamp(25px,5vw,40px); margin-bottom:50px; }
-        .footer-column h3 { font-size: clamp(1.1rem,2.5vw,1.3rem); margin-bottom:20px; display:inline-block; position:relative; }
-        .footer-column h3:after { content:''; position:absolute; bottom:-8px; left:0; width:40px; height:2px; background:var(--primary); }
-        .footer-links, .contact-info { list-style:none; }
-        .footer-links li { margin-bottom:10px; }
-        .footer-links a { color:#bbb; text-decoration:none; transition:var(--transition); font-size: clamp(0.9rem,2vw,1rem); }
-        .footer-links a:hover { color:var(--primary); padding-left:5px; }
-        .contact-info li { margin-bottom:15px; display:flex; align-items:flex-start; font-size: clamp(0.9rem,2vw,1rem); }
-        .contact-info i { margin-right:10px; color:var(--primary); min-width:20px; }
-        .copyright { text-align:center; padding-top:20px; border-top:1px solid rgba(255,255,255,0.1); color:#bbb; font-size: clamp(0.8rem,1.5vw,0.9rem); }
+        /* ===========================
+           FOOTER
+           =========================== */
+        footer { background:var(--dark); color:white; padding:48px 0 28px; }
+        .footer-content { display:grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap:24px; margin-bottom:24px; }
+        .footer-column h3 { margin-bottom:10px; color:white; font-size:1.05rem; }
+        .footer-column p, .footer-links a, .contact-info li { color:#cfcfcf; font-size:0.95rem; line-height:1.5; }
+        .footer-links { list-style:none; padding:0; }
+        .footer-links li { margin-bottom:8px; }
+        .footer-links a { color:#cfcfcf; text-decoration:none; }
+        .copyright { text-align:center; color:#bfbfbf; font-size:0.9rem; padding-top:12px; border-top:1px solid rgba(255,255,255,0.04); }
 
-        /* ---------------------------
-           Mobile menu & responsive
-           --------------------------- */
-        .mobile-nav { position: fixed; top:0; right:-100%; width:80%; max-width:300px; height:100vh; background:white; box-shadow:-5px 0 15px rgba(0,0,0,0.1); transition: all 0.4s ease-in-out; z-index:1000; padding:80px 20px 20px; overflow-y:auto; }
-        .mobile-nav.active { right:0; }
-        .mobile-nav-links { list-style:none; }
-        .close-menu { position:absolute; top:20px; right:20px; font-size:24px; cursor:pointer; background:none; border:none; color:var(--dark); z-index:1002; width:40px; height:40px; display:flex; align-items:center; justify-content:center; }
-        .mobile-nav-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:999; }
-        .mobile-nav-overlay.active { display:block; }
-
-        /* ---------------------------
-           Animations & misc
-           --------------------------- */
-        @keyframes fadeInUp { to { opacity:1; transform:translateY(0); } }
-        @keyframes gradientShift {
-            0%,100% { opacity:0.1; transform:scale(1); }
-            50% { opacity:0.15; transform:scale(1.1); }
+        /* ===========================
+           Responsive tweaks
+           =========================== */
+        @media (max-width: 992px){
+            .hero h1 { font-size:clamp(1.8rem,6vw,2.8rem); }
+            .product-card { width:300px; }
+            .product-image { height:360px; flex:0 0 360px; }
         }
-
-        /* ---------------------------
-           Responsive adjustments
-           --------------------------- */
-        @media (max-width: 992px) {
-            .hero h1 { font-size: clamp(2rem,6vw,3rem); }
-            .nav-links, .navbar .ms_booking { display: none; }
+        @media (max-width: 768px){
+            .nav-links { display:none; }
+            .ms_booking { display:none; }
             .mobile-menu { display:block; }
-
-            .product-card { width: 280px; }
-            .product-image { height: 360px; flex: 0 0 360px; }
-            .product-content { padding: 20px; }
-            .product-content h3 { font-size: 1.2rem; -webkit-line-clamp: 2; max-height: 2.6em; }
-            .product-price { font-size: 1.3rem; }
+            .product-card { width:280px; }
+            .product-image { height:320px; flex:0 0 320px; }
+            .team-image { height:260px; }
+        }
+        @media (max-width: 480px){
+            .container { width:95%; padding:0 16px; }
+            .product-card { width:300px; margin:0 auto; }
+            .product-image { height:320px; flex:0 0 320px; }
+            .home-care-scroll { gap:18px; padding:22px 0; }
+            .section { padding:36px 0; }
         }
 
-        @media (max-width: 768px) {
-            .hero { text-align:center; }
-            .hero-content { text-align:center; }
-            .hero h1 { font-size: clamp(1.8rem, 8vw, 2.5rem); }
-
-            .product-card { width: 280px; }
-            .product-image { height: 320px; flex: 0 0 320px; }
-            .product-content { padding: 18px; }
-            .product-description { font-size: 0.95rem; }
-        }
-
-        @media (max-width: 480px) {
-            .container { width: 95%; padding: 0 15px; }
-            .hero { height: 90vh; min-height: 600px; }
-            .hero-buttons .ms_booking { padding: 10px 20px; font-size: 14px; }
-
-            /* Mobile: allow cards be center aligned and grow in height naturally */
-            .product-card { width: 300px; margin: 0 auto; }
-            .product-image { height: 350px; flex: 0 0 350px; }
-            .product-content { padding: 20px; }
-            .product-description { max-height: none; overflow: auto; min-height: 0; }
-            .home-care-scroll { gap: 30px; padding: 25px 0; }
-        }
-
-        @media (max-width: 360px) {
-            .product-card { width: 280px; }
-            .product-image { height: 320px; flex: 0 0 320px; }
-            .product-content { padding: 16px; }
-        }
-
-        /* Touch improvements */
+        /* Improve touch performance: avoid heavy shadows on touch devices */
         @media (hover: none) {
-            .service-card:hover, .team-card:hover, .portfolio-item:hover, .product-card:hover { transform: none; }
-            .service-card:active, .team-card:active, .product-card:active { transform: scale(0.98); }
+            .service-card:hover, .product-card:hover, .team-card:hover { transform:none; box-shadow: 0 10px 20px rgba(0,0,0,0.04); }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
+    <!-- HEADER -->
     <header id="header">
         <div class="container">
             <nav class="navbar">
@@ -344,59 +219,50 @@
                     <li><a href="#team">Мастер</a></li>
                     <li><a href="#contact">Контакты</a></li>
                 </ul>
-                <a href="#" class="ms_booking" data-yclients-widget>Записаться онлайн</a>
-                <button class="mobile-menu" id="mobileMenu">
-                    <i class="fas fa-bars"></i>
-                </button>
+                <a href="#" class="ms_booking" data-yclients-widget>Записаться</a>
+                <button class="mobile-menu" id="mobileMenu" aria-label="Открыть меню"><i class="fas fa-bars"></i></button>
             </nav>
         </div>
     </header>
 
-    <!-- Mobile Navigation -->
-    <div class="mobile-nav" id="mobileNav">
-        <button class="close-menu" id="closeMenu">
-            <i class="fas fa-times"></i>
-        </button>
-        <ul class="mobile-nav-links">
-            <li><a href="#home">Главная</a></li>
-            <li><a href="#services">Услуги</a></li>
-            <li><a href="#portfolio">Портфолио</a></li>
-            <li><a href="#home-care">Домашний уход</a></li>
-            <li><a href="#team">Мастер</a></li>
-            <li><a href="#contact">Контакты</a></li>
+    <!-- MOBILE NAV (simple) -->
+    <div class="mobile-nav" id="mobileNav" style="display:none; position:fixed; top:0; right:0; width:80%; max-width:320px; height:100vh; background:white; z-index:2000; padding:80px 20px; box-shadow:-10px 0 30px rgba(0,0,0,0.08);">
+        <button id="closeMobileNav" style="position:absolute; top:18px; right:18px; background:none; border:0; font-size:22px;"><i class="fas fa-times"></i></button>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:14px; padding:0; margin-top:12px;">
+            <li><a href="#home" style="text-decoration:none; color:var(--dark); font-weight:600;">Главная</a></li>
+            <li><a href="#services" style="text-decoration:none; color:var(--dark); font-weight:600;">Услуги</a></li>
+            <li><a href="#portfolio" style="text-decoration:none; color:var(--dark); font-weight:600;">Портфолио</a></li>
+            <li><a href="#home-care" style="text-decoration:none; color:var(--dark); font-weight:600;">Домашний уход</a></li>
+            <li><a href="#team" style="text-decoration:none; color:var(--dark); font-weight:600;">Мастер</a></li>
+            <li><a href="#contact" style="text-decoration:none; color:var(--dark); font-weight:600;">Контакты</a></li>
         </ul>
     </div>
-    <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+    <div id="mobileNavOverlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:1500;"></div>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
+    <!-- HERO -->
+    <section class="hero" id="home" aria-label="Главный">
         <div class="container">
             <div class="hero-content">
                 <h1>Искусство в каждой прядке</h1>
-                <p>Добро пожаловать в салон красоты Lumière, где мы создаем стиль, который подчеркивает вашу индивидуальность и красоту. Профессиональные мастера и премиальные продукты.</p>
+                <p>Добро пожаловать в салон Lumière — профессиональные мастера, премиальные средства и индивидуальный подход.</p>
                 <div class="hero-buttons">
-                    <a href="#" class="ms_booking" data-yclients-widget>Записаться онлайн</a>
-                    <a href="#services" class="ms_booking outline">Наши услуги</a>
+                    <a href="#" class="ms_booking">Записаться</a>
+                    <a href="#services" class="ms_booking" style="background:transparent; color:white; border:2px solid rgba(255,255,255,0.8);">Наши услуги</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section class="section" id="services">
+    <!-- SERVICES -->
+    <section class="section" id="services" aria-label="Услуги">
         <div class="container">
-            <div class="section-title">
-                <h2>Наши услуги</h2>
-                <p>Профессиональные парикмахерские услуги премиум-класса</p>
-            </div>
-
+            <div class="section-title"><h2>Наши услуги</h2><p>Премиальные парикмахерские услуги и уход</p></div>
             <div class="services-grid">
-                <!-- Several service cards (оставлены без изменений контентно) -->
                 <div class="service-card">
                     <div class="service-content">
                         <h3>Сложное окрашивание Airtouch | Шатуш</h3>
-                        <div class="service-duration"><i class="fas fa-clock"></i> 4 часа</div>
-                        <p>Создание естественных плавных переходов цвета. Идеально для тех, кто хочет мягкое обновление образа.</p>
+                        <div class="service-duration"><i class="fas fa-clock" style="color:var(--primary)"></i> 4 часа</div>
+                        <p>Создание естественных плавных переходов цвета.</p>
                         <div class="service-price">
                             от 15 000 ₽
                             <span class="price-range">Короткие: 15 000 ₽ • Средние: 16 500 ₽ • Длинные: 18 000 ₽</span>
@@ -407,29 +273,20 @@
                 <div class="service-card">
                     <div class="service-content">
                         <h3>Total Blonde</h3>
-                        <div class="service-duration"><i class="fas fa-clock"></i> 2.5-4 часов</div>
-                        <p>Осветление корня + тонирование длины. Идеальное блондирование с сохранением здоровья волос.</p>
+                        <div class="service-duration"><i class="fas fa-clock" style="color:var(--primary)"></i> 2.5–4 часа</div>
+                        <p>Осветление корня и тонирование длины с бережным отношением к волосам.</p>
                         <div class="service-price">
                             от 8 000 ₽
-                            <span class="price-range">Корень 1-2 см: 8 000 - 10 000 ₽ • от 2 см: 12 000 - 18 000₽</span>
+                            <span class="price-range">Корень 1-2 см: 8 000–10 000 ₽ • от 2 см: 12 000–18 000 ₽</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="service-card">
                     <div class="service-content">
-                        <h3>Выход из чёрного | тёмного</h3>
-                        <div class="service-duration"><i class="fas fa-clock"></i> 7 часов</div>
-                        <p>Бережный выход из темных оттенков без вреда для волос. Многоэтапная процедура с профессиональными средствами.</p>
-                        <div class="service-price">18 000 – 22 000 ₽</div>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-content">
                         <h3>Тонирование</h3>
-                        <div class="service-duration"><i class="fas fa-clock"></i> 2 часа</div>
-                        <p>Обновление цвета, нейтрализация нежелательных оттенков. Придание волосам блеска и насыщенности.</p>
+                        <div class="service-duration"><i class="fas fa-clock" style="color:var(--primary)"></i> 1.5–2 часа</div>
+                        <p>Обновление оттенка, усиление блеска и сияния.</p>
                         <div class="service-price">
                             от 6 000 ₽
                             <span class="price-range">Короткие: 6 000 ₽ • Средние: 7 500 ₽ • Длинные: 9 000 ₽</span>
@@ -439,211 +296,116 @@
 
                 <div class="service-card">
                     <div class="service-content">
-                        <h3>Окрашивание в один тон</h3>
-                        <div class="service-duration"><i class="fas fa-clock"></i> 2 часа</div>
-                        <p>Равномерное окрашивание по всей длине. Подбор идеального оттенка с учетом вашего цветотипа.</p>
-                        <div class="service-price">
-                            от 5 000 ₽
-                            <span class="price-range">Короткие: 5 000 ₽ • Средние: 6 500 ₽ • Длинные: 8 000 ₽</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-content">
                         <h3>Стрижка</h3>
-                        <div class="service-duration"><i class="fas fa-clock"></i> 1.5 часа</div>
-                        <p>Создание идеальной формы с учетом структуры волос и типа лица. Подбор стрижки под ваш образ жизни.</p>
+                        <div class="service-duration"><i class="fas fa-clock" style="color:var(--primary)"></i> 1–1.5 часа</div>
+                        <p>Индивидуальная стрижка с учётом структуры волос и формы лица.</p>
                         <div class="service-price">
                             от 3 500 ₽
                             <span class="price-range">Женская: 3 500 ₽ • Мужская: 2 500 ₽ • Детская: 2 000 ₽</span>
                         </div>
                     </div>
                 </div>
-
-                <div class="service-card">
-                    <div class="service-content">
-                        <h3>Кератиновое выпрямление</h3>
-                        <div class="service-duration"><i class="fas fa-clock"></i> 3 часа</div>
-                        <p>Восстановление структуры волос, выпрямление и защита от влажности. Эффект до 4 месяцев.</p>
-                        <div class="service-price">
-                            от 8 000 ₽
-                            <span class="price-range">Короткие: 8 000 ₽ • Средние: 10 000 ₽ • Длинные: 12 000 ₽</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-content">
-                        <h3>Уход Olaplex</h3>
-                        <div class="service-duration"><i class="fas fa-clock"></i> 30 минут</div>
-                        <p>Восстановление поврежденных волос на молекулярном уровне. Устранение ломкости и сечения.</p>
-                        <div class="service-price">3 000 ₽</div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
 
-    <!-- Portfolio Section -->
-    <section class="section portfolio-section" id="portfolio">
+    <!-- PORTFOLIO -->
+    <section class="section portfolio-section" id="portfolio" aria-label="Портфолио">
         <div class="container">
-            <div class="section-title">
-                <h2>Наши работы</h2>
-                <p>Результаты, которые говорят сами за себя</p>
-            </div>
-            <div class="portfolio-scroll-container">
-                <div class="portfolio-scroll">
-                    <div class="portfolio-item">
-                        <img src="cabelo-calor.gif" alt="Процесс окрашивания" class="portfolio-gif">
-                        <div class="portfolio-overlay">
-                            <h3>Сложное окрашивание</h3>
-                            <p>Техника Airtouch и шатуш</p>
-                        </div>
-                    </div>
-                    <div class="portfolio-item">
-                        <img src="hair-flip-shiny-hair.webp" alt="Процесс стрижки" class="portfolio-gif">
-                        <div class="portfolio-overlay">
-                            <h3>Профессиональная стрижка</h3>
-                            <p>Точные срезы и филировка</p>
-                        </div>
-                    </div>
-                    <div class="portfolio-item">
-                        <img src="7f8e7595-3b30-4909-a01d-07d615f11ffc-ezgif.com-video-to-gif-converter (1).gif" alt="Создание укладки" class="portfolio-gif">
-                        <div class="portfolio-overlay">
-                            <h3>Вечерняя укладка</h3>
-                            <p>Элегантные волны и объем</p>
-                        </div>
-                    </div>
-                    <div class="portfolio-item">
-                        <img src="guy-long-hair.gif" alt="Blond" class="portfolio-gif">
-                        <div class="portfolio-overlay">
-                            <h3>Blond</h3>
-                            <p>Окрашивание в блонд</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="section-title"><h2>Наши работы</h2><p>Результаты, которыми мы гордимся</p></div>
+            <div class="portfolio-scroll" aria-hidden="false">
+                <div class="portfolio-item"><img src="cabelo-calor.gif" alt="окрашивание"></div>
+                <div class="portfolio-item"><img src="hair-flip-shiny-hair.webp" alt="стрижка"></div>
+                <div class="portfolio-item"><img src="7f8e7595-3b30-4909-a01d-07d615f11ffc-ezgif.com-video-to-gif-converter (1).gif" alt="укладка"></div>
+                <div class="portfolio-item"><img src="guy-long-hair.gif" alt="blond"></div>
             </div>
         </div>
     </section>
 
-    <!-- Home Care Section -->
-    <section class="section home-care-section" id="home-care">
+    <!-- HOME CARE -->
+    <section class="section home-care-section" id="home-care" aria-label="Домашний уход">
         <div class="container">
-            <div class="section-title">
-                <h2>Домашний уход</h2>
-                <p>Профессиональные средства для ухода за волосами в домашних условиях</p>
-            </div>
-            
+            <div class="section-title"><h2>Домашний уход</h2><p>Профессиональные средства для домашнего ухода</p></div>
 
-            <div class="home-care-scroll-container">
-                <div class="home-care-scroll">
-                    <!-- Product 1 -->
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="0af97492a1e011f0a178e6378db1d023_1.jpg" alt="Уход Lebel">
-                        </div>
-                        <div class="product-content">
-                            <h3>Lebel "Счастье для волос"</h3>
-                            <div class="product-description">
-                                <p>Профессиональный уход для восстановления и увлажнения волос. Подходит для всех типов волос. Глубоко проникает в структуру волоса, восстанавливая повреждения и придавая здоровый блеск.</p>
-                            </div>
-                            <div class="product-price">4 500 ₽</div>
-                        </div>
+            <div class="home-care-scroll" id="homeCareScroll" tabindex="0" aria-label="Лента товаров">
+                <!-- Product 1 -->
+                <article class="product-card" aria-labelledby="p1">
+                    <div class="product-image"><img src="https://via.placeholder.com/350x420/f8f5f0/1a1a1a?text=Lebel+Care" alt=""></div>
+                    <div class="product-content">
+                        <h3 id="p1">Lebel "Счастье для волос"</h3>
+                        <div class="product-description"><p>Профессиональный уход для восстановления и увлажнения волос. Подходит для всех типов волос. Глубоко проникает в структуру волоса, восстанавливая повреждения и придавая здоровый блеск.</p></div>
+                        <div class="product-price">4 500 ₽</div>
                     </div>
+                </article>
 
-                    <!-- Product 2 -->
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="https://via.placeholder.com/320x420/f8f5f0/1a1a1a?text=Kerastase" alt="Kerastase">
-                        </div>
-                        <div class="product-content">
-                            <h3>Kerastase Resistance</h3>
-                            <div class="product-description">
-                                <p>Восстанавливающая сыворотка для поврежденных волос. Восстанавливает структуру волоса. Содержит кератин и маточное молочко для интенсивного восстановления и защиты от дальнейших повреждений.</p>
-                            </div>
-                            <div class="product-price">3 800 ₽</div>
-                        </div>
+                <!-- Product 2 -->
+                <article class="product-card" aria-labelledby="p2">
+                    <div class="product-image"><img src="https://via.placeholder.com/350x420/f8f5f0/1a1a1a?text=Kerastase" alt=""></div>
+                    <div class="product-content">
+                        <h3 id="p2">Kerastase Resistance</h3>
+                        <div class="product-description"><p>Восстанавливающая сыворотка для поврежденных волос. Восстанавливает структуру волоса, придаёт силу и защищает от ломкости.</p></div>
+                        <div class="product-price">3 800 ₽</div>
                     </div>
+                </article>
 
-                    <!-- Product 3 -->
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="https://via.placeholder.com/320x420/f8f5f0/1a1a1a?text=Olaplex" alt="Olaplex">
-                        </div>
-                        <div class="product-content">
-                            <h3>Olaplex No.3</h3>
-                            <div class="product-description">
-                                <p>Восстановитель волос. Восстанавливает поврежденные связи в структуре волос. Революционная технология, которая работает на молекулярном уровне, возвращая волосам силу и эластичность.</p>
-                            </div>
-                            <div class="product-price">2 900 ₽</div>
-                        </div>
+                <!-- Product 3 -->
+                <article class="product-card" aria-labelledby="p3">
+                    <div class="product-image"><img src="https://via.placeholder.com/350x420/f8f5f0/1a1a1a?text=Olaplex" alt=""></div>
+                    <div class="product-content">
+                        <h3 id="p3">Olaplex No.3</h3>
+                        <div class="product-description"><p>Восстановитель волос: возвращает силу и эластичность благодаря уникальной молекулярной технологии.</p></div>
+                        <div class="product-price">2 900 ₽</div>
                     </div>
+                </article>
 
-                    <!-- Product 4 -->
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="https://via.placeholder.com/320x420/f8f5f0/1a1a1a?text=Moroccanoil" alt="Moroccanoil">
-                        </div>
-                        <div class="product-content">
-                            <h3>Moroccanoil Treatment</h3>
-                            <div class="product-description">
-                                <p>Масло для волос с аргановым маслом. Придает блеск, увлажняет и защищает волосы. Уникальная формула с антиоксидантами и витаминами для комплексного ухода за волосами любого типа.</p>
-                            </div>
-                            <div class="product-price">3 200 ₽</div>
-                        </div>
+                <!-- Product 4 -->
+                <article class="product-card" aria-labelledby="p4">
+                    <div class="product-image"><img src="https://via.placeholder.com/350x420/f8f5f0/1a1a1a?text=Moroccanoil" alt=""></div>
+                    <div class="product-content">
+                        <h3 id="p4">Moroccanoil Treatment</h3>
+                        <div class="product-description"><p>Аргановое масло для питания, блеска и защиты волос. Идеально для сухих и поврежденных волос.</p></div>
+                        <div class="product-price">3 200 ₽</div>
                     </div>
+                </article>
 
-                    <!-- Product 5 -->
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="https://via.placeholder.com/320x420/f8f5f0/1a1a1a?text=Redken" alt="Redken">
-                        </div>
-                        <div class="product-content">
-                            <h3>Redken Acidic Bonding</h3>
-                            <div class="product-description">
-                                <p>Концентрированный уход для сильно поврежденных волос. Восстанавливает и укрепляет. Кислотная формула запечатывает кутикулу, делая волосы гладкими и блестящими.</p>
-                            </div>
-                            <div class="product-price">4 100 ₽</div>
-                        </div>
+                <!-- Product 5 -->
+                <article class="product-card" aria-labelledby="p5">
+                    <div class="product-image"><img src="https://via.placeholder.com/350x420/f8f5f0/1a1a1a?text=Redken" alt=""></div>
+                    <div class="product-content">
+                        <h3 id="p5">Redken Acidic Bonding</h3>
+                        <div class="product-description"><p>Интенсивный уход для сильно поврежденных волос, запечатывает кутикулу и укрепляет структуру.</p></div>
+                        <div class="product-price">4 100 ₽</div>
                     </div>
+                </article>
 
-                    <!-- Product 6 -->
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="https://via.placeholder.com/320x420/f8f5f0/1a1a1a?text=Oribe" alt="Oribe">
-                        </div>
-                        <div class="product-content">
-                            <h3>Oribe Gold Lust</h3>
-                            <div class="product-description">
-                                <p>Премиальный уход для восстановления и блеска волос. Подходит для окрашенных волос. Роскошная формула с биопептидами и маслами для максимального восстановления и сияния.</p>
-                            </div>
-                            <div class="product-price">5 600 ₽</div>
-                        </div>
+                <!-- Product 6 -->
+                <article class="product-card" aria-labelledby="p6">
+                    <div class="product-image"><img src="https://via.placeholder.com/350x420/f8f5f0/1a1a1a?text=Oribe" alt=""></div>
+                    <div class="product-content">
+                        <h3 id="p6">Oribe Gold Lust</h3>
+                        <div class="product-description"><p>Премиальный уход для восстановления и сияния волос, подходит для окрашенных волос.</p></div>
+                        <div class="product-price">5 600 ₽</div>
                     </div>
-                </div>
+                </article>
             </div>
         </div>
     </section>
 
-    <!-- Team Section -->
-    <section class="section team-section" id="team">
+    <!-- TEAM -->
+    <section class="section team-section" id="team" aria-label="Мастер">
         <div class="container">
-            <div class="section-title">
-                <h2>Наш мастер</h2>
-                <p>Профессиональный стилист с многолетним опытом и любовью к своему делу</p>
-            </div>
+            <div class="section-title"><h2>Наш мастер</h2><p>Профессионал с богатым опытом и индивидуальным подходом</p></div>
             <div class="team-grid">
                 <div class="team-card">
-                    <div class="team-image"></div>
+                    <div class="team-image" role="img" aria-label="Юлия Абдрахманова"></div>
                     <div class="team-info">
                         <h3>Юлия Абдрахманова</h3>
                         <span class="specialty">Топ-стилист и колорист</span>
-                        <p>Специализация: сложное окрашивание, стрижки, уходовые процедуры. Опыт работы более 5 лет. Постоянно совершенствую свои навыки на международных мастер-классах.</p>
+                        <p>Специализируется на сложных техниках окрашивания, стрижках и лечебных уходах.</p>
                         <div class="social-links">
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fab fa-telegram"></i></a>
-                            <a href="#"><i class="fab fa-whatsapp"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+                            <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
                         </div>
                     </div>
                 </div>
@@ -651,37 +413,32 @@
         </div>
     </section>
 
-    <!-- Map Section -->
-    <section class="section" id="map">
+    <!-- MAP / CONTACTS -->
+    <section class="section" id="map" aria-label="Контакты">
         <div class="container">
-            <div class="section-title">
-                <h2>Как нас найти</h2>
-                <p>Мы находимся в центре Санкт-Петербурга</p>
-            </div>
-            <div class="map-container">
-                <iframe 
-                    src="https://yandex.com/web-maps/2/saint-petersburg/?azimuth=6.240063619259528&l=masstransit&ll=30.385074%2C59.926586&mode=poi&poi%5Bpoint%5D=30.385000%2C59.926531&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D87088919361&tilt=0.552121134491067&z=20"
-                    width="100%" height="400" style="border:none; border-radius:15px;" allowfullscreen>
-                </iframe>
+            <div class="section-title"><h2>Как нас найти</h2><p>Центр Санкт-Петербурга</p></div>
+            <div style="border-radius:12px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.06);">
+                <iframe src="https://yandex.com/web-maps/2/saint-petersburg/?azimuth=6.240063619259528&l=masstransit&ll=30.385074%2C59.926586&mode=poi&poi%5Bpoint%5D=30.385000%2C59.926531&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D87088919361&tilt=0.552121134491067&z=18"
+                        style="width:100%; height:420px; border:0;" allowfullscreen loading="lazy"></iframe>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer id="contact">
+    <!-- FOOTER -->
+    <footer id="contact" aria-label="Футер">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
                     <h3>Lumière</h3>
-                    <p>Салон красоты премиум-класса, где мы создаем стиль, который подчеркивает вашу индивидуальность и красоту.</p>
+                    <p>Салон красоты премиум-класса, где мы создаём индивидуальные образы и заботимся о здоровье волос.</p>
                 </div>
                 <div class="footer-column">
                     <h3>Контакты</h3>
-                    <ul class="contact-info">
-                        <li><i class="fas fa-map-marker-alt"></i> г. Санкт-Петербург, ул. Александра Невского, 12</li>
-                        <li><i class="fas fa-phone"></i> +7 (912) 352-77-20</li>
-                        <li><i class="fas fa-envelope"></i> info@lumiere-salon.ru</li>
-                        <li><i class="fas fa-clock"></i> Пн-Вс: 9:00 - 21:00</li>
+                    <ul class="contact-info" style="list-style:none; padding:0;">
+                        <li style="margin-bottom:8px;"><i class="fas fa-map-marker-alt" style="color:var(--primary); margin-right:8px;"></i>г. Санкт-Петербург, ул. Александра Невского, 12</li>
+                        <li style="margin-bottom:8px;"><i class="fas fa-phone" style="color:var(--primary); margin-right:8px;"></i>+7 (912) 352-77-20</li>
+                        <li style="margin-bottom:8px;"><i class="fas fa-envelope" style="color:var(--primary); margin-right:8px;"></i>info@lumiere-salon.ru</li>
+                        <li style="margin-bottom:8px;"><i class="fas fa-clock" style="color:var(--primary); margin-right:8px;"></i>Пн–Вс: 9:00–21:00</li>
                     </ul>
                 </div>
                 <div class="footer-column">
@@ -691,117 +448,125 @@
                         <li><a href="#services">Услуги</a></li>
                         <li><a href="#portfolio">Портфолио</a></li>
                         <li><a href="#home-care">Домашний уход</a></li>
-                        <li><a href="#team">Мастер</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="copyright">
-                <p>&copy; 2025 Lumière. Все права защищены.</p>
-            </div>
+            <div class="copyright">&copy; 2025 Lumière. Все права защищены.</div>
         </div>
     </footer>
 
+    <!-- SCRIPTS -->
     <script>
-        // Mobile Menu
-        document.addEventListener('DOMContentLoaded', function() {
-            const mobileMenu = document.getElementById('mobileMenu');
-            const mobileNav = document.getElementById('mobileNav');
-            const closeMenu = document.getElementById('closeMenu');
-            const mobileNavOverlay = document.getElementById('mobileNavOverlay');
+        // Mobile nav
+        const mobileMenuBtn = document.getElementById('mobileMenu');
+        const mobileNav = document.getElementById('mobileNav');
+        const mobileNavOverlay = document.getElementById('mobileNavOverlay');
+        const closeMobileNavBtn = document.getElementById('closeMobileNav');
 
-            function openMobileMenu() {
-                mobileNav.classList.add('active');
-                mobileNavOverlay.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
+        function openMobileNav(){
+            mobileNav.style.display = 'block';
+            mobileNavOverlay.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        function closeMobileNav(){
+            mobileNav.style.display = 'none';
+            mobileNavOverlay.style.display = 'none';
+            document.body.style.overflow = '';
+        }
 
-            function closeMobileMenu() {
-                mobileNav.classList.remove('active');
-                mobileNavOverlay.classList.remove('active');
-                document.body.style.overflow = '';
-            }
+        if(mobileMenuBtn){
+            mobileMenuBtn.addEventListener('click', openMobileNav);
+        }
+        if(closeMobileNavBtn){
+            closeMobileNavBtn.addEventListener('click', closeMobileNav);
+        }
+        if(mobileNavOverlay){
+            mobileNavOverlay.addEventListener('click', closeMobileNav);
+        }
 
-            if (mobileMenu) mobileMenu.addEventListener('click', openMobileMenu);
-            if (closeMenu) closeMenu.addEventListener('click', closeMobileMenu);
-            if (mobileNavOverlay) mobileNavOverlay.addEventListener('click', closeMobileMenu);
-
-            document.querySelectorAll('.mobile-nav-links a').forEach(link => {
-                link.addEventListener('click', closeMobileMenu);
-            });
-
-            // Smooth scroll for anchors (adjust for fixed header)
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    const href = this.getAttribute('href');
-                    if (href === '#' || this.classList.contains('no-scroll')) return;
+        // Smooth anchor scroll adjusted for fixed header
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e){
+                const href = this.getAttribute('href');
+                if(href === '#' || href === '') return;
+                const target = document.querySelector(href);
+                if(target){
                     e.preventDefault();
-                    const target = document.querySelector(href);
-                    if (target) {
-                        const headerHeight = document.getElementById('header').offsetHeight;
-                        const targetPosition = target.offsetTop - headerHeight;
-                        window.scrollTo({ top: targetPosition, behavior: 'smooth' });
-                    }
-                });
+                    const headerHeight = document.getElementById('header').offsetHeight;
+                    const top = target.offsetTop - headerHeight - 8;
+                    window.scrollTo({ top, behavior:'smooth' });
+                    // close mobile nav on selection
+                    closeMobileNav();
+                }
             });
-
-            // Header scroll effect
-            window.addEventListener('scroll', () => {
-                const header = document.getElementById('header');
-                if (window.scrollY > 100) header.classList.add('scrolled'); else header.classList.remove('scrolled');
-            });
-
-            // Hero entrance animation (simple)
-            const heroContent = document.querySelector('.hero-content');
-            if (heroContent) {
-                heroContent.style.opacity = '0';
-                heroContent.style.transform = 'translateY(50px)';
-                setTimeout(() => {
-                    heroContent.style.transition = 'all 1.2s cubic-bezier(0.25,0.46,0.45,0.94)';
-                    heroContent.style.opacity = '1';
-                    heroContent.style.transform = 'translateY(0)';
-                }, 300);
-            }
-
-            // Desktop style mouse drag for the horizontal product scroller (and touch)
-            function initDragScroll(selector) {
-                const scroller = document.querySelector(selector);
-                if (!scroller) return;
-                let isDown = false;
-                let startX, scrollLeft;
-                scroller.addEventListener('mousedown', (e) => {
-                    isDown = true;
-                    scroller.classList.add('active-drag');
-                    startX = e.pageX - scroller.offsetLeft;
-                    scrollLeft = scroller.scrollLeft;
-                });
-                scroller.addEventListener('mouseleave', () => { isDown = false; scroller.classList.remove('active-drag'); });
-                scroller.addEventListener('mouseup', () => { isDown = false; scroller.classList.remove('active-drag'); });
-                scroller.addEventListener('mousemove', (e) => {
-                    if (!isDown) return;
-                    e.preventDefault();
-                    const x = e.pageX - scroller.offsetLeft;
-                    const walk = (x - startX) * 1.8;
-                    scroller.scrollLeft = scrollLeft - walk;
-                });
-                scroller.addEventListener('touchstart', (e) => {
-                    isDown = true;
-                    startX = e.touches[0].pageX - scroller.offsetLeft;
-                    scrollLeft = scroller.scrollLeft;
-                }, {passive:true});
-                scroller.addEventListener('touchend', () => { isDown = false; });
-                scroller.addEventListener('touchmove', (e) => {
-                    if (!isDown) return;
-                    const x = e.touches[0].pageX - scroller.offsetLeft;
-                    const walk = (x - startX) * 1.8;
-                    scroller.scrollLeft = scrollLeft - walk;
-                }, {passive:true});
-            }
-
-            initDragScroll('.home-care-scroll');
-            initDragScroll('.portfolio-scroll');
         });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if(window.scrollY > 80) header.classList.add('scrolled'); else header.classList.remove('scrolled');
+        });
+
+        // Drag-to-scroll for home-care and portfolio: mouse + touch
+        function initDragScroll(selector){
+            const el = document.querySelector(selector);
+            if(!el) return;
+            let isDown = false, startX = 0, scrollLeft = 0;
+            // Mouse
+            el.addEventListener('mousedown', (e) => {
+                isDown = true;
+                el.classList.add('grabbing');
+                startX = e.pageX - el.offsetLeft;
+                scrollLeft = el.scrollLeft;
+                // prevent selecting text while dragging
+                el.style.userSelect = 'none';
+            });
+            document.addEventListener('mouseup', () => {
+                isDown = false;
+                el.classList.remove('grabbing');
+                el.style.userSelect = '';
+            });
+            el.addEventListener('mouseleave', () => {
+                isDown = false;
+                el.classList.remove('grabbing');
+                el.style.userSelect = '';
+            });
+            el.addEventListener('mousemove', (e) => {
+                if(!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - el.offsetLeft;
+                const walk = (x - startX) * 1.6; // sensitivity
+                el.scrollLeft = scrollLeft - walk;
+            });
+            // Touch
+            let touchStartX = 0, touchScrollLeft = 0;
+            el.addEventListener('touchstart', (e) => {
+                if(e.touches.length !== 1) return;
+                touchStartX = e.touches[0].pageX - el.offsetLeft;
+                touchScrollLeft = el.scrollLeft;
+            }, {passive:true});
+            el.addEventListener('touchmove', (e) => {
+                if(e.touches.length !== 1) return;
+                const x = e.touches[0].pageX - el.offsetLeft;
+                const walk = (x - touchStartX) * 1.2;
+                el.scrollLeft = touchScrollLeft - walk;
+            }, {passive:true});
+        }
+
+        initDragScroll('#homeCareScroll');
+        initDragScroll('.portfolio-scroll');
+
+        // Improve accessibility: allow horizontal scroll with keyboard for homeCare
+        const hc = document.getElementById('homeCareScroll');
+        if(hc){
+            hc.addEventListener('keydown', (e) => {
+                if(e.key === 'ArrowRight') { hc.scrollBy({left: 220, behavior:'smooth'}); }
+                if(e.key === 'ArrowLeft') { hc.scrollBy({left: -220, behavior:'smooth'}); }
+            });
+        }
     </script>
 
+    <!-- YCLIENTS WIDGET (если нужен) -->
     <script type="text/javascript" src="https://w948450.yclients.com/widgetJS" charset="UTF-8"></script>
 </body>
 </html>
