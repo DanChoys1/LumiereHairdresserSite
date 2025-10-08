@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lumière - Салон красоты премиум-класса</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="c63635fba1eb11f0a547b62e65e43737_1.jpg">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* ---------------------------
+           Reset & variables
+           --------------------------- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --primary: #d4af37;
             --primary-dark: #b8941f;
@@ -28,97 +26,38 @@
             line-height: 1.6;
             color: var(--dark);
             background-color: var(--light);
+            -webkit-font-smoothing:antialiased;
+            -moz-osx-font-smoothing:grayscale;
             overflow-x: hidden;
         }
 
-        h1, h2, h3, h4, h5 {
-            font-family: 'Playfair Display', serif;
-            font-weight: 600;
-            line-height: 1.2;
-        }
+        h1,h2,h3,h4,h5 { font-family: 'Playfair Display', serif; font-weight: 600; line-height: 1.2; }
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header & Navigation */
+        /* ---------------------------
+           Header & Navigation
+           --------------------------- */
         header {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
+            top: 0; left: 0; width: 100%;
             z-index: 1000;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255,255,255,0.95);
             backdrop-filter: blur(10px);
             transition: var(--transition);
             padding: 20px 0;
         }
+        header.scrolled { padding: 15px 0; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
 
-        header.scrolled {
-            padding: 15px 0;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        }
+        .navbar { display:flex; justify-content:space-between; align-items:center; }
+        .logo { font-family:'Playfair Display', serif; font-size:28px; font-weight:700; color:var(--dark); text-decoration:none; display:flex; align-items:center; z-index:1002; }
+        .logo span { color:var(--primary); }
 
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--dark);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            z-index: 1002;
-        }
-
-        .logo span {
-            color: var(--primary);
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-        }
-
-        .nav-links li {
-            margin-left: 30px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 500;
-            font-size: 16px;
-            transition: var(--transition);
-            position: relative;
-        }
-
-        .nav-links a:after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: var(--transition);
-        }
-
-        .nav-links a:hover:after {
-            width: 100%;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
+        .nav-links { display:flex; list-style:none; }
+        .nav-links li { margin-left:30px; }
+        .nav-links a { text-decoration:none; color:var(--dark); font-weight:500; font-size:16px; transition:var(--transition); position:relative; }
+        .nav-links a:after { content:''; position:absolute; bottom:-5px; left:0; width:0; height:2px; background:var(--primary); transition:var(--transition); }
+        .nav-links a:hover:after { width:100%; }
+        .nav-links a:hover { color:var(--primary); }
 
         .ms_booking {
             background: var(--primary);
@@ -133,299 +72,79 @@
             text-decoration: none;
             display: inline-block;
         }
+        .ms_booking:hover { background: var(--primary-dark); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(212,175,55,0.3); }
 
-        .ms_booking:hover {
-            background: var(--primary-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
-        }
+        .mobile-menu { display: none; font-size:24px; cursor:pointer; z-index:1001; background:none; border:none; color:var(--dark); }
 
-        /* Hero Section */
+        /* ---------------------------
+           Hero
+           --------------------------- */
         .hero {
             height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            background: linear-gradient(135deg, rgba(26, 26, 26, 0.8) 0%, rgba(26, 26, 26, 0.6) 100%), url('eebebd35a1d711f0988e4ec14a599804_1.jpg') no-repeat center center/cover;
+            display:flex;
+            align-items:center;
+            position:relative;
+            background: linear-gradient(135deg, rgba(26,26,26,0.8) 0%, rgba(26,26,26,0.6) 100%), url('eebebd35a1d711f0988e4ec14a599804_1.jpg') no-repeat center center/cover;
             color: white;
             overflow: hidden;
             margin-top: 0;
         }
-
         .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(212, 175, 55, 0.08) 0%, transparent 50%);
-            animation: gradientShift 8s ease-in-out infinite;
-            z-index: 1;
+            content:''; position:absolute; top:0; left:0; width:100%; height:100%;
+            background:
+                radial-gradient(circle at 20% 80%, rgba(212,175,55,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(212,175,55,0.05) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(212,175,55,0.08) 0%, transparent 50%);
+            animation: gradientShift 8s ease-in-out infinite; z-index:1;
         }
+        .hero-content { max-width:650px; position:relative; z-index:2; text-align:left; }
+        .hero h1 { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom:20px; text-shadow: 0 0 20px rgba(212,175,55,0.3); line-height:1.1; }
+        .hero p { font-size: clamp(1rem,2.5vw,1.2rem); margin-bottom:30px; }
 
-        .hero-content {
-            max-width: 650px;
-            position: relative;
-            z-index: 2;
-            text-align: left;
-        }
+        .hero-buttons { display:flex; gap:15px; flex-wrap:wrap; }
+        .hero-buttons .ms_booking { margin:0; flex:1; min-width:200px; text-align:center; }
+        .hero-buttons .ms_booking.outline { background:transparent; border:2px solid white; }
+        .hero-buttons .ms_booking.outline:hover { background:white; color:var(--dark); }
 
-        .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            margin-bottom: 20px;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards 0.5s;
-            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
-            line-height: 1.1;
-        }
+        /* ---------------------------
+           Sections common
+           --------------------------- */
+        .section { padding: clamp(50px, 0vw, 100px) 0; }
+        .section-title { text-align:center; margin-bottom: clamp(30px, 6vw, 60px); }
+        .section-title h2 { font-size: clamp(2rem, 4vw, 2.5rem); margin-bottom:15px; display:inline-block; position:relative; }
+        .section-title h2:after { content:''; position:absolute; bottom:-10px; left:50%; transform:translateX(-50%); width:80px; height:3px; background:var(--primary); }
+        .section-title p { color:var(--gray); max-width:600px; margin:0 auto; font-size: clamp(0.9rem, 2vw, 1rem); }
 
-        .hero p {
-            font-size: clamp(1rem, 2.5vw, 1.2rem);
-            margin-bottom: 30px;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards 0.8s;
-        }
+        /* ---------------------------
+           Services grid
+           --------------------------- */
+        .services-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(min(350px,100%), 1fr)); gap: clamp(20px, 4vw, 30px); }
+        .service-card { background:white; border-radius:15px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.08); transition:var(--transition); position:relative; display:flex; flex-direction:column; padding:30px; }
+        .service-card:hover { transform:translateY(-10px); box-shadow:0 20px 40px rgba(0,0,0,0.15); }
+        .service-content { display:flex; flex-direction:column; height:100%; }
+        .service-content h3 { font-size:clamp(1.2rem,3vw,1.4rem); margin-bottom:15px; color:var(--dark); }
+        .service-content p { color:var(--gray); margin-bottom:15px; font-size:clamp(0.9rem,2vw,1rem); line-height:1.5; flex-grow:1; }
+        .service-duration { color:var(--gray); font-size:0.9rem; margin-bottom:15px; display:flex; align-items:center; gap:5px; }
+        .service-duration i { color:var(--primary); }
+        .service-price { font-weight:600; color:var(--primary); font-size:clamp(1.1rem,2.5vw,1.2rem); margin-top:auto; padding-top:15px; border-top:1px solid rgba(0,0,0,0.1); text-align:center; }
 
-        .hero-buttons {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards 1.1s;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
+        /* ---------------------------
+           Portfolio (horizontal scroll)
+           --------------------------- */
+        .portfolio-section { background:#f9f9f9; }
+        .portfolio-scroll { display:flex; gap:20px; overflow-x:auto; scroll-behavior:smooth; padding:20px 0; scrollbar-width:thin; scrollbar-color:var(--primary) transparent; -webkit-overflow-scrolling: touch; }
+        .portfolio-item { position:relative; border-radius:15px; overflow:hidden; height:400px; min-width:300px; cursor:pointer; background:linear-gradient(45deg,var(--primary),#f4e4a0); display:flex; align-items:center; justify-content:center; transition:var(--transition); flex-shrink:0; }
+        .portfolio-gif { width:100%; height:100%; object-fit:cover; border-radius:15px; transition:var(--transition); }
+        .portfolio-overlay { position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(212,175,55,0.9); display:flex; flex-direction:column; justify-content:center; align-items:center; opacity:0; transition:var(--transition); padding:20px; text-align:center; color:white; }
+        .portfolio-item:hover { transform:translateY(-10px); }
+        .portfolio-item:hover .portfolio-gif { transform:scale(1.05); }
+        .portfolio-item:hover .portfolio-overlay { opacity:1; }
 
-        .hero-buttons .ms_booking {
-            margin: 0;
-            flex: 1;
-            min-width: 200px;
-            text-align: center;
-        }
-
-        .hero-buttons .ms_booking.outline {
-            background: transparent;
-            border: 2px solid white;
-        }
-
-        .hero-buttons .ms_booking.outline:hover {
-            background: white;
-            color: var(--dark);
-        }
-
-        /* Services Section - ОБНОВЛЕНА (без изображений) */
-        .section {
-            padding: clamp(50px, 0vw, 100px) 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: clamp(30px, 6vw, 60px);
-        }
-
-        .section-title h2 {
-            font-size: clamp(2rem, 4vw, 2.5rem);
-            margin-bottom: 15px;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2:after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background: var(--primary);
-        }
-
-        .section-title p {
-            color: var(--gray);
-            max-width: 600px;
-            margin: 0 auto;
-            font-size: clamp(0.9rem, 2vw, 1rem);
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
-            gap: clamp(20px, 4vw, 30px);
-        }
-
-        .service-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            transition: var(--transition);
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            padding: 30px;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .service-content {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-
-        .service-content h3 {
-            font-size: clamp(1.2rem, 3vw, 1.4rem);
-            margin-bottom: 15px;
-            color: var(--dark);
-        }
-
-        .service-content p {
-            color: var(--gray);
-            margin-bottom: 15px;
-            font-size: clamp(0.9rem, 2vw, 1rem);
-            line-height: 1.5;
-            flex-grow: 1;
-        }
-
-        .service-duration {
-            color: var(--gray);
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .service-duration i {
-            color: var(--primary);
-        }
-
-        .service-price {
-            font-weight: 600;
-            color: var(--primary);
-            font-size: clamp(1.1rem, 2.5vw, 1.2rem);
-            margin-top: auto;
-            padding-top: 15px;
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        .price-range {
-            display: block;
-            font-size: 0.9rem;
-            color: var(--gray);
-            margin-top: 5px;
-        }
-
-        /* Portfolio Section - ГОРИЗОНТАЛЬНЫЙ СКРОЛЛ */
-        .portfolio-section {
-            background: #f9f9f9;
-        }
-
-        .portfolio-scroll-container {
-            position: relative;
-        }
-
-        .portfolio-scroll {
-            display: flex;
-            gap: 20px;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            padding: 20px 0;
-            scrollbar-width: thin;
-            scrollbar-color: var(--primary) transparent;
-        }
-
-        .portfolio-scroll::-webkit-scrollbar {
-            height: 8px;
-        }
-
-        .portfolio-scroll::-webkit-scrollbar-track {
-            background: transparent;
-            border-radius: 10px;
-        }
-
-        .portfolio-scroll::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 10px;
-        }
-
-        .portfolio-scroll::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-dark);
-        }
-
-        .portfolio-item {
-            position: relative;
-            border-radius: 15px;
-            overflow: hidden;
-            height: 400px;
-            min-width: 300px;
-            cursor: pointer;
-            background: linear-gradient(45deg, var(--primary), #f4e4a0);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-            flex-shrink: 0;
-        }
-
-        .portfolio-item:hover {
-            transform: translateY(-10px);
-        }
-
-        .portfolio-gif {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 15px;
-            transition: var(--transition);
-        }
-
-        .portfolio-item:hover .portfolio-gif {
-            transform: scale(1.05);
-        }
-
-        .portfolio-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(212, 175, 55, 0.9);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            transition: var(--transition);
-            padding: 20px;
-            text-align: center;
-            color: white;
-        }
-
-        .portfolio-item:hover .portfolio-overlay {
-            opacity: 1;
-        }
-
-        /* Home Care Section - ДОМАШНИЙ УХОД (УВЕЛИЧЕННЫЕ КАРТОЧКИ) */
-        .home-care-section {
-            background: white;
-        }
-
-        .home-care-scroll-container {
-            position: relative;
-        }
-
+        /* ---------------------------
+           HOME CARE — улучшенная секция карточек (flex-based)
+           --------------------------- */
+        .home-care-section { background: white; }
+        .home-care-scroll-container { position: relative; }
         .home-care-scroll {
             display: flex;
             gap: 25px;
@@ -434,746 +153,181 @@
             padding: 20px 0;
             scrollbar-width: thin;
             scrollbar-color: var(--primary) transparent;
+            -webkit-overflow-scrolling: touch;
         }
 
-        .home-care-scroll::-webkit-scrollbar {
-            height: 8px;
-        }
-
-        .home-care-scroll::-webkit-scrollbar-track {
-            background: transparent;
-            border-radius: 10px;
-        }
-
-        .home-care-scroll::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 10px;
-        }
-
-        .home-care-scroll::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-dark);
-        }
-
+        /* Product card: use flex column so price can stick to bottom */
         .product-card {
             background: white;
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
             transition: var(--transition);
-            width: 350px; /* Увеличена ширина */
-            height: 670px; /* Увеличена высота */
-            flex-shrink: 0;
+            width: 350px;
+            flex: 0 0 auto;
             display: flex;
             flex-direction: column;
+            align-items: stretch;
         }
 
-        .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
+        .product-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
 
         .product-image {
-            height: 420px; /* Увеличена высота изображения */
             overflow: hidden;
+            flex: 0 0 420px; /* fixed visual height on desktop */
+            height: 420px;
             position: relative;
-            flex-shrink: 0;
+            display: block;
+            background: #f8f5f0;
         }
 
         .product-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            display: block;
             transition: var(--transition);
         }
 
-        .product-card:hover .product-image img {
-            transform: scale(1.1);
-        }
+        .product-card:hover .product-image img { transform: scale(1.06); }
 
         .product-content {
-            padding: 25px; /* Увеличен padding */
+            padding: 25px;
             display: flex;
             flex-direction: column;
-            flex-grow: 1;
-            height: 200px; /* Увеличена высота контента */
-            position: relative;
-            min-height: 0;
+            flex: 1 1 auto; /* allow content to grow/shrink */
+            min-height: 0; /* important for flex children with overflow */
         }
 
         .product-content h3 {
-            font-size: 1.3rem; /* Увеличен шрифт */
+            font-size: 1.3rem;
             margin-bottom: 12px;
             color: var(--dark);
             line-height: 1.3;
-            /* Фиксированный заголовок */
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
             text-overflow: ellipsis;
-            max-height: 2.8em;
-            min-height: 0em;
-            flex-shrink: 0;
         }
 
         .product-description {
             color: var(--gray);
-            margin-bottom: 15px;
-            font-size: 1rem; /* Увеличен шрифт */
+            font-size: 1rem;
             line-height: 1.5;
-            flex-grow: 1;
-            /* Скроллируемое описание */
-            overflow-y: auto;
-            max-height: 7em;
-            min-height: 5em;
-            padding-right: 5px;
-            /* Стилизация скроллбара */
-            scrollbar-width: thin;
-            scrollbar-color: var(--primary) transparent;
+            flex: 1 1 auto; /* take remaining space */
+            overflow: auto; /* if text very long -> scroll inside */
+            min-height: 0; /* essential for proper flex overflow behaviour */
+            margin-bottom: 12px;
+            padding-right: 6px;
         }
 
-        .product-description::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        .product-description::-webkit-scrollbar-track {
-            background: transparent;
-            border-radius: 2px;
-        }
-
-        .product-description::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 2px;
-        }
-
-        .product-description::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-dark);
-        }
+        .product-description::-webkit-scrollbar { width: 6px; }
+        .product-description::-webkit-scrollbar-track { background: transparent; border-radius: 2px; }
+        .product-description::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 2px; }
+        .product-description::-webkit-scrollbar-thumb:hover { background: var(--primary-dark); }
 
         .product-price {
             font-weight: 600;
             color: var(--primary);
-            font-size: 1.4rem; /* Увеличен шрифт */
+            font-size: 1.4rem;
             text-align: center;
-            margin-top: auto;
+            margin-top: auto; /* crucial: keeps price at bottom */
             padding-top: 15px;
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
-            position: relative;
-            width: 100%;
-            left: 0;
-            flex-shrink: 0;
-        }
-
-        /* Team Section */
-        .team-section {
-            background: #f9f9f9;
-        }
-
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
-            gap: clamp(20px, 4vw, 30px);
-            justify-items: center;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .team-card {
-            text-align: center;
+            border-top: 1px solid rgba(0,0,0,0.08);
             background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-            transition: var(--transition);
-            max-width: 400px;
-            width: 100%;
         }
 
-        .team-card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-        }
+        /* ---------------------------
+           Team / Footer etc
+           --------------------------- */
+        .team-section { background:#f9f9f9; }
+        .team-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(min(350px,100%), 1fr)); gap: clamp(20px,4vw,30px); justify-items:center; max-width:500px; margin:0 auto; }
+        .team-card { text-align:center; background:white; border-radius:15px; overflow:hidden; box-shadow:0 15px 40px rgba(0,0,0,0.1); transition:var(--transition); max-width:400px; width:100%; }
+        .team-card:hover { transform: translateY(-15px); box-shadow:0 25px 50px rgba(0,0,0,0.15); }
+        .team-image { height:350px; overflow:hidden; background: url('fa729392-cd15-468b-8839-547d0e1f800b.jpg') no-repeat center/cover; display:flex; align-items:center; justify-content:center; }
 
-        .team-image {
-            height: 350px;
-            overflow: hidden;
-            background: url('fa729392-cd15-468b-8839-547d0e1f800b.jpg') no-repeat center center/cover;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+        footer { background: var(--dark); color: white; padding: clamp(40px,8vw,70px) 0 20px; }
+        .footer-content { display:grid; grid-template-columns: repeat(auto-fit, minmax(min(250px,100%), 1fr)); gap: clamp(25px,5vw,40px); margin-bottom:50px; }
+        .footer-column h3 { font-size: clamp(1.1rem,2.5vw,1.3rem); margin-bottom:20px; display:inline-block; position:relative; }
+        .footer-column h3:after { content:''; position:absolute; bottom:-8px; left:0; width:40px; height:2px; background:var(--primary); }
+        .footer-links, .contact-info { list-style:none; }
+        .footer-links li { margin-bottom:10px; }
+        .footer-links a { color:#bbb; text-decoration:none; transition:var(--transition); font-size: clamp(0.9rem,2vw,1rem); }
+        .footer-links a:hover { color:var(--primary); padding-left:5px; }
+        .contact-info li { margin-bottom:15px; display:flex; align-items:flex-start; font-size: clamp(0.9rem,2vw,1rem); }
+        .contact-info i { margin-right:10px; color:var(--primary); min-width:20px; }
+        .copyright { text-align:center; padding-top:20px; border-top:1px solid rgba(255,255,255,0.1); color:#bbb; font-size: clamp(0.8rem,1.5vw,0.9rem); }
 
-        .team-info {
-            padding: clamp(20px, 4vw, 30px);
-        }
+        /* ---------------------------
+           Mobile menu & responsive
+           --------------------------- */
+        .mobile-nav { position: fixed; top:0; right:-100%; width:80%; max-width:300px; height:100vh; background:white; box-shadow:-5px 0 15px rgba(0,0,0,0.1); transition: all 0.4s ease-in-out; z-index:1000; padding:80px 20px 20px; overflow-y:auto; }
+        .mobile-nav.active { right:0; }
+        .mobile-nav-links { list-style:none; }
+        .close-menu { position:absolute; top:20px; right:20px; font-size:24px; cursor:pointer; background:none; border:none; color:var(--dark); z-index:1002; width:40px; height:40px; display:flex; align-items:center; justify-content:center; }
+        .mobile-nav-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:999; }
+        .mobile-nav-overlay.active { display:block; }
 
-        .team-info h3 {
-            margin-bottom: 10px;
-            font-size: clamp(1.3rem, 3vw, 1.6rem);
-            color: var(--dark);
-        }
-
-        .team-info .specialty {
-            color: var(--primary);
-            font-weight: 600;
-            font-size: clamp(1rem, 2.5vw, 1.2rem);
-            margin-bottom: 15px;
-            display: block;
-        }
-
-        .team-info p {
-            color: var(--gray);
-            margin-bottom: 20px;
-            font-size: clamp(0.9rem, 2vw, 1rem);
-            line-height: 1.6;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .social-links a {
-            color: var(--dark);
-            transition: var(--transition);
-            font-size: clamp(1.3rem, 3vw, 1.5rem);
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(212, 175, 55, 0.1);
-        }
-
-        .social-links a:hover {
-            color: white;
-            background: var(--primary);
-            transform: translateY(-5px);
-        }
-
-        /* Footer */
-        footer {
-            background: var(--dark);
-            color: white;
-            padding: clamp(40px, 8vw, 70px) 0 20px;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
-            gap: clamp(25px, 5vw, 40px);
-            margin-bottom: 50px;
-        }
-
-        .footer-column h3 {
-            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
-            margin-bottom: 20px;
-            position: relative;
-            display: inline-block;
-        }
-
-        .footer-column h3:after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background: var(--primary);
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-
-        .footer-links a {
-            color: #bbb;
-            text-decoration: none;
-            transition: var(--transition);
-            font-size: clamp(0.9rem, 2vw, 1rem);
-        }
-
-        .footer-links a:hover {
-            color: var(--primary);
-            padding-left: 5px;
-        }
-
-        .contact-info {
-            list-style: none;
-        }
-
-        .contact-info li {
-            margin-bottom: 15px;
-            display: flex;
-            align-items: flex-start;
-            font-size: clamp(0.9rem, 2vw, 1rem);
-        }
-
-        .contact-info i {
-            margin-right: 10px;
-            color: var(--primary);
-            min-width: 20px;
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #bbb;
-            font-size: clamp(0.8rem, 1.5vw, 0.9rem);
-        }
-
-        /* Mobile Menu */
-        .mobile-menu {
-            display: none;
-            font-size: 24px;
-            cursor: pointer;
-            z-index: 1001;
-            background: none;
-            border: none;
-            color: var(--dark);
-            position: relative;
-        }
-
-        .mobile-nav {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 80%;
-            max-width: 300px;
-            height: 100vh;
-            background: white;
-            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.4s ease-in-out;
-            z-index: 1000;
-            padding: 80px 20px 20px;
-            overflow-y: auto;
-        }
-
-        .mobile-nav.active {
-            right: 0;
-        }
-
-        .mobile-nav-links {
-            list-style: none;
-        }
-
-        .mobile-nav-links li {
-            margin-bottom: 20px;
-        }
-
-        .mobile-nav-links a {
-            text-decoration: none;
-            color: var(--dark);
-            font-size: 18px;
-            font-weight: 500;
-            transition: var(--transition);
-            display: block;
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
-        }
-
-        .mobile-nav-links a:hover {
-            color: var(--primary);
-            transform: translateX(10px);
-        }
-
-        .close-menu {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 24px;
-            cursor: pointer;
-            background: none;
-            border: none;
-            color: var(--dark);
-            z-index: 1002;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .mobile-nav-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 999;
-        }
-
-        .mobile-nav-overlay.active {
-            display: block;
-        }
-
-        /* Map Section */
-        .map-container {
-            width: 100%;
-            height: 400px;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            margin-top: 20px;
-        }
-
-        .map-container iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
+        /* ---------------------------
+           Animations & misc
+           --------------------------- */
+        @keyframes fadeInUp { to { opacity:1; transform:translateY(0); } }
         @keyframes gradientShift {
-            0%, 100% {
-                opacity: 0.1;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 0.15;
-                transform: scale(1.1);
-            }
+            0%,100% { opacity:0.1; transform:scale(1); }
+            50% { opacity:0.15; transform:scale(1.1); }
         }
 
-        /* Responsive */
+        /* ---------------------------
+           Responsive adjustments
+           --------------------------- */
         @media (max-width: 992px) {
-            .hero h1 {
-                font-size: clamp(2rem, 6vw, 3rem);
-            }
+            .hero h1 { font-size: clamp(2rem,6vw,3rem); }
+            .nav-links, .navbar .ms_booking { display: none; }
+            .mobile-menu { display:block; }
 
-            .nav-links,
-            .navbar .ms_booking {
-                display: none;
-            }
-
-            .mobile-menu {
-                display: block;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-            }
-
-            .hero-buttons .ms_booking {
-                min-width: auto;
-                width: 100%;
-                max-width: 300px;
-            }
-
-            .team-grid {
-                max-width: 400px;
-            }
-
-            .product-card {
-                width: 280px;
-                height: 540px;
-            }
-
-            .product-image {
-                height: 360px;
-            }
-
-            .product-content {
-                height: 180px;
-                padding: 20px;
-            }
-
-            .product-content h3 {
-                font-size: 1.2rem;
-                -webkit-line-clamp: 2;
-                max-height: 2.6em;
-                min-height: 0em;
-            }
-
-            .product-description {
-                font-size: 0.95rem;
-                max-height: 6em;
-                min-height: 4em;
-            }
+            .product-card { width: 280px; }
+            .product-image { height: 360px; flex: 0 0 360px; }
+            .product-content { padding: 20px; }
+            .product-content h3 { font-size: 1.2rem; -webkit-line-clamp: 2; max-height: 2.6em; }
+            .product-price { font-size: 1.3rem; }
         }
 
         @media (max-width: 768px) {
-            .hero {
-                text-align: center;
-            }
+            .hero { text-align:center; }
+            .hero-content { text-align:center; }
+            .hero h1 { font-size: clamp(1.8rem, 8vw, 2.5rem); }
 
-            .hero-content {
-                text-align: center;
-            }
-
-            .hero h1 {
-                font-size: clamp(1.8rem, 8vw, 2.5rem);
-            }
-
-            .section {
-                padding: 40px 0;
-            }
-
-            .team-image {
-                height: 280px;
-            }
-
-            .portfolio-item {
-                height: 350px;
-                min-width: 280px;
-            }
-
-            /* УВЕЛИЧЕННЫЕ КАРТОЧКИ ДЛЯ ПЛАНШЕТОВ */
-            .product-card {
-                width: 280px !important;
-                height: 520px !important;
-            }
-
-            .product-image {
-                height: 320px !important;
-            }
-
-            .product-content {
-                height: 200px !important;
-                padding: 20px !important;
-            }
-
-            .product-content h3 {
-                font-size: 1.2rem !important;
-                -webkit-line-clamp: 2;
-                max-height: 2.6em !important;
-                min-height: 2.6em !important;
-            }
-
-            .product-description {
-                font-size: 0.95rem !important;
-                max-height: 6.5em !important;
-                min-height: 5em !important;
-            }
-
-            .product-price {
-                font-size: 1.3rem !important;
-                padding-top: 15px !important;
-            }
-
-            .close-menu {
-                top: 25px;
-                right: 25px;
-                font-size: 24px;
-            }
+            .product-card { width: 280px; }
+            .product-image { height: 320px; flex: 0 0 320px; }
+            .product-content { padding: 18px; }
+            .product-description { font-size: 0.95rem; }
         }
 
         @media (max-width: 480px) {
-            .container {
-                width: 95%;
-                padding: 0 15px;
-            }
+            .container { width: 95%; padding: 0 15px; }
+            .hero { height: 90vh; min-height: 600px; }
+            .hero-buttons .ms_booking { padding: 10px 20px; font-size: 14px; }
 
-            .hero {
-                height: 90vh;
-                min-height: 600px;
-            }
-
-            .hero-buttons .ms_booking {
-                padding: 10px 20px;
-                font-size: 14px;
-            }
-
-            .service-card {
-                padding: 20px;
-            }
-
-            .portfolio-item {
-                height: 300px;
-                min-width: 250px;
-            }
-
-            /* УВЕЛИЧЕННЫЕ КАРТОЧКИ ДЛЯ МОБИЛЬНЫХ */
-            .product-card {
-                width: 300px !important;
-                height: 550px !important;
-                margin: 0 auto;
-            }
-
-            .product-image {
-                height: 350px !important;
-            }
-
-            .product-content {
-                height: 200px !important;
-                padding: 25px !important;
-            }
-
-            .product-content h3 {
-                font-size: 1.3rem !important;
-                -webkit-line-clamp: 2;
-                max-height: 2.8em !important;
-                min-height: 2.8em !important;
-                margin-bottom: 12px !important;
-            }
-
-            .product-description {
-                font-size: 1rem !important;
-                max-height: 7em !important;
-                min-height: 5.5em !important;
-                margin-bottom: 15px !important;
-            }
-
-            .product-price {
-                font-size: 1.4rem !important;
-                padding-top: 15px !important;
-            }
-
-            /* Увеличиваем отступы между карточками */
-            .home-care-scroll {
-                gap: 30px !important;
-                padding: 25px 0 !important;
-            }
-
-            .team-grid {
-                max-width: 100%;
-            }
+            /* Mobile: allow cards be center aligned and grow in height naturally */
+            .product-card { width: 300px; margin: 0 auto; }
+            .product-image { height: 350px; flex: 0 0 350px; }
+            .product-content { padding: 20px; }
+            .product-description { max-height: none; overflow: auto; min-height: 0; }
+            .home-care-scroll { gap: 30px; padding: 25px 0; }
         }
 
-        /* Для очень маленьких экранов */
         @media (max-width: 360px) {
-            .product-card {
-                width: 280px !important;
-                height: 520px !important;
-            }
-
-            .product-image {
-                height: 320px !important;
-            }
-
-            .product-content {
-                height: 200px !important;
-                padding: 20px !important;
-            }
+            .product-card { width: 280px; }
+            .product-image { height: 320px; flex: 0 0 320px; }
+            .product-content { padding: 16px; }
         }
 
-        /* Touch device improvements */
+        /* Touch improvements */
         @media (hover: none) {
-            .service-card:hover,
-            .team-card:hover,
-            .portfolio-item:hover,
-            .product-card:hover {
-                transform: none;
-            }
-
-            .service-card:active,
-            .team-card:active,
-            .product-card:active {
-                transform: scale(0.98);
-            }
+            .service-card:hover, .team-card:hover, .portfolio-item:hover, .product-card:hover { transform: none; }
+            .service-card:active, .team-card:active, .product-card:active { transform: scale(0.98); }
         }
-
-        .product-content {
-    height: auto !important;
-    min-height: unset !important;
-}
-
-@media (max-width: 992px),
-(max-width: 768px),
-(max-width: 480px),
-(max-width: 360px) {
-    .product-content {
-        height: auto !important;
-        min-height: unset !important;
-    }
-}
-
-.product-price {
-    margin-top: auto !important;
-    position: static !important;
-}
-
-@media (max-width: 992px),
-(max-width: 768px),
-(max-width: 480px),
-(max-width: 360px) {
-    .product-card {
-        height: auto !important;
-        min-height: 0 !important;
-    }
-
-    .product-image {
-        height: auto !important;
-        max-height: 350px !important;
-    }
-
-    .product-content {
-        height: auto !important;
-        min-height: 0 !important;
-        flex-grow: 1 !important;
-        display: flex !important;
-        flex-direction: column !important;
-    }
-
-    .product-description {
-        flex-grow: 1 !important;
-        overflow: visible !important;
-        max-height: none !important;
-    }
-
-    .product-price {
-        margin-top: auto !important;
-        position: relative !important;
-        bottom: 0 !important;
-        border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
-        text-align: center !important;
-    }
-}
-
-/* --- ABSOLUTE FIX для мобильных карточек "Домашний уход" --- */
-.home-care-scroll .product-card {
-    display: flex !important;
-    flex-direction: column !important;
-    height: auto !important;
-    min-height: 0 !important;
-}
-
-.home-care-scroll .product-image {
-    height: auto !important;
-    max-height: 360px !important;
-}
-
-.home-care-scroll .product-content {
-    display: flex !important;
-    flex-direction: column !important;
-    flex-grow: 1 !important;
-    height: auto !important;
-    min-height: 0 !important;
-}
-
-.home-care-scroll .product-description {
-    flex-grow: 1 !important;
-    overflow: visible !important;
-    max-height: none !important;
-    min-height: 0 !important;
-}
-
-.home-care-scroll .product-price {
-    margin-top: auto !important;
-    position: relative !important;
-    bottom: 0 !important;
-    text-align: center !important;
-    border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
-    background: white !important;
-    z-index: 1 !important;
-}
     </style>
 </head>
 <body>
@@ -1235,15 +389,13 @@
                 <h2>Наши услуги</h2>
                 <p>Профессиональные парикмахерские услуги премиум-класса</p>
             </div>
+
             <div class="services-grid">
-                
-                <!-- Сложное окрашивание Airtouch | Шатуш -->
+                <!-- Several service cards (оставлены без изменений контентно) -->
                 <div class="service-card">
                     <div class="service-content">
                         <h3>Сложное окрашивание Airtouch | Шатуш</h3>
-                        <div class="service-duration">
-                            <i class="fas fa-clock"></i> 4 часа
-                        </div>
+                        <div class="service-duration"><i class="fas fa-clock"></i> 4 часа</div>
                         <p>Создание естественных плавных переходов цвета. Идеально для тех, кто хочет мягкое обновление образа.</p>
                         <div class="service-price">
                             от 15 000 ₽
@@ -1252,13 +404,10 @@
                     </div>
                 </div>
 
-                <!-- Total Blonde -->
                 <div class="service-card">
                     <div class="service-content">
                         <h3>Total Blonde</h3>
-                        <div class="service-duration">
-                            <i class="fas fa-clock"></i> 2.5-4 часов
-                        </div>
+                        <div class="service-duration"><i class="fas fa-clock"></i> 2.5-4 часов</div>
                         <p>Осветление корня + тонирование длины. Идеальное блондирование с сохранением здоровья волос.</p>
                         <div class="service-price">
                             от 8 000 ₽
@@ -1267,25 +416,19 @@
                     </div>
                 </div>
 
-                <!-- Выход из чёрного | тёмного -->
                 <div class="service-card">
                     <div class="service-content">
                         <h3>Выход из чёрного | тёмного</h3>
-                        <div class="service-duration">
-                            <i class="fas fa-clock"></i> 7 часов
-                        </div>
+                        <div class="service-duration"><i class="fas fa-clock"></i> 7 часов</div>
                         <p>Бережный выход из темных оттенков без вреда для волос. Многоэтапная процедура с профессиональными средствами.</p>
                         <div class="service-price">18 000 – 22 000 ₽</div>
                     </div>
                 </div>
 
-                <!-- Тонирование -->
                 <div class="service-card">
                     <div class="service-content">
                         <h3>Тонирование</h3>
-                        <div class="service-duration">
-                            <i class="fas fa-clock"></i> 2 часа
-                        </div>
+                        <div class="service-duration"><i class="fas fa-clock"></i> 2 часа</div>
                         <p>Обновление цвета, нейтрализация нежелательных оттенков. Придание волосам блеска и насыщенности.</p>
                         <div class="service-price">
                             от 6 000 ₽
@@ -1294,13 +437,10 @@
                     </div>
                 </div>
 
-                <!-- Окрашивание в один тон -->
                 <div class="service-card">
                     <div class="service-content">
                         <h3>Окрашивание в один тон</h3>
-                        <div class="service-duration">
-                            <i class="fas fa-clock"></i> 2 часа
-                        </div>
+                        <div class="service-duration"><i class="fas fa-clock"></i> 2 часа</div>
                         <p>Равномерное окрашивание по всей длине. Подбор идеального оттенка с учетом вашего цветотипа.</p>
                         <div class="service-price">
                             от 5 000 ₽
@@ -1309,13 +449,10 @@
                     </div>
                 </div>
 
-                <!-- Стрижка -->
                 <div class="service-card">
                     <div class="service-content">
                         <h3>Стрижка</h3>
-                        <div class="service-duration">
-                            <i class="fas fa-clock"></i> 1.5 часа
-                        </div>
+                        <div class="service-duration"><i class="fas fa-clock"></i> 1.5 часа</div>
                         <p>Создание идеальной формы с учетом структуры волос и типа лица. Подбор стрижки под ваш образ жизни.</p>
                         <div class="service-price">
                             от 3 500 ₽
@@ -1324,13 +461,10 @@
                     </div>
                 </div>
 
-                <!-- Кератиновое выпрямление -->
                 <div class="service-card">
                     <div class="service-content">
                         <h3>Кератиновое выпрямление</h3>
-                        <div class="service-duration">
-                            <i class="fas fa-clock"></i> 3 часа
-                        </div>
+                        <div class="service-duration"><i class="fas fa-clock"></i> 3 часа</div>
                         <p>Восстановление структуры волос, выпрямление и защита от влажности. Эффект до 4 месяцев.</p>
                         <div class="service-price">
                             от 8 000 ₽
@@ -1339,18 +473,14 @@
                     </div>
                 </div>
 
-                <!-- Уход Olaplex -->
                 <div class="service-card">
                     <div class="service-content">
                         <h3>Уход Olaplex</h3>
-                        <div class="service-duration">
-                            <i class="fas fa-clock"></i> 30 минут
-                        </div>
+                        <div class="service-duration"><i class="fas fa-clock"></i> 30 минут</div>
                         <p>Восстановление поврежденных волос на молекулярном уровне. Устранение ломкости и сечения.</p>
                         <div class="service-price">3 000 ₽</div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -1365,48 +495,31 @@
             <div class="portfolio-scroll-container">
                 <div class="portfolio-scroll">
                     <div class="portfolio-item">
-                        <img src="cabelo-calor.gif" 
-                             alt="Процесс окрашивания" 
-                             class="portfolio-gif">
+                        <img src="cabelo-calor.gif" alt="Процесс окрашивания" class="portfolio-gif">
                         <div class="portfolio-overlay">
                             <h3>Сложное окрашивание</h3>
                             <p>Техника Airtouch и шатуш</p>
                         </div>
                     </div>
                     <div class="portfolio-item">
-                        <img src="hair-flip-shiny-hair.webp" 
-                             alt="Процесс стрижки" 
-                             class="portfolio-gif">
+                        <img src="hair-flip-shiny-hair.webp" alt="Процесс стрижки" class="portfolio-gif">
                         <div class="portfolio-overlay">
                             <h3>Профессиональная стрижка</h3>
                             <p>Точные срезы и филировка</p>
                         </div>
                     </div>
                     <div class="portfolio-item">
-                        <img src="7f8e7595-3b30-4909-a01d-07d615f11ffc-ezgif.com-video-to-gif-converter (1).gif" 
-                             alt="Создание укладки" 
-                             class="portfolio-gif">
+                        <img src="7f8e7595-3b30-4909-a01d-07d615f11ffc-ezgif.com-video-to-gif-converter (1).gif" alt="Создание укладки" class="portfolio-gif">
                         <div class="portfolio-overlay">
                             <h3>Вечерняя укладка</h3>
                             <p>Элегантные волны и объем</p>
                         </div>
                     </div>
                     <div class="portfolio-item">
-                        <img src="guy-long-hair.gif" 
-                             alt="Blond" 
-                             class="portfolio-gif">
+                        <img src="guy-long-hair.gif" alt="Blond" class="portfolio-gif">
                         <div class="portfolio-overlay">
                             <h3>Blond</h3>
                             <p>Окрашивание в блонд</p>
-                        </div>
-                    </div>
-                    <div class="portfolio-item">
-                        <img src="cabelo-calor.gif" 
-                             alt="Дополнительная работа" 
-                             class="portfolio-gif">
-                        <div class="portfolio-overlay">
-                            <h3>Экспериментальное окрашивание</h3>
-                            <p>Нестандартные техники</p>
                         </div>
                     </div>
                 </div>
@@ -1421,9 +534,10 @@
                 <h2>Домашний уход</h2>
                 <p>Профессиональные средства для ухода за волосами в домашних условиях</p>
             </div>
+
             <div class="home-care-scroll-container">
                 <div class="home-care-scroll">
-                    <!-- Продукт 1 -->
+                    <!-- Product 1 -->
                     <div class="product-card">
                         <div class="product-image">
                             <img src="https://via.placeholder.com/320x420/f8f5f0/1a1a1a?text=Lebel+Care" alt="Уход Lebel">
@@ -1437,7 +551,7 @@
                         </div>
                     </div>
 
-                    <!-- Продукт 2 -->
+                    <!-- Product 2 -->
                     <div class="product-card">
                         <div class="product-image">
                             <img src="https://via.placeholder.com/320x420/f8f5f0/1a1a1a?text=Kerastase" alt="Kerastase">
@@ -1451,7 +565,7 @@
                         </div>
                     </div>
 
-                    <!-- Продукт 3 -->
+                    <!-- Product 3 -->
                     <div class="product-card">
                         <div class="product-image">
                             <img src="https://via.placeholder.com/320x420/f8f5f0/1a1a1a?text=Olaplex" alt="Olaplex">
@@ -1465,7 +579,7 @@
                         </div>
                     </div>
 
-                    <!-- Продукт 4 -->
+                    <!-- Product 4 -->
                     <div class="product-card">
                         <div class="product-image">
                             <img src="https://via.placeholder.com/320x420/f8f5f0/1a1a1a?text=Moroccanoil" alt="Moroccanoil">
@@ -1479,7 +593,7 @@
                         </div>
                     </div>
 
-                    <!-- Продукт 5 -->
+                    <!-- Product 5 -->
                     <div class="product-card">
                         <div class="product-image">
                             <img src="https://via.placeholder.com/320x420/f8f5f0/1a1a1a?text=Redken" alt="Redken">
@@ -1493,7 +607,7 @@
                         </div>
                     </div>
 
-                    <!-- Продукт 6 -->
+                    <!-- Product 6 -->
                     <div class="product-card">
                         <div class="product-image">
                             <img src="https://via.placeholder.com/320x420/f8f5f0/1a1a1a?text=Oribe" alt="Oribe">
@@ -1526,9 +640,9 @@
                         <span class="specialty">Топ-стилист и колорист</span>
                         <p>Специализация: сложное окрашивание, стрижки, уходовые процедуры. Опыт работы более 5 лет. Постоянно совершенствую свои навыки на международных мастер-классах.</p>
                         <div class="social-links">
-                            <a href="https://www.instagram.com/julia.abdrakhmanova?igsh=MXQyeDNvZ2R1djhtZg%3D%3D&utm_source=qr"><i class="fab fa-instagram"></i></a>
-                            <a href="https://web.telegram.org/a/#1272181952"><i class="fab fa-telegram"></i></a>
-                            <a href="https://api.whatsapp.com/send/?phone=89123527720&text&type=phone_number&app_absent=0"><i class="fab fa-whatsapp"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-telegram"></i></a>
+                            <a href="#"><i class="fab fa-whatsapp"></i></a>
                         </div>
                     </div>
                 </div>
@@ -1546,10 +660,7 @@
             <div class="map-container">
                 <iframe 
                     src="https://yandex.com/web-maps/2/saint-petersburg/?azimuth=6.240063619259528&l=masstransit&ll=30.385074%2C59.926586&mode=poi&poi%5Bpoint%5D=30.385000%2C59.926531&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D87088919361&tilt=0.552121134491067&z=20"
-                    width="100%" 
-                    height="400" 
-                    style="border: none; border-radius: 15px;"
-                    allowfullscreen>
+                    width="100%" height="400" style="border:none; border-radius:15px;" allowfullscreen>
                 </iframe>
             </div>
         </div>
@@ -1597,61 +708,37 @@
             const closeMenu = document.getElementById('closeMenu');
             const mobileNavOverlay = document.getElementById('mobileNavOverlay');
 
-            // Функция открытия меню
             function openMobileMenu() {
                 mobileNav.classList.add('active');
                 mobileNavOverlay.classList.add('active');
                 document.body.style.overflow = 'hidden';
             }
 
-            // Функция закрытия меню
             function closeMobileMenu() {
                 mobileNav.classList.remove('active');
                 mobileNavOverlay.classList.remove('active');
                 document.body.style.overflow = '';
             }
 
-            // Открытие меню
-            if (mobileMenu) {
-                mobileMenu.addEventListener('click', openMobileMenu);
-            }
+            if (mobileMenu) mobileMenu.addEventListener('click', openMobileMenu);
+            if (closeMenu) closeMenu.addEventListener('click', closeMobileMenu);
+            if (mobileNavOverlay) mobileNavOverlay.addEventListener('click', closeMobileMenu);
 
-            // Закрытие меню
-            if (closeMenu) {
-                closeMenu.addEventListener('click', closeMobileMenu);
-            }
-
-            // Закрытие по клику на overlay
-            if (mobileNavOverlay) {
-                mobileNavOverlay.addEventListener('click', closeMobileMenu);
-            }
-
-            // Закрытие по клику на ссылки
-            const mobileNavLinks = document.querySelectorAll('.mobile-nav-links a');
-            mobileNavLinks.forEach(link => {
+            document.querySelectorAll('.mobile-nav-links a').forEach(link => {
                 link.addEventListener('click', closeMobileMenu);
             });
 
-            // Smooth scroll для всех ссылок
+            // Smooth scroll for anchors (adjust for fixed header)
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     const href = this.getAttribute('href');
-                    
-                    if (href === '#' || this.classList.contains('no-scroll')) {
-                        return;
-                    }
-                    
+                    if (href === '#' || this.classList.contains('no-scroll')) return;
                     e.preventDefault();
-                    
                     const target = document.querySelector(href);
                     if (target) {
                         const headerHeight = document.getElementById('header').offsetHeight;
                         const targetPosition = target.offsetTop - headerHeight;
-                        
-                        window.scrollTo({
-                            top: targetPosition,
-                            behavior: 'smooth'
-                        });
+                        window.scrollTo({ top: targetPosition, behavior: 'smooth' });
                     }
                 });
             });
@@ -1659,83 +746,61 @@
             // Header scroll effect
             window.addEventListener('scroll', () => {
                 const header = document.getElementById('header');
-                if (window.scrollY > 100) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
+                if (window.scrollY > 100) header.classList.add('scrolled'); else header.classList.remove('scrolled');
             });
 
-            // Hero animation
+            // Hero entrance animation (simple)
             const heroContent = document.querySelector('.hero-content');
             if (heroContent) {
                 heroContent.style.opacity = '0';
                 heroContent.style.transform = 'translateY(50px)';
-                
                 setTimeout(() => {
-                    heroContent.style.transition = 'all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                    heroContent.style.transition = 'all 1.2s cubic-bezier(0.25,0.46,0.45,0.94)';
                     heroContent.style.opacity = '1';
                     heroContent.style.transform = 'translateY(0)';
                 }, 300);
             }
 
-            // Адаптация скролла для мобильных устройств
-            function initMobileScroll() {
-                const homeCareScroll = document.querySelector('.home-care-scroll');
-                if (!homeCareScroll) return;
-
+            // Desktop style mouse drag for the horizontal product scroller (and touch)
+            function initDragScroll(selector) {
+                const scroller = document.querySelector(selector);
+                if (!scroller) return;
                 let isDown = false;
-                let startX;
-                let scrollLeft;
-
-                homeCareScroll.addEventListener('mousedown', (e) => {
+                let startX, scrollLeft;
+                scroller.addEventListener('mousedown', (e) => {
                     isDown = true;
-                    startX = e.pageX - homeCareScroll.offsetLeft;
-                    scrollLeft = homeCareScroll.scrollLeft;
+                    scroller.classList.add('active-drag');
+                    startX = e.pageX - scroller.offsetLeft;
+                    scrollLeft = scroller.scrollLeft;
                 });
-
-                homeCareScroll.addEventListener('mouseleave', () => {
-                    isDown = false;
-                });
-
-                homeCareScroll.addEventListener('mouseup', () => {
-                    isDown = false;
-                });
-
-                homeCareScroll.addEventListener('mousemove', (e) => {
+                scroller.addEventListener('mouseleave', () => { isDown = false; scroller.classList.remove('active-drag'); });
+                scroller.addEventListener('mouseup', () => { isDown = false; scroller.classList.remove('active-drag'); });
+                scroller.addEventListener('mousemove', (e) => {
                     if (!isDown) return;
                     e.preventDefault();
-                    const x = e.pageX - homeCareScroll.offsetLeft;
-                    const walk = (x - startX) * 2;
-                    homeCareScroll.scrollLeft = scrollLeft - walk;
+                    const x = e.pageX - scroller.offsetLeft;
+                    const walk = (x - startX) * 1.8;
+                    scroller.scrollLeft = scrollLeft - walk;
                 });
-
-                // Touch events для мобильных
-                homeCareScroll.addEventListener('touchstart', (e) => {
+                scroller.addEventListener('touchstart', (e) => {
                     isDown = true;
-                    startX = e.touches[0].pageX - homeCareScroll.offsetLeft;
-                    scrollLeft = homeCareScroll.scrollLeft;
-                });
-
-                homeCareScroll.addEventListener('touchend', () => {
-                    isDown = false;
-                });
-
-                homeCareScroll.addEventListener('touchmove', (e) => {
+                    startX = e.touches[0].pageX - scroller.offsetLeft;
+                    scrollLeft = scroller.scrollLeft;
+                }, {passive:true});
+                scroller.addEventListener('touchend', () => { isDown = false; });
+                scroller.addEventListener('touchmove', (e) => {
                     if (!isDown) return;
-                    const x = e.touches[0].pageX - homeCareScroll.offsetLeft;
-                    const walk = (x - startX) * 2;
-                    homeCareScroll.scrollLeft = scrollLeft - walk;
-                });
+                    const x = e.touches[0].pageX - scroller.offsetLeft;
+                    const walk = (x - startX) * 1.8;
+                    scroller.scrollLeft = scrollLeft - walk;
+                }, {passive:true});
             }
 
-            // Инициализация скролла
-            initMobileScroll();
-            
-            // Переинициализация при изменении размера окна
-            window.addEventListener('resize', initMobileScroll);
+            initDragScroll('.home-care-scroll');
+            initDragScroll('.portfolio-scroll');
         });
     </script>
+
     <script type="text/javascript" src="https://w948450.yclients.com/widgetJS" charset="UTF-8"></script>
 </body>
 </html>
