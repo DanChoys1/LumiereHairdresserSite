@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ-панель Lumière</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* СТИЛИ ОСТАЮТСЯ ТАКИМИ ЖЕ КАК В ПРЕДЫДУЩЕЙ ВЕРСИИ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8f5f0;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .admin-header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .admin-header h1 {
+            color: #d4af37;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .admin-header p {
+            color: #8a8a8a;
+            font-size: 1.1rem;
+        }
+
+        .form-section {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .form-section h2 {
+            color: #1a1a1a;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #d4af37;
+            font-size: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #d4af37;
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .service-item, .portfolio-item {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid #d4af37;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .item-header h3 {
+            color: #1a1a1a;
+            font-size: 1.2rem;
+        }
+
+        .btn {
+            background: #d4af37;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            background: #b8941f;
+            transform: translateY(-2px);
+        }
+
+        .btn-danger {
+            background: #e74c3c;
+        }
+
+        .btn-danger:hover {
+            background: #c0392b;
+        }
+
+        .btn-success {
+            background: #27ae60;
+        }
+
+        .btn-success:hover {
+            background: #219a52;
+        }
+
+        .btn-sm {
+            padding: 8px 15px;
+            font-size: 0.9rem;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .message {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+
+        .message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+
+        .tab-navigation {
+            display: flex;
+            margin-bottom: 30px;
+            background: white;
+            border-radius: 15px;
+            padding: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #8a8a8a;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            background: #d4af37;
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .preview-section {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-top: 30px;
+        }
+
+        .preview-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .download-section {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .download-instructions {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .download-instructions ol {
+            margin-left: 20px;
+        }
+
+        .download-instructions li {
+            margin-bottom: 10px;
+        }
+
+        .download-instructions code {
+            background: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .admin-container {
+                padding: 15px;
+            }
+            
+            .form-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <div class="admin-header">
+            <h1><i class="fas fa-crown"></i> Админ-панель Lumière</h1>
+            <p>Управление контентом сайта салона красоты</p>
+        </div>
+
+        <div class="tab-navigation">
+            <button class="tab-btn active" onclick="openTab('main')">Основное</button>
+            <button class="tab-btn" onclick="openTab('services')">Услуги</button>
+            <button class="tab-btn" onclick="openTab('portfolio')">Портфолио</button>
+            <button class="tab-btn" onclick="openTab('master')">Мастер</button>
+            <button class="tab-btn" onclick="openTab('contacts')">Контакты</button>
+        </div>
+
+        <div id="message" class="message"></div>
+
+        <!-- Основная информация -->
+        <div id="main" class="tab-content active">
+            <div class="form-section">
+                <h2><i class="fas fa-info-circle"></i> Основная информация</h2>
+                
+                <div class="form-group">
+                    <label>Название салона:</label>
+                    <input type="text" id="salonName" placeholder="Lumière">
+                </div>
+
+                <div class="form-group">
+                    <label>Описание салона:</label>
+                    <textarea id="salonDescription" placeholder="Описание вашего салона..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Заголовок на главной:</label>
+                    <input type="text" id="heroTitle" placeholder="Искусство в каждой прядке">
+                </div>
+
+                <div class="form-group">
+                    <label>Текст на главной:</label>
+                    <textarea id="heroText" placeholder="Текст приветствия на главной странице..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Услуги -->
+        <div id="services" class="tab-content">
+            <div class="form-section">
+                <h2><i class="fas fa-scissors"></i> Управление услугами</h2>
+                <p>Добавляйте, редактируйте и удаляйте услуги вашего салона</p>
+                
+                <div id="servicesList">
+                    <!-- Список услуг будет здесь -->
+                </div>
+
+                <button class="btn" onclick="addService()">
+                    <i class="fas fa-plus"></i> Добавить услугу
+                </button>
+            </div>
+        </div>
+
+        <!-- Портфолио -->
+        <div id="portfolio" class="tab-content">
+            <div class="form-section">
+                <h2><i class="fas fa-images"></i> Портфолио работ</h2>
+                <p>Добавляйте работы в портфолио</p>
+                
+                <div id="portfolioList">
+                    <!-- Список работ будет здесь -->
+                </div>
+
+                <button class="btn" onclick="addPortfolioItem()">
+                    <i class="fas fa-plus"></i> Добавить работу
+                </button>
+            </div>
+        </div>
+
+        <!-- Информация о мастере -->
+        <div id="master" class="tab-content">
+            <div class="form-section">
+                <h2><i class="fas fa-user-tie"></i> Информация о мастере</h2>
+                
+                <div class="form-group">
+                    <label>Имя мастера:</label>
+                    <input type="text" id="masterName" placeholder="Юлия Абдрахманова">
+                </div>
+
+                <div class="form-group">
+                    <label>Специализация:</label>
+                    <input type="text" id="masterSpecialty" placeholder="Топ-стилист и колорист">
+                </div>
+
+                <div class="form-group">
+                    <label>Описание:</label>
+                    <textarea id="masterDescription" placeholder="Описание опыта и специализации..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Фото (URL):</label>
+                    <input type="text" id="masterPhoto" placeholder="fa729392-cd15-468b-8839-547d0e1f800b.jpg">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Instagram:</label>
+                        <input type="text" id="socialInstagram" placeholder="https://instagram.com/...">
+                    </div>
+                    <div class="form-group">
+                        <label>Telegram:</label>
+                        <input type="text" id="socialTelegram" placeholder="https://t.me/...">
+                    </div>
+                    <div class="form-group">
+                        <label>WhatsApp:</label>
+                        <input type="text" id="socialWhatsapp" placeholder="https://wa.me/...">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Контакты -->
+        <div id="contacts" class="tab-content">
+            <div class="form-section">
+                <h2><i class="fas fa-map-marker-alt"></i> Контактная информация</h2>
+                
+                <div class="form-group">
+                    <label>Адрес:</label>
+                    <input type="text" id="contactAddress" placeholder="г. Санкт-Петербург, ул. Александра Невского, 12">
+                </div>
+
+                <div class="form-group">
+                    <label>Телефон:</label>
+                    <input type="text" id="contactPhone" placeholder="+7 (912) 352-77-20">
+                </div>
+
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input type="email" id="contactEmail" placeholder="info@lumiere-salon.ru">
+                </div>
+
+                <div class="form-group">
+                    <label>Часы работы:</label>
+                    <input type="text" id="contactHours" placeholder="Пн-Вс: 9:00 - 21:00">
+                </div>
+
+                <div class="form-group">
+                    <label>Координаты карты (широта):</label>
+                    <input type="number" step="any" id="mapLat" placeholder="59.926586">
+                </div>
+
+                <div class="form-group">
+                    <label>Координаты карты (долгота):</label>
+                    <input type="number" step="any" id="mapLng" placeholder="30.385074">
+                </div>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="btn btn-success" onclick="saveData()">
+                <i class="fas fa-save"></i> Сохранить изменения
+            </button>
+            <button class="btn" onclick="loadCurrentData()">
+                <i class="fas fa-sync"></i> Загрузить текущие данные
+            </button>
+            <button class="btn" onclick="resetData()">
+                <i class="fas fa-undo"></i> Сбросить
+            </button>
+        </div>
+
+        <!-- Секция скачивания -->
+        <div class="download-section">
+            <h2><i class="fas fa-download"></i> Обновление сайта</h2>
+            <p>После редактирования данных скачайте обновленный файл и загрузите его на GitHub</p>
+            
+            <div class="download-instructions">
+                <h3>Инструкция по обновлению:</h3>
+                <ol>
+                    <li>Нажмите кнопку "Скачать обновленный data.js" ниже</li>
+                    <li>Перейдите в репозиторий на GitHub</li>
+                    <li>Найдите файл <code>data.js</code> и нажмите на него</li>
+                    <li>Нажмите иконку карандаша (Edit this file)</li>
+                    <li>Удалите весь старый код и вставьте содержимое скачанного файла</li>
+                    <li>Прокрутите вниз и нажмите "Commit changes"</li>
+                    <li>Подождите 1-2 минуты пока GitHub Pages обновится</li>
+                    <li>Обновите сайт чтобы увидеть изменения</li>
+                </ol>
+            </div>
+
+            <button class="btn btn-success" onclick="downloadDataJS()">
+                <i class="fas fa-file-download"></i> Скачать обновленный data.js
+            </button>
+
+            <div class="preview-actions" style="margin-top: 20px;">
+                <button class="btn" onclick="window.open('index.html', '_blank')">
+                    <i class="fas fa-external-link-alt"></i> Открыть сайт
+                </button>
+                <button class="btn" onclick="location.reload()">
+                    <i class="fas fa-redo"></i> Обновить админ-панель
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <input type="file" id="importFile" style="display: none;" accept=".js,.json">
+
+    <script>
+        // Данные по умолчанию (такие же как в data.js)
+        const defaultData = {
+            "salon": {
+                "name": "Lumière",
+                "description": "Салон красоты премиум-класса, где мы создаем стиль, который подчеркивает вашу индивидуальность и красоту.",
+                "heroTitle": "Искусство в каждой прядке",
+                "heroText": "Добро пожаловать в салон красоты Lumière, где мы создаем стиль, который подчеркивает вашу индивидуальность и красоту. Профессиональные мастера и премиальные продукты."
+            },
+            "contacts": {
+                "address": "г. Санкт-Петербург, ул. Александра Невского, 12",
+                "phone": "+7 (912) 352-77-20",
+                "email": "info@lumiere-salon.ru",
+                "hours": "Пн-Вс: 9:00 - 21:00",
+                "map": {
+                    "lat": 59.926586,
+                    "lng": 30.385074
+                }
+            },
+            "master": {
+                "name": "Юлия Абдрахманова",
+                "specialty": "Топ-стилист и колорист",
+                "description": "Специализация: сложное окрашивание, стрижки, уходовые процедуры. Опыт работы более 5 лет. Постоянно совершенствую свои навыки на международных мастер-классах.",
+                "photo": "fa729392-cd15-468b-8839-547d0e1f800b.jpg",
+                "social": {
+                    "instagram": "https://www.instagram.com/julia.abdrakhmanova?igsh=MXQyeDNvZ2R1djhtZg%3D%3D&utm_source=qr",
+                    "telegram": "https://web.telegram.org/a/#1272181952",
+                    "whatsapp": "https://api.whatsapp.com/send/?phone=89123527720&text&type=phone_number&app_absent=0"
+                }
+            },
+            "services": [
+                {
+                    "id": 1,
+                    "name": "Сложное окрашивание Airtouch | Шатуш",
+                    "duration": "4 часа",
+                    "description": "Создание естественных плавных переходов цвета. Идеально для тех, кто хочет мягкое обновление образа.",
+                    "price": "от 15 000 ₽",
+                    "priceRange": "Короткие: 15 000 ₽ • Средние: 16 500 ₽ • Длинные: 18 000 ₽",
+                    "image": "0af97492a1e011f0a178e6378db1d023_1.jpg",
+                    "type": "gif"
+                },
+                {
+                    "id": 2,
+                    "name": "Total Blonde",
+                    "duration": "2.5-4 часов",
+                    "description": "Осветление корня + тонирование длины. Идеальное блондирование с сохранением здоровья волос.",
+                    "price": "от 8 000 ₽",
+                    "priceRange": "Корень 1-2 см: 8 000 - 10 000 ₽ • от 2 см: 12 000 - 18 000₽",
+                    "image": "IMG_0376.gif",
+                    "type": "photo"
+                },
+                {
+                    "id": 3,
+                    "name": "Выход из чёрного | тёмного",
+                    "duration": "7 часов",
+                    "description": "Бережный выход из темных оттенков без вреда для волос. Многоэтапная процедура с профессиональными средствами.",
+                    "price": "18 000 – 22 000 ₽",
+                    "priceRange": "",
+                    "image": "f38a913ea1e011f09faf867d5f9d46e5_1.jpg",
+                    "type": "gif"
+                },
+                {
+                    "id": 4,
+                    "name": "Тонирование",
+                    "duration": "2 часа",
+                    "description": "Обновление цвета, нейтрализация нежелательных оттенков. Придание волосам блеска и насыщенности.",
+                    "price": "от 6 000 ₽",
+                    "priceRange": "Короткие: 6 000 ₽ • Средние: 7 500 ₽ • Длинные: 9 000 ₽",
+                    "image": "strishka.png",
+                    "type": "photo"
+                },
+                {
+                    "id": 5,
+                    "name": "Окрашивание в один тон",
+                    "duration": "2 часа",
+                    "description": "Равномерное окрашивание в один цвет. Идеально для тех, кто предпочитает классический однотонный образ.",
+                    "price": "от 6 000 ₽",
+                    "priceRange": "Короткие: 6 000 ₽ • Средние: 7 500 ₽ • Длинные: 9 000 ₽",
+                    "image": "strishka.png",
+                    "type": "photo"
+                },
+                {
+                    "id": 6,
+                    "name": "Уход от Lebel",
+                    "duration": "1-1.5 часа",
+                    "description": "Профессиональный уход \"Счастье для волос\". Восстановление, увлажнение и сияние ваших волос.",
+                    "price": "от 4 000 ₽",
+                    "priceRange": "Средние: 4 000 ₽ • Длинные: 5 000 ₽",
+                    "image": "strishka.png",
+                    "type": "gif"
+                },
+                {
+                    "id": 7,
+                    "name": "Моделирование чёлки",
+                    "duration": "20 минут",
+                    "description": "Корректировка формы и длины чёлки. Создание идеальной формы, подчеркивающей черты лица.",
+                    "price": "1 500 ₽",
+                    "priceRange": "* В стоимость не входит мытье головы",
+                    "image": "strishka.png",
+                    "type": "photo"
+                },
+                {
+                    "id": 8,
+                    "name": "Стрижка ровный срез",
+                    "duration": "1 час 30 минут",
+                    "description": "Идеально ровный срез по всей длине. Классическая техника для здоровых и ухоженных волос.",
+                    "price": "2 500 ₽",
+                    "priceRange": "",
+                    "image": "strishka.png",
+                    "type": "photo"
+                },
+                {
+                    "id": 9,
+                    "name": "Стрижка Каскад | Слои",
+                    "duration": "2 часа",
+                    "description": "Многоуровневая стрижка с плавными переходами. Создает объем и динамику в прическе.",
+                    "price": "4 000 ₽",
+                    "priceRange": "",
+                    "image": "strishka.png",
+                    "type": "photo"
+                },
+                {
+                    "id": 10,
+                    "name": "Стрижка Каре",
+                    "duration": "2 часа",
+                    "description": "Классическое или градуированное каре. Универсальная стрижка, подходящая для любого типа волос.",
+                    "price": "4 000 ₽",
+                    "priceRange": "",
+                    "image": "strishka.png",
+                    "type": "photo"
+                }
+            ],
+            "portfolio": [
+                {
+                    "id": 1,
+                    "title": "Сложное окрашивание",
+                    "description": "Техника Airtouch и шатуш",
+                    "image": "cabelo-calor.gif"
+                },
+                {
+                    "id": 2,
+                    "title": "Профессиональная стрижка",
+                    "description": "Точные срезы и филировка",
+                    "image": "hair-flip-shiny-hair.webp"
+                },
+                {
+                    "id": 3,
+                    "title": "Вечерняя укладка",
+                    "description": "Элегантные волны и объем",
+                    "image": "7f8e7595-3b30-4909-a01d-07d615f11ffc-ezgif.com-video-to-gif-converter (1).gif"
+                },
+                {
+                    "id": 4,
+                    "title": "Blond",
+                    "description": "Окрашивание в блонд",
+                    "image": "guy-long-hair.gif"
+                }
+            ]
+        };
+
+        let currentData = {};
+
+        // Инициализация
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCurrentData();
+        });
+
+        // Загрузка текущих данных с сайта
+        function loadCurrentData() {
+            // Пытаемся загрузить данные с текущего сайта
+            fetch('data.js')
+                .then(response => response.text())
+                .then(data => {
+                    try {
+                        // Извлекаем JSON из data.js
+                        const jsonStr = data.replace('const salonData = ', '').replace(';', '');
+                        currentData = JSON.parse(jsonStr);
+                        populateForms();
+                        renderServices();
+                        renderPortfolio();
+                        showMessage('Текущие данные успешно загружены с сайта!', 'success');
+                    } catch (error) {
+                        // Если не удалось, используем данные по умолчанию
+                        currentData = JSON.parse(JSON.stringify(defaultData));
+                        populateForms();
+                        renderServices();
+                        renderPortfolio();
+                        showMessage('Используются данные по умолчанию', 'success');
+                    }
+                })
+                .catch(error => {
+                    // Если файл не найден, используем данные по умолчанию
+                    currentData = JSON.parse(JSON.stringify(defaultData));
+                    populateForms();
+                    renderServices();
+                    renderPortfolio();
+                    showMessage('Используются данные по умолчанию', 'success');
+                });
+        }
+
+        // Заполнение форм данными
+        function populateForms() {
+            // Основная информация
+            document.getElementById('salonName').value = currentData.salon.name;
+            document.getElementById('salonDescription').value = currentData.salon.description;
+            document.getElementById('heroTitle').value = currentData.salon.heroTitle;
+            document.getElementById('heroText').value = currentData.salon.heroText;
+
+            // Контакты
+            document.getElementById('contactAddress').value = currentData.contacts.address;
+            document.getElementById('contactPhone').value = currentData.contacts.phone;
+            document.getElementById('contactEmail').value = currentData.contacts.email;
+            document.getElementById('contactHours').value = currentData.contacts.hours;
+            document.getElementById('mapLat').value = currentData.contacts.map.lat;
+            document.getElementById('mapLng').value = currentData.contacts.map.lng;
+
+            // Мастер
+            document.getElementById('masterName').value = currentData.master.name;
+            document.getElementById('masterSpecialty').value = currentData.master.specialty;
+            document.getElementById('masterDescription').value = currentData.master.description;
+            document.getElementById('masterPhoto').value = currentData.master.photo;
+            document.getElementById('socialInstagram').value = currentData.master.social.instagram;
+            document.getElementById('socialTelegram').value = currentData.master.social.telegram;
+            document.getElementById('socialWhatsapp').value = currentData.master.social.whatsapp;
+        }
+
+        // Сохранение данных
+        function saveData() {
+            // Сбор данных с форм
+            currentData.salon.name = document.getElementById('salonName').value;
+            currentData.salon.description = document.getElementById('salonDescription').value;
+            currentData.salon.heroTitle = document.getElementById('heroTitle').value;
+            currentData.salon.heroText = document.getElementById('heroText').value;
+
+            currentData.contacts.address = document.getElementById('contactAddress').value;
+            currentData.contacts.phone = document.getElementById('contactPhone').value;
+            currentData.contacts.email = document.getElementById('contactEmail').value;
+            currentData.contacts.hours = document.getElementById('contactHours').value;
+            currentData.contacts.map.lat = parseFloat(document.getElementById('mapLat').value);
+            currentData.contacts.map.lng = parseFloat(document.getElementById('mapLng').value);
+
+            currentData.master.name = document.getElementById('masterName').value;
+            currentData.master.specialty = document.getElementById('masterSpecialty').value;
+            currentData.master.description = document.getElementById('masterDescription').value;
+            currentData.master.photo = document.getElementById('masterPhoto').value;
+            currentData.master.social.instagram = document.getElementById('socialInstagram').value;
+            currentData.master.social.telegram = document.getElementById('socialTelegram').value;
+            currentData.master.social.whatsapp = document.getElementById('socialWhatsapp').value;
+
+            showMessage('Изменения сохранены! Теперь скачайте обновленный файл.', 'success');
+        }
+
+        // Генерация и скачивание data.js
+        function downloadDataJS() {
+            const dataStr = `const salonData = ${JSON.stringify(currentData, null, 2)};`;
+            const dataBlob = new Blob([dataStr], {type: 'application/javascript'});
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(dataBlob);
+            link.download = 'data.js';
+            link.click();
+            
+            showMessage('Файл data.js готов для скачивания!', 'success');
+        }
+
+        // Управление услугами
+        function renderServices() {
+            const container = document.getElementById('servicesList');
+            container.innerHTML = '';
+
+            currentData.services.forEach((service, index) => {
+                const serviceHtml = `
+                    <div class="service-item">
+                        <div class="item-header">
+                            <h3>${service.name}</h3>
+                            <div>
+                                <button class="btn btn-sm btn-danger" onclick="deleteService(${index})">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Название услуги:</label>
+                                <input type="text" value="${service.name}" onchange="updateServiceField(${index}, 'name', this.value)">
+                            </div>
+                            <div class="form-group">
+                                <label>Длительность:</label>
+                                <input type="text" value="${service.duration}" onchange="updateServiceField(${index}, 'duration', this.value)">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Описание:</label>
+                            <textarea onchange="updateServiceField(${index}, 'description', this.value)">${service.description}</textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Цена:</label>
+                                <input type="text" value="${service.price}" onchange="updateServiceField(${index}, 'price', this.value)">
+                            </div>
+                            <div class="form-group">
+                                <label>Тип:</label>
+                                <select onchange="updateServiceField(${index}, 'type', this.value)">
+                                    <option value="photo" ${service.type === 'photo' ? 'selected' : ''}>Фото</option>
+                                    <option value="gif" ${service.type === 'gif' ? 'selected' : ''}>GIF</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Изображение (URL):</label>
+                            <input type="text" value="${service.image}" onchange="updateServiceField(${index}, 'image', this.value)">
+                        </div>
+                        <div class="form-group">
+                            <label>Диапазон цен (опционально):</label>
+                            <input type="text" value="${service.priceRange || ''}" onchange="updateServiceField(${index}, 'priceRange', this.value)" placeholder="Короткие: X ₽ • Средние: Y ₽ • Длинные: Z ₽">
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += serviceHtml;
+            });
+        }
+
+        function addService() {
+            const newService = {
+                id: Date.now(),
+                name: "Новая услуга",
+                duration: "1 час",
+                description: "Описание новой услуги",
+                price: "от 0 ₽",
+                image: "strishka.png",
+                type: "photo"
+            };
+            
+            currentData.services.push(newService);
+            renderServices();
+            saveData();
+        }
+
+        function updateServiceField(index, field, value) {
+            currentData.services[index][field] = value;
+            saveData();
+        }
+
+        function deleteService(index) {
+            if (confirm('Удалить эту услугу?')) {
+                currentData.services.splice(index, 1);
+                renderServices();
+                saveData();
+            }
+        }
+
+        // Управление портфолио
+        function renderPortfolio() {
+            const container = document.getElementById('portfolioList');
+            container.innerHTML = '';
+
+            currentData.portfolio.forEach((item, index) => {
+                const portfolioHtml = `
+                    <div class="portfolio-item">
+                        <div class="item-header">
+                            <h3>${item.title}</h3>
+                            <div>
+                                <button class="btn btn-sm btn-danger" onclick="deletePortfolioItem(${index})">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Название работы:</label>
+                                <input type="text" value="${item.title}" onchange="updatePortfolioField(${index}, 'title', this.value)">
+                            </div>
+                            <div class="form-group">
+                                <label>Описание:</label>
+                                <input type="text" value="${item.description}" onchange="updatePortfolioField(${index}, 'description', this.value)">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Изображение (URL):</label>
+                            <input type="text" value="${item.image}" onchange="updatePortfolioField(${index}, 'image', this.value)">
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += portfolioHtml;
+            });
+        }
+
+        function addPortfolioItem() {
+            const newItem = {
+                id: Date.now(),
+                title: "Новая работа",
+                description: "Описание работы",
+                image: "portfolio.jpg"
+            };
+            
+            currentData.portfolio.push(newItem);
+            renderPortfolio();
+            saveData();
+        }
+
+        function updatePortfolioField(index, field, value) {
+            currentData.portfolio[index][field] = value;
+            saveData();
+        }
+
+        function deletePortfolioItem(index) {
+            if (confirm('Удалить эту работу из портфолио?')) {
+                currentData.portfolio.splice(index, 1);
+                renderPortfolio();
+                saveData();
+            }
+        }
+
+        // Вспомогательные функции
+        function openTab(tabName) {
+            // Скрыть все табы
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Убрать активный класс у всех кнопок
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Показать выбранный таб
+            document.getElementById(tabName).classList.add('active');
+            
+            // Активировать кнопку
+            event.target.classList.add('active');
+        }
+
+        function showMessage(text, type) {
+            const messageEl = document.getElementById('message');
+            messageEl.textContent = text;
+            messageEl.className = `message ${type}`;
+            
+            setTimeout(() => {
+                messageEl.style.display = 'none';
+            }, 5000);
+        }
+
+        function resetData() {
+            if (confirm('Вернуть все настройки к значениям по умолчанию? Это действие нельзя отменить.')) {
+                currentData = JSON.parse(JSON.stringify(defaultData));
+                populateForms();
+                renderServices();
+                renderPortfolio();
+                showMessage('Данные сброшены к значениям по умолчанию', 'success');
+            }
+        }
+    </script>
+</body>
+</html>

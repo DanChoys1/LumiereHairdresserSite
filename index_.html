@@ -1406,144 +1406,237 @@
         </div>
     </footer>
 
-<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+<!-- Подключение данных сайта -->
+<script src="data.js"></script>
+<!-- Регистрация -->
+<script type="text/javascript" src="https://w948450.yclients.com/widgetJS" charset="UTF-8"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Инициализация карты
-        ymaps.ready(init);
-        
-        function init() {
-            // Создание карты
-            var myMap = new ymaps.Map("yandex-map", {
-                center: [59.925113, 30.385793], // Координаты центра (ул. Александра Невского, 12)
-                zoom: 16, // Уровень масштабирования
-                controls: ['zoomControl', 'fullscreenControl'] // Элементы управления
-            });
-            
-            // Создание метки
-            var myPlacemark = new ymaps.Placemark([59.925113, 30.385793], {
-                balloonContent: `
-                    <strong>Lumière - Салон красоты</strong><br>
-                    г. Санкт-Петербург, ул. Александра Невского, 12<br>
-                    📞 +7 (912) 352-77-20<br>
-                    🕒 Пн-Вс: 9:00 - 21:00
-                `,
-                hintContent: "Lumière - Салон красоты"
-            }, {
-                // Опции метки
-                iconLayout: 'default#image',
-                iconImageHref: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiNkNGFmMzciIGZpbGwtb3BhY2l0eT0iMC45Ii8+CjxjaXJjbGUgY3g9IjIwIiBjeT0iMjAiIHI9IjgiIGZpbGw9IiNmZmYiLz4KPC9zdmc+',
-                iconImageSize: [40, 40],
-                iconImageOffset: [-20, -40]
-            });
-            
-            // Добавление метки на карту
-            myMap.geoObjects.add(myPlacemark);
-            
-            // Открываем балун при клике на метку
-            myPlacemark.balloon.open();
-            
-            // Адаптация карты под размер контейнера
-            myMap.container.fitToViewport();
-        }
-    });
-</script>
-
-    <script>
-   // Mobile Menu - ПРОСТОЙ И РАБОЧИЙ ВАРИАНТ
-document.addEventListener('DOMContentLoaded', function() {
-    const mobileMenu = document.getElementById('mobileMenu');
-    const mobileNav = document.getElementById('mobileNav');
-    const closeMenu = document.getElementById('closeMenu');
-    const mobileNavOverlay = document.getElementById('mobileNavOverlay');
-
-    // Функция открытия меню
-    function openMobileMenu() {
-        console.log('Opening mobile menu');
-        mobileNav.classList.add('active');
-        mobileNavOverlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
+// SiteConfig - класс для управления данными сайта
+class SiteConfig {
+    constructor() {
+        this.data = salonData; // Используем данные из data.js
+        this.init();
     }
 
-    // Функция закрытия меню
-    function closeMobileMenu() {
-        console.log('Closing mobile menu');
+    init() {
+        this.renderAll();
+        this.setupEventListeners();
+    }
+
+    renderAll() {
+        this.renderSalonInfo();
+        this.renderServices();
+        this.renderMaster();
+        this.renderPortfolio();
+        this.renderFooter();
+        this.initMap();
+    }
+
+    renderSalonInfo() {
+        // Логотип и название
+        const logo = document.querySelector('.logo');
+        if (logo) {
+            logo.innerHTML = `${this.data.salon.name}<span>ère</span>`;
+        }
+
+        // Hero section
+        const heroTitle = document.querySelector('.hero h1');
+        const heroText = document.querySelector('.hero p');
+        
+        if (heroTitle) heroTitle.textContent = this.data.salon.heroTitle;
+        if (heroText) heroText.textContent = this.data.salon.heroText;
+
+        // Title страницы
+        document.title = `${this.data.salon.name} - Салон красоты премиум-класса`;
+    }
+
+    renderServices() {
+        const container = document.querySelector('.services-grid');
+        if (!container) return;
+
+        container.innerHTML = this.data.services.map(service => `
+            <div class="service-card">
+                <div class="service-media">
+                    <img src="${service.image}" 
+                         alt="${service.name}" 
+                         class="${service.type === 'gif' ? 'service-gif' : 'service-image'}">
+                    <div class="media-badge">${service.type === 'gif' ? 'GIF' : 'ФОТО'}</div>
+                </div>
+                <div class="service-content">
+                    <h3>${service.name}</h3>
+                    <div class="service-duration">
+                        <i class="fas fa-clock"></i> ${service.duration}
+                    </div>
+                    <p>${service.description}</p>
+                    ${service.priceRange ? `<p class="form-note">${service.priceRange}</p>` : ''}
+                    <div class="service-price">
+                        ${service.price}
+                        ${service.priceRange ? `<span class="price-range">${service.priceRange}</span>` : ''}
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    renderMaster() {
+        const teamGrid = document.querySelector('.team-grid');
+        if (!teamGrid) return;
+
+        teamGrid.innerHTML = `
+            <div class="team-card">
+                <div class="team-image" style="background: url('${this.data.master.photo}') no-repeat center center/cover"></div>
+                <div class="team-info">
+                    <h3>${this.data.master.name}</h3>
+                    <span class="specialty">${this.data.master.specialty}</span>
+                    <p>${this.data.master.description}</p>
+                    <div class="social-links">
+                        <a href="${this.data.master.social.instagram}" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="${this.data.master.social.telegram}" target="_blank"><i class="fab fa-telegram"></i></a>
+                        <a href="${this.data.master.social.whatsapp}" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    renderPortfolio() {
+        const portfolioGrid = document.querySelector('.portfolio-grid');
+        if (!portfolioGrid) return;
+
+        portfolioGrid.innerHTML = this.data.portfolio.map(item => `
+            <div class="portfolio-item">
+                <img src="${item.image}" 
+                     alt="${item.title}" 
+                     class="portfolio-gif">
+                <div class="portfolio-overlay">
+                    <h3>${item.title}</h3>
+                    <p>${item.description}</p>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    renderFooter() {
+        // Контактная информация
+        const contactInfo = document.querySelector('.contact-info');
+        if (contactInfo) {
+            contactInfo.innerHTML = `
+                <li><i class="fas fa-map-marker-alt"></i> ${this.data.contacts.address}</li>
+                <li><i class="fas fa-phone"></i> ${this.data.contacts.phone}</li>
+                <li><i class="fas fa-envelope"></i> ${this.data.contacts.email}</li>
+                <li><i class="fas fa-clock"></i> ${this.data.contacts.hours}</li>
+            `;
+        }
+
+        // Описание салона в футере
+        const salonDescription = document.querySelector('.footer-column p');
+        if (salonDescription) {
+            salonDescription.textContent = this.data.salon.description;
+        }
+    }
+
+    initMap() {
+        if (typeof ymaps !== 'undefined') {
+            ymaps.ready(() => {
+                const myMap = new ymaps.Map("yandex-map", {
+                    center: [this.data.contacts.map.lat, this.data.contacts.map.lng],
+                    zoom: 16,
+                    controls: ['zoomControl', 'fullscreenControl']
+                });
+                
+                const myPlacemark = new ymaps.Placemark([this.data.contacts.map.lat, this.data.contacts.map.lng], {
+                    balloonContent: `
+                        <strong>${this.data.salon.name} - Салон красоты</strong><br>
+                        ${this.data.contacts.address}<br>
+                        📞 ${this.data.contacts.phone}<br>
+                        🕒 ${this.data.contacts.hours}
+                    `,
+                    hintContent: `${this.data.salon.name} - Салон красоты`
+                }, {
+                    iconLayout: 'default#image',
+                    iconImageHref: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiNkNGFmMzciIGZpbGwtb3BhY2l0eT0iMC45Ii8+CjxjaXJjbGUgY3g9IjIwIiBjeT0iMjAiIHI9IjgiIGZpbGw9IiNmZmYiLz4KPC9zdmc+',
+                    iconImageSize: [40, 40],
+                    iconImageOffset: [-20, -40]
+                });
+                
+                myMap.geoObjects.add(myPlacemark);
+                myMap.container.fitToViewport();
+            });
+        }
+    }
+
+    setupEventListeners() {
+        // Mobile Menu
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileNav = document.getElementById('mobileNav');
+        const closeMenu = document.getElementById('closeMenu');
+        const mobileNavOverlay = document.getElementById('mobileNavOverlay');
+
+        if (mobileMenu) {
+            mobileMenu.addEventListener('click', () => {
+                mobileNav.classList.add('active');
+                mobileNavOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        }
+
+        if (closeMenu) {
+            closeMenu.addEventListener('click', this.closeMobileMenu);
+        }
+
+        if (mobileNavOverlay) {
+            mobileNavOverlay.addEventListener('click', this.closeMobileMenu);
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                
+                if (href === '#' || this.classList.contains('no-scroll')) {
+                    return;
+                }
+                
+                e.preventDefault();
+                
+                const target = document.querySelector(href);
+                if (target) {
+                    const headerHeight = document.getElementById('header').offsetHeight;
+                    const targetPosition = target.offsetTop - headerHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    }
+
+    closeMobileMenu() {
+        const mobileNav = document.getElementById('mobileNav');
+        const mobileNavOverlay = document.getElementById('mobileNavOverlay');
+        
         mobileNav.classList.remove('active');
         mobileNavOverlay.classList.remove('active');
         document.body.style.overflow = '';
     }
+}
 
-    // Открытие меню
-    if (mobileMenu) {
-        mobileMenu.addEventListener('click', openMobileMenu);
-    }
-
-    // Закрытие меню
-    if (closeMenu) {
-        closeMenu.addEventListener('click', closeMobileMenu);
-    }
-
-    // Закрытие по клику на overlay
-    if (mobileNavOverlay) {
-        mobileNavOverlay.addEventListener('click', closeMobileMenu);
-    }
-
-    // Закрытие по клику на ссылки
-    const mobileNavLinks = document.querySelectorAll('.mobile-nav-links a');
-    mobileNavLinks.forEach(link => {
-        link.addEventListener('click', closeMobileMenu);
-    });
-
-    // Smooth scroll для всех ссылок
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            const href = this.getAttribute('href');
-            
-            if (href === '#' || this.classList.contains('no-scroll')) {
-                return;
-            }
-            
-            e.preventDefault();
-            
-            const target = document.querySelector(href);
-            if (target) {
-                const headerHeight = document.getElementById('header').offsetHeight;
-                const targetPosition = target.offsetTop - headerHeight;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-
-    // Header scroll effect
-    window.addEventListener('scroll', () => {
-        const header = document.getElementById('header');
-        if (window.scrollY > 100) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-    });
-
-    // Hero animation
-    const heroContent = document.querySelector('.hero-content');
-    if (heroContent) {
-        heroContent.style.opacity = '0';
-        heroContent.style.transform = 'translateY(50px)';
-        
-        setTimeout(() => {
-            heroContent.style.transition = 'all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-            heroContent.style.opacity = '1';
-            heroContent.style.transform = 'translateY(0)';
-        }, 300);
-    }
-
-    </script>
-<script type="text/javascript" src="https://w948450.yclients.com/widgetJS" charset="UTF-8"></script>
-
-
+// Инициализация при загрузке страницы
+document.addEventListener('DOMContentLoaded', () => {
+    new SiteConfig();
+});
+</script>
 </body>
 </html>
