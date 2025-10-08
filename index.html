@@ -1,572 +1,597 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Lumière - Салон красоты премиум-класса</title>
-    <link rel="icon" href="c63635fba1eb11f0a547b62e65e43737_1.jpg">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        /* ===========================
-           RESET & VARIABLES
-           =========================== */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        :root{
-            --primary:#d4af37;
-            --primary-dark:#b8941f;
-            --dark:#1a1a1a;
-            --light:#f8f5f0;
-            --gray:#8a8a8a;
-            --transition: all 0.32s cubic-bezier(.2,.8,.2,1);
-        }
-        body{
-            font-family: 'Inter', sans-serif;
-            color:var(--dark);
-            background:var(--light);
-            -webkit-font-smoothing:antialiased;
-            -moz-osx-font-smoothing:grayscale;
-            line-height:1.6;
-            overflow-x:hidden;
-        }
-        h1,h2,h3,h4,h5 { font-family: 'Playfair Display', serif; font-weight:600; }
-        .container { width:90%; max-width:1200px; margin:0 auto; padding:0 20px; }
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Lumière - Салон красоты премиум-класса</title>
 
-        /* ===========================
-           HEADER / NAV
-           =========================== */
-        header {
-            position: fixed; top:0; left:0; width:100%; z-index:1000;
-            background: rgba(255,255,255,0.96);
-            backdrop-filter: blur(8px);
-            padding:18px 0;
-            transition: var(--transition);
-        }
-        header.scrolled { box-shadow:0 6px 24px rgba(0,0,0,0.08); padding:14px 0; }
-        .navbar { display:flex; justify-content:space-between; align-items:center; gap:20px; }
-        .logo { font-family:'Playfair Display'; font-size:26px; color:var(--dark); text-decoration:none; font-weight:700; display:flex; gap:6px; align-items:center; }
-        .logo span { color:var(--primary); }
-        .nav-links { display:flex; list-style:none; gap:24px; align-items:center; }
-        .nav-links a { color:var(--dark); text-decoration:none; font-weight:500; font-size:15px; position:relative; }
-        .nav-links a:after { content:''; position:absolute; left:0; bottom:-6px; width:0; height:2px; background:var(--primary); transition:var(--transition); }
-        .nav-links a:hover:after { width:100%; }
-        .ms_booking { background:var(--primary); color:white; padding:10px 20px; border-radius:30px; text-decoration:none; font-weight:700; display:inline-block; }
-        .ms_booking:hover { background:var(--primary-dark); transform:translateY(-3px); }
+<link rel="icon" href="c63635fba1eb11f0a547b62e65e43737_1.jpg">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-        .mobile-menu { display:none; background:none; border:0; font-size:22px; cursor:pointer; color:var(--dark); }
+<style>
+/* =========================
+   Reset + переменные
+   ========================= */
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --primary:#d4af37;
+  --primary-dark:#b8941f;
+  --dark:#1a1a1a;
+  --light:#f8f5f0;
+  --gray:#8a8a8a;
+  --transition: all 0.32s cubic-bezier(.2,.8,.2,1);
+}
+body{
+  font-family:'Inter',sans-serif;
+  color:var(--dark);
+  background:var(--light);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4,h5{font-family:'Playfair Display',serif;font-weight:600}
+.container{width:90%;max-width:1200px;margin:0 auto;padding:0 20px}
 
-        /* ===========================
-           HERO
-           =========================== */
-        .hero {
-            height:100vh; display:flex; align-items:center; position:relative;
-            background: linear-gradient(135deg, rgba(26,26,26,0.75), rgba(26,26,26,0.45)), url('eebebd35a1d711f0988e4ec14a599804_1.jpg') no-repeat center/cover;
-            color:white; margin-top:0;
-        }
-        .hero-content { max-width:680px; z-index:2; padding: 40px 0; }
-        .hero h1 { font-size:clamp(2.2rem,5vw,3.6rem); margin-bottom:18px; line-height:1.05; text-shadow:0 0 18px rgba(212,175,55,0.25); }
-        .hero p { font-size:clamp(1rem,2.2vw,1.15rem); color: rgba(255,255,255,0.9); margin-bottom:20px; }
-        .hero-buttons { display:flex; gap:14px; flex-wrap:wrap; }
+/* =========================
+   Header / nav
+   ========================= */
+header{position:fixed;top:0;left:0;width:100%;z-index:1000;background:rgba(255,255,255,0.96);backdrop-filter:blur(8px);padding:18px 0;transition:var(--transition)}
+header.scrolled{box-shadow:0 6px 24px rgba(0,0,0,0.08);padding:14px 0}
+.navbar{display:flex;justify-content:space-between;align-items:center;gap:20px}
+.logo{font-family:'Playfair Display';font-size:26px;color:var(--dark);text-decoration:none;font-weight:700;display:flex;gap:6px;align-items:center}
+.logo span{color:var(--primary)}
+.nav-links{display:flex;list-style:none;gap:24px;align-items:center}
+.nav-links a{color:var(--dark);text-decoration:none;font-weight:500;font-size:15px;position:relative}
+.nav-links a:after{content:'';position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--primary);transition:var(--transition)}
+.nav-links a:hover:after{width:100%}
+.ms_booking{background:var(--primary);color:#fff;padding:10px 20px;border-radius:30px;text-decoration:none;font-weight:700;display:inline-block}
+.ms_booking:hover{background:var(--primary-dark);transform:translateY(-3px)}
+.mobile-menu{display:none;background:none;border:0;font-size:22px;cursor:pointer;color:var(--dark)}
 
-        /* ===========================
-           SECTION TITLES
-           =========================== */
-        .section { padding: clamp(48px, 6vw, 90px) 0; }
-        .section-title { text-align:center; margin-bottom: clamp(24px,4vw,48px); }
-        .section-title h2 { font-size:clamp(1.6rem,4vw,2.4rem); display:inline-block; position:relative; }
-        .section-title h2:after { content:''; position:absolute; left:50%; transform:translateX(-50%); bottom:-12px; width:80px; height:3px; background:var(--primary); }
+/* =========================
+   Hero
+   ========================= */
+.hero{
+  height:100vh;
+  display:flex;
+  align-items:center;
+  position:relative;
+  background:
+    linear-gradient(135deg, rgba(26,26,26,0.75), rgba(26,26,26,0.45)),
+    url('eebebd35a1d711f0988e4ec14a599804_1.jpg') center/cover no-repeat;
+  color:#fff;margin-top:0;
+}
+.hero-content{max-width:680px;z-index:2;padding:36px 0}
+.hero h1{font-size:clamp(2.2rem,5vw,3.6rem);margin-bottom:18px;line-height:1.05;text-shadow:0 0 18px rgba(212,175,55,0.25)}
+.hero p{font-size:clamp(1rem,2.2vw,1.15rem);color:rgba(255,255,255,0.92);margin-bottom:18px}
+.hero-buttons{display:flex;gap:12px;flex-wrap:wrap}
 
-        .section-title p { color:var(--gray); margin-top:10px; max-width:700px; margin-left:auto; margin-right:auto; }
+/* =========================
+   Section titles
+   ========================= */
+.section{padding:clamp(48px,6vw,90px) 0}
+.section-title{text-align:center;margin-bottom:clamp(24px,4vw,48px)}
+.section-title h2{font-size:clamp(1.6rem,4vw,2.4rem);display:inline-block;position:relative}
+.section-title h2:after{content:'';position:absolute;left:50%;transform:translateX(-50%);bottom:-12px;width:80px;height:3px;background:var(--primary)}
+.section-title p{color:var(--gray);margin-top:10px;max-width:700px;margin-left:auto;margin-right:auto}
 
-        /* ===========================
-           SERVICES (общие карточки)
-           =========================== */
-        .services-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(min(300px,100%),1fr)); gap:24px; }
-        .service-card { background:white; border-radius:14px; padding:24px; box-shadow:0 12px 30px rgba(0,0,0,0.06); display:flex; flex-direction:column; min-height:220px; }
-        .service-content h3 { margin-bottom:8px; font-size:1.15rem; color:var(--dark); }
-        .service-duration { color:var(--gray); font-size:0.95rem; margin-bottom:10px; display:flex; gap:8px; align-items:center; }
-        .service-content p { color:var(--gray); margin-bottom:12px; flex:1; }
-        .service-price { color:var(--primary); font-weight:700; text-align:center; margin-top:auto; padding-top:12px; border-top:1px solid rgba(0,0,0,0.04); font-size:1.05rem; }
-        .price-range { display:block; color:var(--gray); font-size:0.9rem; margin-top:6px; font-weight:400; }
+/* =========================
+   Services
+   ========================= */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:24px}
+.service-card{background:#fff;border-radius:14px;padding:24px;box-shadow:0 12px 30px rgba(0,0,0,0.06);display:flex;flex-direction:column;min-height:220px}
+.service-content h3{margin-bottom:8px;font-size:1.15rem;color:var(--dark)}
+.service-duration{color:var(--gray);font-size:0.95rem;margin-bottom:10px;display:flex;gap:8px;align-items:center}
+.service-duration i{color:var(--primary)}
+.service-content p{color:var(--gray);margin-bottom:12px;flex:1}
+.service-price{color:var(--primary);font-weight:700;text-align:center;margin-top:auto;padding-top:12px;border-top:1px solid rgba(0,0,0,0.04);font-size:1.05rem}
+.price-range{display:block;color:var(--gray);font-size:0.9rem;margin-top:6px;font-weight:400}
 
-        /* ===========================
-           PORTFOLIO (horiz scroll)
-           =========================== */
-        .portfolio-scroll { display:flex; gap:18px; overflow-x:auto; padding:12px 0; -webkit-overflow-scrolling:touch; scroll-behavior:smooth; }
-        .portfolio-item { min-width:280px; height:360px; border-radius:12px; overflow:hidden; flex-shrink:0; background:#f4e9c8; display:flex; align-items:center; justify-content:center; position:relative; box-shadow:0 10px 30px rgba(0,0,0,0.06); }
-        .portfolio-item img { width:100%; height:100%; object-fit:cover; display:block; }
+/* =========================
+   Portfolio (horizontal)
+   ========================= */
+.portfolio-scroll{display:flex;gap:18px;overflow-x:auto;padding:12px 0;-webkit-overflow-scrolling:touch;scroll-behavior:smooth}
+.portfolio-scroll::-webkit-scrollbar{height:8px}
+.portfolio-scroll::-webkit-scrollbar-thumb{background:var(--primary);border-radius:6px}
+.portfolio-item{min-width:280px;height:360px;border-radius:12px;overflow:hidden;flex-shrink:0;background:#f4e9c8;display:flex;align-items:center;justify-content:center;position:relative;box-shadow:0 10px 30px rgba(0,0,0,0.06)}
+.portfolio-item img{width:100%;height:100%;object-fit:cover;display:block}
 
-        /* ===========================
-           HOME CARE (продукты) — FLEX-BASED
-           =========================== */
-        .home-care-section { background: #ffffff; }
-        .home-care-scroll {
-            display:flex;
-            gap:22px;
-            overflow-x:auto;
-            padding:18px 0;
-            -webkit-overflow-scrolling: touch;
-            scroll-behavior: smooth;
-        }
-        .home-care-scroll::-webkit-scrollbar { height:8px; }
-        .home-care-scroll::-webkit-scrollbar-thumb { background:var(--primary); border-radius:6px; }
-        .home-care-scroll.grabbing { cursor: grabbing; cursor:-webkit-grabbing; }
+/* =========================
+   Home Care — продукты (flex)
+   ========================= */
+.home-care-section{background:#fff}
+.home-care-scroll{
+  display:flex;gap:22px;overflow-x:auto;padding:18px 0;-webkit-overflow-scrolling:touch;scroll-behavior:smooth;
+  /* do not interfere with touch scrolling — JS will only enable mouse dragging */
+}
+.home-care-scroll::-webkit-scrollbar{height:8px}
+.home-care-scroll::-webkit-scrollbar-thumb{background:var(--primary);border-radius:6px}
+.home-care-scroll.grabbing{cursor:grabbing;cursor:-webkit-grabbing}
 
-        .product-card {
-            width:350px;
-            flex:0 0 auto;
-            background:white;
-            border-radius:14px;
-            overflow:hidden;
-            display:flex;
-            flex-direction:column;
-            box-shadow:0 12px 32px rgba(0,0,0,0.06);
-            transition:var(--transition);
-        }
-        .product-card:hover { transform:translateY(-6px); }
-        /* Image area — use fixed visual height on larger screens but flexible behaviour overall */
-        .product-image { flex:0 0 420px; height:420px; background:#f8f5f0; overflow:hidden; }
-        .product-image img { width:100%; height:100%; object-fit:cover; display:block; transition:var(--transition); }
-        .product-card:hover .product-image img { transform:scale(1.05); }
+/* карточки продуктов */
+.product-card{width:350px;flex:0 0 auto;background:#fff;border-radius:14px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 12px 32px rgba(0,0,0,0.06);transition:var(--transition)}
+.product-card:hover{transform:translateY(-6px)}
+.product-image{flex:0 0 420px;height:420px;background:#f8f5f0;overflow:hidden}
+.product-image img{width:100%;height:100%;object-fit:cover;display:block;transition:var(--transition)}
+.product-card:hover .product-image img{transform:scale(1.05)}
 
-        .product-content {
-            padding:20px;
-            display:flex;
-            flex-direction:column;
-            flex:1 1 auto; /* grow/shrink */
-            min-height:0; /* important for flex children */
-        }
-        .product-content h3 { font-size:1.15rem; color:var(--dark); margin-bottom:8px; line-height:1.2; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; text-overflow:ellipsis; }
-        .product-description { color:var(--gray); font-size:0.98rem; line-height:1.45; flex:1 1 auto; overflow:auto; margin-bottom:10px; min-height:0; padding-right:6px; }
-        .product-price { color:var(--primary); font-weight:700; font-size:1.25rem; text-align:center; margin-top:auto; padding-top:12px; border-top:1px solid rgba(0,0,0,0.04); background:white; }
+.product-content{padding:20px;display:flex;flex-direction:column;flex:1 1 auto;min-height:0}
+.product-content h3{font-size:1.15rem;color:var(--dark);margin-bottom:8px;line-height:1.2;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;text-overflow:ellipsis}
+.product-description{color:var(--gray);font-size:0.98rem;line-height:1.45;flex:1 1 auto;overflow:auto;margin-bottom:10px;min-height:0;padding-right:6px}
+.product-description::-webkit-scrollbar{width:6px}
+.product-description::-webkit-scrollbar-thumb{background:rgba(0,0,0,0.08);border-radius:4px}
+.product-price{color:var(--primary);font-weight:700;font-size:1.25rem;text-align:center;margin-top:auto;padding-top:12px;border-top:1px solid rgba(0,0,0,0.04);background:#fff}
 
-        /* Ensure price stays inside and pinned to bottom at all sizes */
-        .product-card, .product-content { height:auto; }
+/* =========================
+   Team
+   ========================= */
+.team-section{background:#f9f9f9}
+.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;align-items:start;justify-items:center}
+.team-card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 12px 30px rgba(0,0,0,0.06);display:flex;flex-direction:column;width:100%;max-width:420px;align-self:start}
+.team-image{height:320px;background-image:url('fa729392-cd15-468b-8839-547d0e1f800b.jpg');background-size:cover;background-position:center}
+.team-info{padding:20px;text-align:center}
+.team-info h3{font-size:1.25rem;margin-bottom:6px;color:var(--dark)}
+.team-info .specialty{color:var(--primary);display:block;margin-bottom:10px;font-weight:600}
+.team-info p{color:var(--gray);margin-bottom:12px}
+.social-links{display:flex;justify-content:center;gap:14px}
+.social-links a{color:var(--dark);font-size:1.2rem;display:inline-flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;background:rgba(212,175,55,0.06);transition:var(--transition);text-decoration:none}
+.social-links a:hover{color:#fff;background:var(--primary);transform:translateY(-4px)}
 
-        /* Improve internal scrollbars in product-description */
-        .product-description::-webkit-scrollbar { width:6px; }
-        .product-description::-webkit-scrollbar-thumb { background:rgba(0,0,0,0.08); border-radius:4px; }
-        .product-description::-webkit-scrollbar-thumb:hover { background:rgba(0,0,0,0.12); }
+/* =========================
+   Footer
+   ========================= */
+footer{background:var(--dark);color:#fff;padding:48px 0 28px}
+.footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;margin-bottom:24px}
+.footer-column h3{margin-bottom:10px;color:#fff;font-size:1.05rem}
+.footer-column p,.footer-links a,.contact-info li{color:#cfcfcf;font-size:0.95rem;line-height:1.5}
+.footer-links{list-style:none;padding:0}
+.footer-links li{margin-bottom:8px}
+.footer-links a{text-decoration:none;color:#cfcfcf}
+.copyright{text-align:center;color:#bfbfbf;font-size:0.9rem;padding-top:12px;border-top:1px solid rgba(255,255,255,0.04)}
 
-        /* ===========================
-           TEAM / Mастер
-           =========================== */
-        .team-section { background:#f9f9f9; }
-        .team-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:20px; align-items:start; }
-        .team-card { background:white; border-radius:14px; overflow:hidden; box-shadow:0 12px 30px rgba(0,0,0,0.06); display:flex; flex-direction:column; }
-        .team-image { height:320px; background-image: url('fa729392-cd15-468b-8839-547d0e1f800b.jpg'); background-size:cover; background-position:center; }
-        .team-info { padding:20px; text-align:center; }
-        .team-info h3 { font-size:1.25rem; margin-bottom:6px; color:var(--dark); }
-        .team-info .specialty { color:var(--primary); display:block; margin-bottom:10px; font-weight:600; }
-        .team-info p { color:var(--gray); margin-bottom:12px; }
-        .social-links { display:flex; justify-content:center; gap:14px; }
-        .social-links a { color:var(--dark); font-size:1.2rem; display:inline-flex; width:40px; height:40px; align-items:center; justify-content:center; border-radius:50%; background: rgba(212,175,55,0.06); transition:var(--transition); text-decoration:none; }
-        .social-links a:hover { color:white; background:var(--primary); transform:translateY(-4px); }
+/* =========================
+   Responsive tweaks
+   ========================= */
+@media (max-width:992px){
+  .hero h1{font-size:clamp(1.8rem,6vw,2.8rem)}
+  .product-card{width:300px}
+  .product-image{height:360px;flex:0 0 360px}
+}
+@media (max-width:768px){
+  .nav-links{display:none}
+  .ms_booking{display:none}
+  .mobile-menu{display:block}
+  .product-card{width:280px}
+  .product-image{height:320px;flex:0 0 320px}
+  .team-image{height:260px}
+}
+@media (max-width:480px){
+  .container{width:95%;padding:0 16px}
+  .product-card{width:300px;margin:0 auto}
+  .product-image{height:320px;flex:0 0 320px}
+  .home-care-scroll{gap:18px;padding:22px 0}
+  .section{padding:36px 0}
+}
 
-        /* ===========================
-           FOOTER
-           =========================== */
-        footer { background:var(--dark); color:white; padding:48px 0 28px; }
-        .footer-content { display:grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap:24px; margin-bottom:24px; }
-        .footer-column h3 { margin-bottom:10px; color:white; font-size:1.05rem; }
-        .footer-column p, .footer-links a, .contact-info li { color:#cfcfcf; font-size:0.95rem; line-height:1.5; }
-        .footer-links { list-style:none; padding:0; }
-        .footer-links li { margin-bottom:8px; }
-        .footer-links a { color:#cfcfcf; text-decoration:none; }
-        .copyright { text-align:center; color:#bfbfbf; font-size:0.9rem; padding-top:12px; border-top:1px solid rgba(255,255,255,0.04); }
-
-        /* ===========================
-           Responsive tweaks
-           =========================== */
-        @media (max-width: 992px){
-            .hero h1 { font-size:clamp(1.8rem,6vw,2.8rem); }
-            .product-card { width:300px; }
-            .product-image { height:360px; flex:0 0 360px; }
-        }
-        @media (max-width: 768px){
-            .nav-links { display:none; }
-            .ms_booking { display:none; }
-            .mobile-menu { display:block; }
-            .product-card { width:280px; }
-            .product-image { height:320px; flex:0 0 320px; }
-            .team-image { height:260px; }
-        }
-        @media (max-width: 480px){
-            .container { width:95%; padding:0 16px; }
-            .product-card { width:300px; margin:0 auto; }
-            .product-image { height:320px; flex:0 0 320px; }
-            .home-care-scroll { gap:18px; padding:22px 0; }
-            .section { padding:36px 0; }
-        }
-
-        /* Improve touch performance: avoid heavy shadows on touch devices */
-        @media (hover: none) {
-            .service-card:hover, .product-card:hover, .team-card:hover { transform:none; box-shadow: 0 10px 20px rgba(0,0,0,0.04); }
-        }
-    </style>
+/* Touch devices: reduce heavy hover shadows */
+@media (hover:none){
+  .service-card:hover,.product-card:hover,.team-card:hover{transform:none;box-shadow:0 10px 20px rgba(0,0,0,0.04)}
+}
+</style>
 </head>
 <body>
-    <!-- HEADER -->
-    <header id="header">
-        <div class="container">
-            <nav class="navbar">
-                <a href="#" class="logo">Lumi<span>ère</span></a>
-                <ul class="nav-links">
-                    <li><a href="#home">Главная</a></li>
-                    <li><a href="#services">Услуги</a></li>
-                    <li><a href="#portfolio">Портфолио</a></li>
-                    <li><a href="#home-care">Домашний уход</a></li>
-                    <li><a href="#team">Мастер</a></li>
-                    <li><a href="#contact">Контакты</a></li>
-                </ul>
-                <a href="#" class="ms_booking" data-yclients-widget>Записаться</a>
-                <button class="mobile-menu" id="mobileMenu" aria-label="Открыть меню"><i class="fas fa-bars"></i></button>
-            </nav>
-        </div>
-    </header>
 
-    <!-- MOBILE NAV (simple) -->
-    <div class="mobile-nav" id="mobileNav" style="display:none; position:fixed; top:0; right:0; width:80%; max-width:320px; height:100vh; background:white; z-index:2000; padding:80px 20px; box-shadow:-10px 0 30px rgba(0,0,0,0.08);">
-        <button id="closeMobileNav" style="position:absolute; top:18px; right:18px; background:none; border:0; font-size:22px;"><i class="fas fa-times"></i></button>
-        <ul style="list-style:none; display:flex; flex-direction:column; gap:14px; padding:0; margin-top:12px;">
-            <li><a href="#home" style="text-decoration:none; color:var(--dark); font-weight:600;">Главная</a></li>
-            <li><a href="#services" style="text-decoration:none; color:var(--dark); font-weight:600;">Услуги</a></li>
-            <li><a href="#portfolio" style="text-decoration:none; color:var(--dark); font-weight:600;">Портфолио</a></li>
-            <li><a href="#home-care" style="text-decoration:none; color:var(--dark); font-weight:600;">Домашний уход</a></li>
-            <li><a href="#team" style="text-decoration:none; color:var(--dark); font-weight:600;">Мастер</a></li>
-            <li><a href="#contact" style="text-decoration:none; color:var(--dark); font-weight:600;">Контакты</a></li>
-        </ul>
+<!-- HEADER -->
+<header id="header">
+  <div class="container">
+    <nav class="navbar">
+      <a href="#" class="logo">Lumi<span>ère</span></a>
+
+      <ul class="nav-links">
+        <li><a href="#home">Главная</a></li>
+        <li><a href="#services">Услуги</a></li>
+        <li><a href="#portfolio">Портфолио</a></li>
+        <li><a href="#home-care">Домашний уход</a></li>
+        <li><a href="#team">Мастер</a></li>
+        <li><a href="#contact">Контакты</a></li>
+      </ul>
+
+      <a href="#" class="ms_booking" data-yclients-widget>Записаться онлайн</a>
+
+      <button class="mobile-menu" id="mobileMenu" aria-label="Открыть меню"><i class="fas fa-bars"></i></button>
+    </nav>
+  </div>
+</header>
+
+<!-- Mobile nav (hidden by default) -->
+<div id="mobileNav" style="display:none;position:fixed;top:0;right:0;width:80%;max-width:320px;height:100vh;background:#fff;z-index:2000;padding:80px 18px;box-shadow:-10px 0 30px rgba(0,0,0,0.08)">
+  <button id="closeMobileNav" style="position:absolute;top:18px;right:18px;background:none;border:0;font-size:22px"><i class="fas fa-times"></i></button>
+  <ul style="list-style:none;display:flex;flex-direction:column;gap:14px;padding:0;margin-top:12px">
+    <li><a href="#home" style="text-decoration:none;color:var(--dark);font-weight:600">Главная</a></li>
+    <li><a href="#services" style="text-decoration:none;color:var(--dark);font-weight:600">Услуги</a></li>
+    <li><a href="#portfolio" style="text-decoration:none;color:var(--dark);font-weight:600">Портфолио</a></li>
+    <li><a href="#home-care" style="text-decoration:none;color:var(--dark);font-weight:600">Домашний уход</a></li>
+    <li><a href="#team" style="text-decoration:none;color:var(--dark);font-weight:600">Мастер</a></li>
+    <li><a href="#contact" style="text-decoration:none;color:var(--dark);font-weight:600">Контакты</a></li>
+  </ul>
+</div>
+<div id="mobileNavOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:1500"></div>
+
+<!-- HERO -->
+<section class="hero" id="home" aria-label="Главный">
+  <div class="container">
+    <div class="hero-content">
+      <h1>Искусство в каждой прядке</h1>
+      <p>Добро пожаловать в салон красоты Lumière, где мы создаем стиль, который подчеркивает вашу индивидуальность и красоту. Профессиональные мастера и премиальные продукты.</p>
+      <div class="hero-buttons">
+        <a href="#" class="ms_booking">Записаться онлайн</a>
+        <a href="#services" class="ms_booking" style="background:transparent;color:#fff;border:2px solid rgba(255,255,255,0.8)">Наши услуги</a>
+      </div>
     </div>
-    <div id="mobileNavOverlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:1500;"></div>
+  </div>
+</section>
 
-    <!-- HERO -->
-    <section class="hero" id="home" aria-label="Главный">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Искусство в каждой прядке</h1>
-                <p>Добро пожаловать в салон Lumière — профессиональные мастера, премиальные средства и индивидуальный подход.</p>
-                <div class="hero-buttons">
-                    <a href="#" class="ms_booking">Записаться</a>
-                    <a href="#services" class="ms_booking" style="background:transparent; color:white; border:2px solid rgba(255,255,255,0.8);">Наши услуги</a>
-                </div>
-            </div>
+<!-- SERVICES -->
+<section class="section" id="services" aria-label="Услуги">
+  <div class="container">
+    <div class="section-title"><h2>Наши услуги</h2><p>Профессиональные парикмахерские услуги премиум-класса</p></div>
+
+    <div class="services-grid">
+      <!-- Сложное окрашивание Airtouch | Шатуш -->
+      <div class="service-card">
+        <div class="service-content">
+          <h3>Сложное окрашивание Airtouch | Шатуш</h3>
+          <div class="service-duration"><i class="fas fa-clock"></i> 4 часа</div>
+          <p>Создание естественных плавных переходов цвета. Идеально для тех, кто хочет мягкое обновление образа.</p>
+          <div class="service-price">
+            от 15 000 ₽
+            <span class="price-range">Короткие: 15 000 ₽ • Средние: 16 500 ₽ • Длинные: 18 000 ₽</span>
+          </div>
         </div>
-    </section>
+      </div>
 
-    <!-- SERVICES -->
-    <section class="section" id="services" aria-label="Услуги">
-        <div class="container">
-            <div class="section-title"><h2>Наши услуги</h2><p>Премиальные парикмахерские услуги и уход</p></div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-content">
-                        <h3>Сложное окрашивание Airtouch | Шатуш</h3>
-                        <div class="service-duration"><i class="fas fa-clock" style="color:var(--primary)"></i> 4 часа</div>
-                        <p>Создание естественных плавных переходов цвета.</p>
-                        <div class="service-price">
-                            от 15 000 ₽
-                            <span class="price-range">Короткие: 15 000 ₽ • Средние: 16 500 ₽ • Длинные: 18 000 ₽</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-content">
-                        <h3>Total Blonde</h3>
-                        <div class="service-duration"><i class="fas fa-clock" style="color:var(--primary)"></i> 2.5–4 часа</div>
-                        <p>Осветление корня и тонирование длины с бережным отношением к волосам.</p>
-                        <div class="service-price">
-                            от 8 000 ₽
-                            <span class="price-range">Корень 1-2 см: 8 000–10 000 ₽ • от 2 см: 12 000–18 000 ₽</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-content">
-                        <h3>Тонирование</h3>
-                        <div class="service-duration"><i class="fas fa-clock" style="color:var(--primary)"></i> 1.5–2 часа</div>
-                        <p>Обновление оттенка, усиление блеска и сияния.</p>
-                        <div class="service-price">
-                            от 6 000 ₽
-                            <span class="price-range">Короткие: 6 000 ₽ • Средние: 7 500 ₽ • Длинные: 9 000 ₽</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-content">
-                        <h3>Стрижка</h3>
-                        <div class="service-duration"><i class="fas fa-clock" style="color:var(--primary)"></i> 1–1.5 часа</div>
-                        <p>Индивидуальная стрижка с учётом структуры волос и формы лица.</p>
-                        <div class="service-price">
-                            от 3 500 ₽
-                            <span class="price-range">Женская: 3 500 ₽ • Мужская: 2 500 ₽ • Детская: 2 000 ₽</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <!-- Total Blonde -->
+      <div class="service-card">
+        <div class="service-content">
+          <h3>Total Blonde</h3>
+          <div class="service-duration"><i class="fas fa-clock"></i> 2.5-4 часа</div>
+          <p>Осветление корня + тонирование длины. Идеальное блондирование с сохранением здоровья волос.</p>
+          <div class="service-price">
+            от 8 000 ₽
+            <span class="price-range">Корень 1-2 см: 8 000 - 10 000 ₽ • от 2 см: 12 000 - 18 000₽</span>
+          </div>
         </div>
-    </section>
+      </div>
 
-    <!-- PORTFOLIO -->
-    <section class="section portfolio-section" id="portfolio" aria-label="Портфолио">
-        <div class="container">
-            <div class="section-title"><h2>Наши работы</h2><p>Результаты, которыми мы гордимся</p></div>
-            <div class="portfolio-scroll" aria-hidden="false">
-                <div class="portfolio-item"><img src="cabelo-calor.gif" alt="окрашивание"></div>
-                <div class="portfolio-item"><img src="hair-flip-shiny-hair.webp" alt="стрижка"></div>
-                <div class="portfolio-item"><img src="7f8e7595-3b30-4909-a01d-07d615f11ffc-ezgif.com-video-to-gif-converter (1).gif" alt="укладка"></div>
-                <div class="portfolio-item"><img src="guy-long-hair.gif" alt="blond"></div>
-            </div>
+      <!-- Выход из чёрного -->
+      <div class="service-card">
+        <div class="service-content">
+          <h3>Выход из чёрного | тёмного</h3>
+          <div class="service-duration"><i class="fas fa-clock"></i> 7 часов</div>
+          <p>Бережный выход из темных оттенков без вреда для волос. Многоэтапная процедура с профессиональными средствами.</p>
+          <div class="service-price">18 000 – 22 000 ₽</div>
         </div>
-    </section>
+      </div>
 
-    <!-- HOME CARE -->
-    <section class="section home-care-section" id="home-care" aria-label="Домашний уход">
-        <div class="container">
-            <div class="section-title"><h2>Домашний уход</h2><p>Профессиональные средства для домашнего ухода</p></div>
-
-            <div class="home-care-scroll" id="homeCareScroll" tabindex="0" aria-label="Лента товаров">
-                <!-- Product 1 -->
-                <article class="product-card" aria-labelledby="p1">
-                    <div class="product-image"><img src="https://via.placeholder.com/350x420/f8f5f0/1a1a1a?text=Lebel+Care" alt=""></div>
-                    <div class="product-content">
-                        <h3 id="p1">Lebel "Счастье для волос"</h3>
-                        <div class="product-description"><p>Профессиональный уход для восстановления и увлажнения волос. Подходит для всех типов волос. Глубоко проникает в структуру волоса, восстанавливая повреждения и придавая здоровый блеск.</p></div>
-                        <div class="product-price">4 500 ₽</div>
-                    </div>
-                </article>
-
-                <!-- Product 2 -->
-                <article class="product-card" aria-labelledby="p2">
-                    <div class="product-image"><img src="https://via.placeholder.com/350x420/f8f5f0/1a1a1a?text=Kerastase" alt=""></div>
-                    <div class="product-content">
-                        <h3 id="p2">Kerastase Resistance</h3>
-                        <div class="product-description"><p>Восстанавливающая сыворотка для поврежденных волос. Восстанавливает структуру волоса, придаёт силу и защищает от ломкости.</p></div>
-                        <div class="product-price">3 800 ₽</div>
-                    </div>
-                </article>
-
-                <!-- Product 3 -->
-                <article class="product-card" aria-labelledby="p3">
-                    <div class="product-image"><img src="https://via.placeholder.com/350x420/f8f5f0/1a1a1a?text=Olaplex" alt=""></div>
-                    <div class="product-content">
-                        <h3 id="p3">Olaplex No.3</h3>
-                        <div class="product-description"><p>Восстановитель волос: возвращает силу и эластичность благодаря уникальной молекулярной технологии.</p></div>
-                        <div class="product-price">2 900 ₽</div>
-                    </div>
-                </article>
-
-                <!-- Product 4 -->
-                <article class="product-card" aria-labelledby="p4">
-                    <div class="product-image"><img src="https://via.placeholder.com/350x420/f8f5f0/1a1a1a?text=Moroccanoil" alt=""></div>
-                    <div class="product-content">
-                        <h3 id="p4">Moroccanoil Treatment</h3>
-                        <div class="product-description"><p>Аргановое масло для питания, блеска и защиты волос. Идеально для сухих и поврежденных волос.</p></div>
-                        <div class="product-price">3 200 ₽</div>
-                    </div>
-                </article>
-
-                <!-- Product 5 -->
-                <article class="product-card" aria-labelledby="p5">
-                    <div class="product-image"><img src="https://via.placeholder.com/350x420/f8f5f0/1a1a1a?text=Redken" alt=""></div>
-                    <div class="product-content">
-                        <h3 id="p5">Redken Acidic Bonding</h3>
-                        <div class="product-description"><p>Интенсивный уход для сильно поврежденных волос, запечатывает кутикулу и укрепляет структуру.</p></div>
-                        <div class="product-price">4 100 ₽</div>
-                    </div>
-                </article>
-
-                <!-- Product 6 -->
-                <article class="product-card" aria-labelledby="p6">
-                    <div class="product-image"><img src="https://via.placeholder.com/350x420/f8f5f0/1a1a1a?text=Oribe" alt=""></div>
-                    <div class="product-content">
-                        <h3 id="p6">Oribe Gold Lust</h3>
-                        <div class="product-description"><p>Премиальный уход для восстановления и сияния волос, подходит для окрашенных волос.</p></div>
-                        <div class="product-price">5 600 ₽</div>
-                    </div>
-                </article>
-            </div>
+      <!-- Тонирование -->
+      <div class="service-card">
+        <div class="service-content">
+          <h3>Тонирование</h3>
+          <div class="service-duration"><i class="fas fa-clock"></i> 2 часа</div>
+          <p>Обновление цвета, нейтрализация нежелательных оттенков. Придание волосам блеска и насыщенности.</p>
+          <div class="service-price">
+            от 6 000 ₽
+            <span class="price-range">Короткие: 6 000 ₽ • Средние: 7 500 ₽ • Длинные: 9 000 ₽</span>
+          </div>
         </div>
-    </section>
+      </div>
 
-    <!-- TEAM -->
-    <section class="section team-section" id="team" aria-label="Мастер">
-        <div class="container">
-            <div class="section-title"><h2>Наш мастер</h2><p>Профессионал с богатым опытом и индивидуальным подходом</p></div>
-            <div class="team-grid">
-                <div class="team-card">
-                    <div class="team-image" role="img" aria-label="Юлия Абдрахманова"></div>
-                    <div class="team-info">
-                        <h3>Юлия Абдрахманова</h3>
-                        <span class="specialty">Топ-стилист и колорист</span>
-                        <p>Специализируется на сложных техниках окрашивания, стрижках и лечебных уходах.</p>
-                        <div class="social-links">
-                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                            <a href="#" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
-                            <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <!-- Окрашивание в один тон -->
+      <div class="service-card">
+        <div class="service-content">
+          <h3>Окрашивание в один тон</h3>
+          <div class="service-duration"><i class="fas fa-clock"></i> 2 часа</div>
+          <p>Равномерное окрашивание по всей длине. Подбор идеального оттенка с учетом вашего цветотипа.</p>
+          <div class="service-price">
+            от 5 000 ₽
+            <span class="price-range">Короткие: 5 000 ₽ • Средние: 6 500 ₽ • Длинные: 8 000 ₽</span>
+          </div>
         </div>
-    </section>
+      </div>
 
-    <!-- MAP / CONTACTS -->
-    <section class="section" id="map" aria-label="Контакты">
-        <div class="container">
-            <div class="section-title"><h2>Как нас найти</h2><p>Центр Санкт-Петербурга</p></div>
-            <div style="border-radius:12px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.06);">
-                <iframe src="https://yandex.com/web-maps/2/saint-petersburg/?azimuth=6.240063619259528&l=masstransit&ll=30.385074%2C59.926586&mode=poi&poi%5Bpoint%5D=30.385000%2C59.926531&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D87088919361&tilt=0.552121134491067&z=18"
-                        style="width:100%; height:420px; border:0;" allowfullscreen loading="lazy"></iframe>
-            </div>
+      <!-- Стрижка -->
+      <div class="service-card">
+        <div class="service-content">
+          <h3>Стрижка</h3>
+          <div class="service-duration"><i class="fas fa-clock"></i> 1.5 часа</div>
+          <p>Создание идеальной формы с учетом структуры волос и типа лица. Подбор стрижки под ваш образ жизни.</p>
+          <div class="service-price">
+            от 3 500 ₽
+            <span class="price-range">Женская: 3 500 ₽ • Мужская: 2 500 ₽ • Детская: 2 000 ₽</span>
+          </div>
         </div>
-    </section>
+      </div>
 
-    <!-- FOOTER -->
-    <footer id="contact" aria-label="Футер">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Lumière</h3>
-                    <p>Салон красоты премиум-класса, где мы создаём индивидуальные образы и заботимся о здоровье волос.</p>
-                </div>
-                <div class="footer-column">
-                    <h3>Контакты</h3>
-                    <ul class="contact-info" style="list-style:none; padding:0;">
-                        <li style="margin-bottom:8px;"><i class="fas fa-map-marker-alt" style="color:var(--primary); margin-right:8px;"></i>г. Санкт-Петербург, ул. Александра Невского, 12</li>
-                        <li style="margin-bottom:8px;"><i class="fas fa-phone" style="color:var(--primary); margin-right:8px;"></i>+7 (912) 352-77-20</li>
-                        <li style="margin-bottom:8px;"><i class="fas fa-envelope" style="color:var(--primary); margin-right:8px;"></i>info@lumiere-salon.ru</li>
-                        <li style="margin-bottom:8px;"><i class="fas fa-clock" style="color:var(--primary); margin-right:8px;"></i>Пн–Вс: 9:00–21:00</li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Быстрые ссылки</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Главная</a></li>
-                        <li><a href="#services">Услуги</a></li>
-                        <li><a href="#portfolio">Портфолио</a></li>
-                        <li><a href="#home-care">Домашний уход</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="copyright">&copy; 2025 Lumière. Все права защищены.</div>
+      <!-- Кератиновое выпрямление -->
+      <div class="service-card">
+        <div class="service-content">
+          <h3>Кератиновое выпрямление</h3>
+          <div class="service-duration"><i class="fas fa-clock"></i> 3 часа</div>
+          <p>Восстановление структуры волос, выпрямление и защита от влажности. Эффект до 4 месяцев.</p>
+          <div class="service-price">
+            от 8 000 ₽
+            <span class="price-range">Короткие: 8 000 ₽ • Средние: 10 000 ₽ • Длинные: 12 000 ₽</span>
+          </div>
         </div>
-    </footer>
+      </div>
 
-    <!-- SCRIPTS -->
-    <script>
-        // Mobile nav
-        const mobileMenuBtn = document.getElementById('mobileMenu');
-        const mobileNav = document.getElementById('mobileNav');
-        const mobileNavOverlay = document.getElementById('mobileNavOverlay');
-        const closeMobileNavBtn = document.getElementById('closeMobileNav');
+      <!-- Уход Olaplex -->
+      <div class="service-card">
+        <div class="service-content">
+          <h3>Уход Olaplex</h3>
+          <div class="service-duration"><i class="fas fa-clock"></i> 30 минут</div>
+          <p>Восстановление поврежденных волос на молекулярном уровне. Устранение ломкости и сечения.</p>
+          <div class="service-price">3 000 ₽</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        function openMobileNav(){
-            mobileNav.style.display = 'block';
-            mobileNavOverlay.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
-        function closeMobileNav(){
-            mobileNav.style.display = 'none';
-            mobileNavOverlay.style.display = 'none';
-            document.body.style.overflow = '';
-        }
+<!-- PORTFOLIO -->
+<section class="section portfolio-section" id="portfolio" aria-label="Портфолио">
+  <div class="container">
+    <div class="section-title"><h2>Наши работы</h2><p>Результаты, которые говорят сами за себя</p></div>
+    <div class="portfolio-scroll" id="portfolioScroll" aria-hidden="false">
+      <div class="portfolio-item"><img src="cabelo-calor.gif" alt="Процесс окрашивания"></div>
+      <div class="portfolio-item"><img src="hair-flip-shiny-hair.webp" alt="Процесс стрижки"></div>
+      <div class="portfolio-item"><img src="7f8e7595-3b30-4909-a01d-07d615f11ffc-ezgif.com-video-to-gif-converter (1).gif" alt="Создание укладки"></div>
+      <div class="portfolio-item"><img src="guy-long-hair.gif" alt="Blond"></div>
+      <div class="portfolio-item"><img src="cabelo-calor.gif" alt="Дополнительная работа"></div>
+    </div>
+  </div>
+</section>
 
-        if(mobileMenuBtn){
-            mobileMenuBtn.addEventListener('click', openMobileNav);
-        }
-        if(closeMobileNavBtn){
-            closeMobileNavBtn.addEventListener('click', closeMobileNav);
-        }
-        if(mobileNavOverlay){
-            mobileNavOverlay.addEventListener('click', closeMobileNav);
-        }
+<!-- HOME CARE -->
+<section class="section home-care-section" id="home-care" aria-label="Домашний уход">
+  <div class="container">
+    <div class="section-title"><h2>Домашний уход</h2><p>Профессиональные средства для ухода за волосами в домашних условиях</p></div>
 
-        // Smooth anchor scroll adjusted for fixed header
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e){
-                const href = this.getAttribute('href');
-                if(href === '#' || href === '') return;
-                const target = document.querySelector(href);
-                if(target){
-                    e.preventDefault();
-                    const headerHeight = document.getElementById('header').offsetHeight;
-                    const top = target.offsetTop - headerHeight - 8;
-                    window.scrollTo({ top, behavior:'smooth' });
-                    // close mobile nav on selection
-                    closeMobileNav();
-                }
-            });
-        });
+    <div class="home-care-scroll" id="homeCareScroll" tabindex="0" aria-label="Лента товаров">
+      <!-- Продукт 1 -->
+      <article class="product-card" aria-labelledby="p1">
+        <div class="product-image"><img src="https://via.placeholder.com/320x420/f8f5f0/1a1a1a?text=Lebel+Care" alt="Lebel Care"></div>
+        <div class="product-content">
+          <h3 id="p1">Lebel "Счастье для волос"</h3>
+          <div class="product-description"><p>Профессиональный уход для восстановления и увлажнения волос. Подходит для всех типов волос. Глубоко проникает в структуру волоса, восстанавливая повреждения и придавая здоровый блеск.</p></div>
+          <div class="product-price">4 500 ₽</div>
+        </div>
+      </article>
 
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('header');
-            if(window.scrollY > 80) header.classList.add('scrolled'); else header.classList.remove('scrolled');
-        });
+      <!-- Продукт 2 -->
+      <article class="product-card" aria-labelledby="p2">
+        <div class="product-image"><img src="https://via.placeholder.com/320x420/f8f5f0/1a1a1a?text=Kerastase" alt="Kerastase"></div>
+        <div class="product-content">
+          <h3 id="p2">Kerastase Resistance</h3>
+          <div class="product-description"><p>Восстанавливающая сыворотка для поврежденных волос. Восстанавливает структуру волоса. Содержит кератин и маточное молочко для интенсивного восстановления и защиты от дальнейших повреждений.</p></div>
+          <div class="product-price">3 800 ₽</div>
+        </div>
+      </article>
 
-        // Drag-to-scroll for home-care and portfolio: mouse + touch
-        function initDragScroll(selector){
-            const el = document.querySelector(selector);
-            if(!el) return;
-            let isDown = false, startX = 0, scrollLeft = 0;
-            // Mouse
-            el.addEventListener('mousedown', (e) => {
-                isDown = true;
-                el.classList.add('grabbing');
-                startX = e.pageX - el.offsetLeft;
-                scrollLeft = el.scrollLeft;
-                // prevent selecting text while dragging
-                el.style.userSelect = 'none';
-            });
-            document.addEventListener('mouseup', () => {
-                isDown = false;
-                el.classList.remove('grabbing');
-                el.style.userSelect = '';
-            });
-            el.addEventListener('mouseleave', () => {
-                isDown = false;
-                el.classList.remove('grabbing');
-                el.style.userSelect = '';
-            });
-            el.addEventListener('mousemove', (e) => {
-                if(!isDown) return;
-                e.preventDefault();
-                const x = e.pageX - el.offsetLeft;
-                const walk = (x - startX) * 1.6; // sensitivity
-                el.scrollLeft = scrollLeft - walk;
-            });
-            // Touch
-            let touchStartX = 0, touchScrollLeft = 0;
-            el.addEventListener('touchstart', (e) => {
-                if(e.touches.length !== 1) return;
-                touchStartX = e.touches[0].pageX - el.offsetLeft;
-                touchScrollLeft = el.scrollLeft;
-            }, {passive:true});
-            el.addEventListener('touchmove', (e) => {
-                if(e.touches.length !== 1) return;
-                const x = e.touches[0].pageX - el.offsetLeft;
-                const walk = (x - touchStartX) * 1.2;
-                el.scrollLeft = touchScrollLeft - walk;
-            }, {passive:true});
-        }
+      <!-- Продукт 3 -->
+      <article class="product-card" aria-labelledby="p3">
+        <div class="product-image"><img src="https://via.placeholder.com/320x420/f8f5f0/1a1a1a?text=Olaplex" alt="Olaplex"></div>
+        <div class="product-content">
+          <h3 id="p3">Olaplex No.3</h3>
+          <div class="product-description"><p>Восстановитель волос. Восстанавливает поврежденные связи в структуре волос. Революционная технология, которая работает на молекулярном уровне, возвращая волосам силу и эластичность.</p></div>
+          <div class="product-price">2 900 ₽</div>
+        </div>
+      </article>
 
-        initDragScroll('#homeCareScroll');
-        initDragScroll('.portfolio-scroll');
+      <!-- Продукт 4 -->
+      <article class="product-card" aria-labelledby="p4">
+        <div class="product-image"><img src="https://via.placeholder.com/320x420/f8f5f0/1a1a1a?text=Moroccanoil" alt="Moroccanoil"></div>
+        <div class="product-content">
+          <h3 id="p4">Moroccanoil Treatment</h3>
+          <div class="product-description"><p>Масло для волос с аргановым маслом. Придает блеск, увлажняет и защищает волосы. Уникальная формула с антиоксидантами и витаминами для комплексного ухода за волосами любого типа.</p></div>
+          <div class="product-price">3 200 ₽</div>
+        </div>
+      </article>
 
-        // Improve accessibility: allow horizontal scroll with keyboard for homeCare
-        const hc = document.getElementById('homeCareScroll');
-        if(hc){
-            hc.addEventListener('keydown', (e) => {
-                if(e.key === 'ArrowRight') { hc.scrollBy({left: 220, behavior:'smooth'}); }
-                if(e.key === 'ArrowLeft') { hc.scrollBy({left: -220, behavior:'smooth'}); }
-            });
-        }
-    </script>
+      <!-- Продукт 5 -->
+      <article class="product-card" aria-labelledby="p5">
+        <div class="product-image"><img src="https://via.placeholder.com/320x420/f8f5f0/1a1a1a?text=Redken" alt="Redken"></div>
+        <div class="product-content">
+          <h3 id="p5">Redken Acidic Bonding</h3>
+          <div class="product-description"><p>Концентрированный уход для сильно поврежденных волос. Восстанавливает и укрепляет. Кислотная формула запечатывает кутикулу, делая волосы гладкими и блестящими.</p></div>
+          <div class="product-price">4 100 ₽</div>
+        </div>
+      </article>
 
-    <!-- YCLIENTS WIDGET (если нужен) -->
-    <script type="text/javascript" src="https://w948450.yclients.com/widgetJS" charset="UTF-8"></script>
+      <!-- Продукт 6 -->
+      <article class="product-card" aria-labelledby="p6">
+        <div class="product-image"><img src="https://via.placeholder.com/320x420/f8f5f0/1a1a1a?text=Oribe" alt="Oribe"></div>
+        <div class="product-content">
+          <h3 id="p6">Oribe Gold Lust</h3>
+          <div class="product-description"><p>Премиальный уход для восстановления и блеска волос. Подходит для окрашенных волос. Роскошная формула с биопептидами и маслами для максимального восстановления и сияния.</p></div>
+          <div class="product-price">5 600 ₽</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="section team-section" id="team" aria-label="Мастер">
+  <div class="container">
+    <div class="section-title"><h2>Наш мастер</h2><p>Профессиональный стилист с многолетним опытом и любовью к своему делу</p></div>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-image" role="img" aria-label="Юлия Абдрахманова"></div>
+        <div class="team-info">
+          <h3>Юлия Абдрахманова</h3>
+          <span class="specialty">Топ-стилист и колорист</span>
+          <p>Специализация: сложное окрашивание, стрижки, уходовые процедуры. Опыт работы более 5 лет. Постоянно совершенствую свои навыки на международных мастер-классах.</p>
+          <div class="social-links">
+            <a href="https://www.instagram.com/julia.abdrakhmanova?igsh=MXQyeDNvZ2R1djhtZg%3D%3D&utm_source=qr" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://web.telegram.org/a/#1272181952" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+            <a href="https://api.whatsapp.com/send/?phone=89123527720&text&type=phone_number&app_absent=0" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section class="section" id="map" aria-label="Контакты">
+  <div class="container">
+    <div class="section-title"><h2>Как нас найти</h2><p>Мы находимся в центре Санкт-Петербурга</p></div>
+    <div style="border-radius:12px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.06);">
+      <iframe src="https://yandex.com/web-maps/2/saint-petersburg/?azimuth=6.240063619259528&l=masstransit&ll=30.385074%2C59.926586&mode=poi&poi%5Bpoint%5D=30.385000%2C59.926531&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D87088919361&tilt=0.552121134491067&z=18"
+              style="width:100%;height:420px;border:0;" allowfullscreen loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact" aria-label="Футер">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-column">
+        <h3>Lumière</h3>
+        <p>Салон красоты премиум-класса, где мы создаём индивидуальные образы и заботимся о здоровье волос.</p>
+      </div>
+
+      <div class="footer-column">
+        <h3>Контакты</h3>
+        <ul class="contact-info" style="list-style:none;padding:0">
+          <li style="margin-bottom:8px;"><i class="fas fa-map-marker-alt" style="color:var(--primary);margin-right:8px"></i>г. Санкт-Петербург, ул. Александра Невского, 12</li>
+          <li style="margin-bottom:8px;"><i class="fas fa-phone" style="color:var(--primary);margin-right:8px"></i>+7 (912) 352-77-20</li>
+          <li style="margin-bottom:8px;"><i class="fas fa-envelope" style="color:var(--primary);margin-right:8px"></i>info@lumiere-salon.ru</li>
+          <li style="margin-bottom:8px;"><i class="fas fa-clock" style="color:var(--primary);margin-right:8px"></i>Пн-Вс: 9:00 - 21:00</li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h3>Быстрые ссылки</h3>
+        <ul class="footer-links">
+          <li><a href="#home">Главная</a></li>
+          <li><a href="#services">Услуги</a></li>
+          <li><a href="#portfolio">Портфолио</a></li>
+          <li><a href="#home-care">Домашний уход</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="copyright">&copy; 2025 Lumière. Все права защищены.</div>
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script>
+/*
+  Улучшенный drag-to-scroll:
+  - Для мыши: pointer events (pointerdown / pointermove / pointerup) локально на контейнере (быстро, без document-level handlers)
+  - Для тача: НЕ блокируем — позволяем нативному скроллу работать (лучше UX + инерция)
+  - Поддержка стрелок клавиатуры для .home-care (если фокус)
+*/
+
+function initPointerDrag(selector){
+  const el = document.querySelector(selector);
+  if(!el) return;
+  let isDragging = false;
+  let startX = 0;
+  let scrollStart = 0;
+  // pointerdown: handle only mouse (so touch uses native scrolling)
+  el.addEventListener('pointerdown', (e) => {
+    // only start drag if pointer is mouse or pen — do not prevent touch (finger)
+    if(e.pointerType !== 'mouse' && e.pointerType !== 'pen') return;
+    isDragging = true;
+    startX = e.clientX;
+    scrollStart = el.scrollLeft;
+    el.setPointerCapture(e.pointerId);
+    el.classList.add('grabbing');
+    // prevent text selection while dragging
+    e.preventDefault();
+  });
+
+  el.addEventListener('pointermove', (e) => {
+    if(!isDragging) return;
+    // only process if this pointer was captured by el
+    const dx = e.clientX - startX;
+    // sensitivity multiplier
+    el.scrollLeft = scrollStart - dx * 1.6;
+  });
+
+  el.addEventListener('pointerup', (e) => {
+    if(!isDragging) return;
+    isDragging = false;
+    try { el.releasePointerCapture(e.pointerId); } catch(err) {}
+    el.classList.remove('grabbing');
+  });
+  el.addEventListener('pointercancel', () => {
+    isDragging = false;
+    el.classList.remove('grabbing');
+  });
+
+  // keyboard support: left/right arrows (if element focused)
+  el.addEventListener('keydown', (e) => {
+    if(e.key === 'ArrowRight'){ el.scrollBy({ left:220, behavior: 'smooth' }); }
+    if(e.key === 'ArrowLeft'){ el.scrollBy({ left:-220, behavior: 'smooth' }); }
+  });
+}
+
+// Инициализация для двух полос
+initPointerDrag('#homeCareScroll');
+initPointerDrag('#portfolioScroll');
+
+// Mobile nav
+const mobileMenuBtn = document.getElementById('mobileMenu');
+const mobileNav = document.getElementById('mobileNav');
+const mobileNavOverlay = document.getElementById('mobileNavOverlay');
+const closeMobileNavBtn = document.getElementById('closeMobileNav');
+
+function openMobileNav(){
+  if(mobileNav) mobileNav.style.display = 'block';
+  if(mobileNavOverlay) mobileNavOverlay.style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+function closeMobileNav(){
+  if(mobileNav) mobileNav.style.display = 'none';
+  if(mobileNavOverlay) mobileNavOverlay.style.display = 'none';
+  document.body.style.overflow = '';
+}
+if(mobileMenuBtn) mobileMenuBtn.addEventListener('click', openMobileNav);
+if(closeMobileNavBtn) closeMobileNavBtn.addEventListener('click', closeMobileNav);
+if(mobileNavOverlay) mobileNavOverlay.addEventListener('click', closeMobileNav);
+
+// Smooth anchor scroll adjusted for fixed header
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e){
+    const href = this.getAttribute('href');
+    if(!href || href === '#') return;
+    const target = document.querySelector(href);
+    if(target){
+      e.preventDefault();
+      const headerHeight = document.getElementById('header').offsetHeight || 0;
+      const top = target.offsetTop - headerHeight - 8;
+      window.scrollTo({ top, behavior: 'smooth' });
+      closeMobileNav();
+    }
+  });
+});
+
+// Header shadow on scroll
+window.addEventListener('scroll', () => {
+  const header = document.getElementById('header');
+  if(window.scrollY > 80) header.classList.add('scrolled'); else header.classList.remove('scrolled');
+});
+</script>
+
+<!-- YCLIENTS WIDGET (опционально) -->
+<script type="text/javascript" src="https://w948450.yclients.com/widgetJS" charset="UTF-8"></script>
 </body>
 </html>
