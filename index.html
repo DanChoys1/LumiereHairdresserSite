@@ -1136,6 +1136,44 @@
         text-align: center !important;
     }
 }
+
+/* --- ABSOLUTE FIX для мобильных карточек "Домашний уход" --- */
+.home-care-scroll .product-card {
+    display: flex !important;
+    flex-direction: column !important;
+    height: auto !important;
+    min-height: 0 !important;
+}
+
+.home-care-scroll .product-image {
+    height: auto !important;
+    max-height: 360px !important;
+}
+
+.home-care-scroll .product-content {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-grow: 1 !important;
+    height: auto !important;
+    min-height: 0 !important;
+}
+
+.home-care-scroll .product-description {
+    flex-grow: 1 !important;
+    overflow: visible !important;
+    max-height: none !important;
+    min-height: 0 !important;
+}
+
+.home-care-scroll .product-price {
+    margin-top: auto !important;
+    position: relative !important;
+    bottom: 0 !important;
+    text-align: center !important;
+    border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
+    background: white !important;
+    z-index: 1 !important;
+}
     </style>
 </head>
 <body>
