@@ -1099,6 +1099,43 @@
     margin-top: auto !important;
     position: static !important;
 }
+
+@media (max-width: 992px),
+(max-width: 768px),
+(max-width: 480px),
+(max-width: 360px) {
+    .product-card {
+        height: auto !important;
+        min-height: 0 !important;
+    }
+
+    .product-image {
+        height: auto !important;
+        max-height: 350px !important;
+    }
+
+    .product-content {
+        height: auto !important;
+        min-height: 0 !important;
+        flex-grow: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .product-description {
+        flex-grow: 1 !important;
+        overflow: visible !important;
+        max-height: none !important;
+    }
+
+    .product-price {
+        margin-top: auto !important;
+        position: relative !important;
+        bottom: 0 !important;
+        border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
+        text-align: center !important;
+    }
+}
     </style>
 </head>
 <body>
