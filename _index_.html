@@ -8,7 +8,6 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
 <style>
-/* Все стили остаются такими же как в предыдущей версии */
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
   --primary:#d4af37;
@@ -1028,9 +1027,15 @@ footer:before {
 <header id="header">
 <div class="container">
 <nav class="navbar">
-<a class="logo" href="#" id="siteLogo"></a>
+<a class="logo" href="#">Sono</span></a>
 <ul class="nav-links" id="navLinks">
-<!-- Navigation will be populated by JavaScript -->
+<li><a href="#home">Главная</a></li>
+<li><a href="#services">Услуги</a></li>
+<li><a href="#portfolio">Портфолио</a></li>
+<li><a href="#home-care">Домашний уход</a></li>
+<li><a href="#team">Мастер</a></li>
+<li><a href="#contact">Контакты</a></li>
+<li><a class="ms_booking" data-yclients-widget="" href="#">Записаться онлайн</a></li>
 </ul>
 <button class="mobile-menu" id="mobileMenu"><i class="fas fa-bars"></i></button>
 </nav>
@@ -1040,9 +1045,9 @@ footer:before {
 <section class="hero" id="home">
 <div class="container">
 <div class="hero-content">
-<h1 data-animate id="heroTitle"></h1>
-<p data-animate id="heroDescription"></p>
-<a class="ms_booking" data-yclients-widget="" href="#" style="display:inline-block !important; visibility:visible !important;" data-animate id="heroButton"></a>
+<h1 data-animate>Искусство в каждой прядке</h1>
+<p data-animate>Добро пожаловать в салон красоты Sono, где мы создаем стиль, который подчеркивает вашу индивидуальность и красоту.</p>
+<a class="ms_booking" data-yclients-widget="" href="#" style="display:inline-block !important; visibility:visible !important;" data-animate>Записаться онлайн</a>
 </div>
 </div>
 </section>
@@ -1062,11 +1067,58 @@ footer:before {
 <section class="section section-light" id="services">
 <div class="container">
 <div class="section-title" data-animate>
-<h2 id="servicesTitle"></h2>
-<p id="servicesDescription"></p>
+<h2>Наши услуги</h2>
+<p>Профессиональные услуги премиум-класса для вашей красоты</p>
 </div>
-<div class="services-grid" id="servicesGrid">
-<!-- Services will be populated by JavaScript -->
+<div class="services-grid">
+<div class="service-card" data-animate>
+<div class="service-content">
+<h3>Сложное окрашивание Airtouch | Шатуш</h3>
+<div class="service-duration"><i class="fas fa-clock"></i> 4 часа</div>
+<p>Создание естественных переходов цвета с учетом вашего стиля и индивидуальных особенностей.</p>
+<div class="service-price">от 15 000 ₽<span class="price-range">Короткие: 15 000 ₽ • Средние: 16 500 ₽ • Длинные: 18 000 ₽</span></div>
+</div>
+</div>
+<div class="service-card" data-animate>
+<div class="service-content">
+<h3>Стрижка и укладка</h3>
+<div class="service-duration"><i class="fas fa-clock"></i> 1.5 часа</div>
+<p>Профессиональная стрижка и укладка с учетом структуры волос и формы лица.</p>
+<div class="service-price">от 3 500 ₽</div>
+</div>
+</div>
+<div class="service-card" data-animate>
+<div class="service-content">
+<h3>Лечение и восстановление</h3>
+<div class="service-duration"><i class="fas fa-clock"></i> 2 часа</div>
+<p>Глубокое восстановление и лечение поврежденных волос профессиональными средствами.</p>
+<div class="service-price">от 5 000 ₽</div>
+</div>
+</div>
+<div class="service-card" data-animate>
+<div class="service-content">
+<h3>Уходовые процедуры</h3>
+<div class="service-duration"><i class="fas fa-clock"></i> 2.5 часа</div>
+<p>SPA-уход и профессиональные маски для здоровья и сияния ваших волос.</p>
+<div class="service-price">от 4 500 ₽</div>
+</div>
+</div>
+<div class="service-card" data-animate>
+<div class="service-content">
+<h3>Окрашивание в один тон</h3>
+<div class="service-duration"><i class="fas fa-clock"></i> 2.5 часа</div>
+<p>Качественное окрашивание с подбором идеального оттенка и уходом за волосами.</p>
+<div class="service-price">от 7 000 ₽</div>
+</div>
+</div>
+<div class="service-card" data-animate>
+<div class="service-content">
+<h3>Мелирование</h3>
+<div class="service-duration"><i class="fas fa-clock"></i> 3 часа</div>
+<p>Классическое мелирование для создания объема, яркости и многомерного цвета.</p>
+<div class="service-price">от 9 000 ₽</div>
+</div>
+</div>
 </div>
 </div>
 </section>
@@ -1082,11 +1134,30 @@ footer:before {
 <section class="section section-alt" id="portfolio">
 <div class="container">
 <div class="section-title" data-animate>
-<h2 id="portfolioTitle"></h2>
-<p id="portfolioDescription"></p>
+<h2>Наши работы</h2>
+<p>Вдохновляйтесь результатами нашего творчества</p>
 </div>
-<div class="portfolio-scroll" id="portfolioScroll">
-<!-- Portfolio items will be populated by JavaScript -->
+<div class="portfolio-scroll">
+<div class="portfolio-item" data-animate>
+<video muted="" playsinline="" preload="metadata">
+<source src="IMG_6538.MOV" type="video/mp4"/>
+</video>
+</div>
+<div class="portfolio-item" data-animate>
+<video muted="" playsinline="" preload="metadata">
+<source src="IMG_0376 (1).mov" type="video/mp4"/>
+</video>
+</div>
+<div class="portfolio-item" data-animate>
+<video muted="" playsinline="" preload="metadata">
+<source src="IMG_0822.MOV" type="video/mp4"/>
+</video>
+</div>
+<div class="portfolio-item" data-animate>
+<video muted="" playsinline="" preload="metadata">
+<source src="IMG_6537 (1).MOV" type="video/mp4"/>
+</video>
+</div>
 </div>
 </div>
 </section>
@@ -1104,11 +1175,42 @@ footer:before {
 <section class="section section-light" id="home-care">
 <div class="container">
 <div class="section-title" data-animate>
-<h2 id="homeCareTitle"></h2>
-<p id="homeCareDescription"></p>
+<h2>Домашний уход</h2>
+<p>Профессиональная косметика для ухода за волосами дома</p>
 </div>
-<div class="home-care-scroll" id="homeCareScroll">
-<!-- Products will be populated by JavaScript -->
+<div class="home-care-scroll">
+<div class="product-card" data-animate>
+<div class="product-image"><img alt="Lebel Care" src="1.webp"/></div>
+<div class="product-content">
+<h3>Многофункциональное молочко Davines all in one</h3>
+<div class="product-description"><p>Содержит масло аннато, провитамин B5 и функциональный аминокомплекс, который великолепно кондиционирует волосы, оставляя мягкими, защищает их от стресса и повреждений в результате термического воздействия.</p></div>
+<div class="product-price">5 000 ₽</div>
+</div>
+</div>
+<div class="product-card" data-animate>
+<div class="product-image"><img alt="Kérastase" src="2.webp"/></div>
+<div class="product-content">
+<h3>Масло для абсолютной красоты волос DAVINES oi oil absolute beautifying potion</h3>
+<div class="product-description"><p>Масло OI для абсолютной красоты волос питает локоны, создавая защитную пленку и придавая невероятный блеск.</p></div>
+<div class="product-price">4 000 ₽</div>
+</div>
+</div>
+<div class="product-card" data-animate>
+<div class="product-image"><img alt="Olaplex" src="3.webp"/></div>
+<div class="product-content">
+<h3>Шампунь для абсолютной красоты волос DAVINES oi absolute beautifying</h3>
+<div class="product-description"><p>Шампунь для абсолютной красоты OI деликатно очищает волосы и придает необычайную мягкость, блеск и объем.</p></div>
+<div class="product-price">4 100 ₽</div>
+</div>
+</div>
+<div class="product-card" data-animate>
+<div class="product-image"><img alt="Moroccanoil" src="4.webp"/></div>
+<div class="product-content">
+<h3>Кондиционер для абсолютной красоты волос DAVINES oi absolute</h3>
+<div class="product-description"><p>Содержит масло аннато (другое название — масло рукку) из растения, произрастающего в лесах Амазонии, а также кондиционирующее вещество, полученное из целлюлозы, придающее мягкость структуре волос.</p></div>
+<div class="product-price">4 100 ₽</div>
+</div>
+</div>
 </div>
 </div>
 </section>
@@ -1124,11 +1226,23 @@ footer:before {
 <section class="section section-alt" id="team">
 <div class="container">
 <div class="section-title" data-animate>
-<h2 id="teamTitle"></h2>
-<p id="teamDescription"></p>
+<h2>Наш мастер</h2>
+<p>Профессионал с любовью к своему делу</p>
 </div>
-<div class="team-grid" id="teamGrid">
-<!-- Team members will be populated by JavaScript -->
+<div class="team-grid">
+<div class="team-card" data-animate>
+<div class="team-image"></div>
+<div class="team-info">
+<h3>Юлия Абдрахманова</h3>
+<span class="specialty">Топ-стилист</span>
+<p>Сертифицированный специалист с 8-летним опытом работы в индустрии красоты. Прошла обучение у ведущих мировых брендов. Создает индивидуальные образы, подчеркивающие естественную красоту.</p>
+<div class="social-links">
+<a href="#"><i class="fab fa-instagram"></i></a>
+<a href="#"><i class="fab fa-telegram"></i></a>
+<a href="#"><i class="fab fa-whatsapp"></i></a>
+</div>
+</div>
+</div>
 </div>
 </div>
 </section>
@@ -1149,11 +1263,11 @@ footer:before {
 <section class="map-section" id="map">
   <div class="container">
     <div class="section-title" data-animate>
-      <h2 id="mapTitle"></h2>
-      <p id="mapDescription"></p>
+      <h2>Как нас найти</h2>
+      <p>Мы находимся в самом сердце Санкт-Петербурга</p>
     </div>
-    <div class="map-container" data-animate id="mapContainer">
-      <!-- Map iframe will be populated by JavaScript -->
+    <div class="map-container" data-animate>
+      <iframe src="https://yandex.ru/map-widget/v1/?l=masstransit&ll=30.385074%2C59.926586&mode=poi&poi%5Bpoint%5D=30.385000%2C59.926531&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D87088919361&z=17" width="100%" height="100%" frameborder="0" allowfullscreen="true"></iframe>
     </div>
   </div>
 </section>
@@ -1161,205 +1275,41 @@ footer:before {
 <!-- Footer -->
 <footer id="contact">
     <div class="container">
-        <div class="footer-content" id="footerContent">
-            <!-- Footer content will be populated by JavaScript -->
+        <div class="footer-content">
+            <div class="footer-column" data-animate>
+                <h3>Sono</h3>
+                <p>Салон красоты премиум-класса, где мы создаем стиль, который подчеркивает вашу индивидуальность и красоту. Пространство гармонии и эстетики.</p>
+            </div>
+            <div class="footer-column" data-animate>
+                <h3>Контакты</h3>
+                <ul class="contact-info">
+                    <li><i class="fas fa-map-marker-alt"></i> г. Санкт-Петербург, ул. Александра Невского, 12</li>
+                    <li><i class="fas fa-phone"></i> +7 (912) 352-77-20</li>
+                    <li><i class="fas fa-envelope"></i> info@sono-salon.ru</li>
+                    <li><i class="fas fa-clock"></i> Пн-Вс: 9:00 - 21:00</li>
+                </ul>
+            </div>
+            <div class="footer-column" data-animate>
+                <h3>Быстрые ссылки</h3>
+                <ul class="footer-links">
+                    <li><a href="#home">Главная</a></li>
+                    <li><a href="#services">Услуги</a></li>
+                    <li><a href="#portfolio">Портфолио</a></li>
+                    <li><a href="#home-care">Домашний уход</a></li>
+                    <li><a href="#team">Мастер</a></li>
+                    <li><a href="#map">Как нас найти</a></li>
+                </ul>
+            </div>
         </div>
         <div class="copyright">
-            <p id="copyrightText"></p>
+            <p>&copy; 2025 Sono. Все права защищены.</p>
         </div>
     </div>
 </footer>
 
 <script charset="UTF-8" src="https://w948450.yclients.com/widgetJS"></script>
 <script>
-// Load data from JSON and populate the website
-async function loadWebsiteData() {
-  try {
-    const response = await fetch('data.json');
-    const data = await response.json();
-    
-    // Set site title and favicon
-    document.title = data.site.title;
-    document.querySelector('link[rel="icon"]').href = data.site.favicon;
-    
-    // Populate header
-    document.getElementById('siteLogo').innerHTML = `${data.site.logo}<span>.</span>`;
-    populateNavigation(data.header);
-    
-    // Populate hero section
-    document.getElementById('heroTitle').textContent = data.hero.title;
-    document.getElementById('heroDescription').textContent = data.hero.description;
-    document.getElementById('heroButton').textContent = data.hero.button;
-    
-    // Populate services
-    document.getElementById('servicesTitle').textContent = data.services.title;
-    document.getElementById('servicesDescription').textContent = data.services.description;
-    populateServices(data.services.items);
-    
-    // Populate portfolio
-    document.getElementById('portfolioTitle').textContent = data.portfolio.title;
-    document.getElementById('portfolioDescription').textContent = data.portfolio.description;
-    populatePortfolio(data.portfolio.videos);
-    
-    // Populate home care
-    document.getElementById('homeCareTitle').textContent = data.homeCare.title;
-    document.getElementById('homeCareDescription').textContent = data.homeCare.description;
-    populateHomeCare(data.homeCare.products);
-    
-    // Populate team
-    document.getElementById('teamTitle').textContent = data.team.title;
-    document.getElementById('teamDescription').textContent = data.team.description;
-    populateTeam(data.team.members);
-    
-    // Populate map
-    document.getElementById('mapTitle').textContent = data.map.title;
-    document.getElementById('mapDescription').textContent = data.map.description;
-    document.getElementById('mapContainer').innerHTML = `<iframe src="${data.map.iframe}" width="100%" height="100%" frameborder="0" allowfullscreen="true"></iframe>`;
-    
-    // Populate footer
-    populateFooter(data.footer);
-    
-    // Initialize animations after content is loaded
-    initializeAnimations();
-    
-  } catch (error) {
-    console.error('Error loading website data:', error);
-  }
-}
-
-function populateNavigation(headerData) {
-  const navLinks = document.getElementById('navLinks');
-  
-  // Add regular navigation links
-  headerData.navLinks.forEach(link => {
-    const li = document.createElement('li');
-    li.innerHTML = `<a href="${link.href}">${link.name}</a>`;
-    navLinks.appendChild(li);
-  });
-  
-  // Add booking button as last item
-  const bookingLi = document.createElement('li');
-  bookingLi.innerHTML = `<a class="ms_booking" data-yclients-widget="" href="#">${headerData.bookingButton}</a>`;
-  navLinks.appendChild(bookingLi);
-}
-
-function populateServices(services) {
-  const servicesGrid = document.getElementById('servicesGrid');
-  
-  services.forEach(service => {
-    const serviceCard = document.createElement('div');
-    serviceCard.className = 'service-card';
-    serviceCard.setAttribute('data-animate', '');
-    
-    serviceCard.innerHTML = `
-      <div class="service-content">
-        <h3>${service.title}</h3>
-        <div class="service-duration"><i class="fas fa-clock"></i> ${service.duration}</div>
-        <p>${service.description}</p>
-        <div class="service-price">${service.price}${service.priceRange ? `<span class="price-range">${service.priceRange}</span>` : ''}</div>
-      </div>
-    `;
-    
-    servicesGrid.appendChild(serviceCard);
-  });
-}
-
-function populatePortfolio(videos) {
-  const portfolioScroll = document.getElementById('portfolioScroll');
-  
-  videos.forEach(video => {
-    const portfolioItem = document.createElement('div');
-    portfolioItem.className = 'portfolio-item';
-    portfolioItem.setAttribute('data-animate', '');
-    
-    portfolioItem.innerHTML = `
-      <video muted playsinline preload="metadata">
-        <source src="${video.src}" type="${video.type}"/>
-      </video>
-    `;
-    
-    portfolioScroll.appendChild(portfolioItem);
-  });
-}
-
-function populateHomeCare(products) {
-  const homeCareScroll = document.getElementById('homeCareScroll');
-  
-  products.forEach(product => {
-    const productCard = document.createElement('div');
-    productCard.className = 'product-card';
-    productCard.setAttribute('data-animate', '');
-    
-    productCard.innerHTML = `
-      <div class="product-image"><img alt="${product.alt}" src="${product.image}"/></div>
-      <div class="product-content">
-        <h3>${product.title}</h3>
-        <div class="product-description"><p>${product.description}</p></div>
-        <div class="product-price">${product.price}</div>
-      </div>
-    `;
-    
-    homeCareScroll.appendChild(productCard);
-  });
-}
-
-function populateTeam(members) {
-  const teamGrid = document.getElementById('teamGrid');
-  
-  members.forEach(member => {
-    const teamCard = document.createElement('div');
-    teamCard.className = 'team-card';
-    teamCard.setAttribute('data-animate', '');
-    
-    teamCard.innerHTML = `
-      <div class="team-image"></div>
-      <div class="team-info">
-        <h3>${member.name}</h3>
-        <span class="specialty">${member.specialty}</span>
-        <p>${member.description}</p>
-        <div class="social-links">
-          ${member.socialLinks.map(social => 
-            `<a href="${social.href}"><i class="${social.icon}"></i></a>`
-          ).join('')}
-        </div>
-      </div>
-    `;
-    
-    teamGrid.appendChild(teamCard);
-  });
-}
-
-function populateFooter(footerData) {
-  const footerContent = document.getElementById('footerContent');
-  
-  footerContent.innerHTML = `
-    <div class="footer-column" data-animate>
-      <h3>${footerData.company.name}</h3>
-      <p>${footerData.company.description}</p>
-    </div>
-    <div class="footer-column" data-animate>
-      <h3>Контакты</h3>
-      <ul class="contact-info">
-        <li><i class="fas fa-map-marker-alt"></i> ${footerData.contacts.address}</li>
-        <li><i class="fas fa-phone"></i> ${footerData.contacts.phone}</li>
-        <li><i class="fas fa-envelope"></i> ${footerData.contacts.email}</li>
-        <li><i class="fas fa-clock"></i> ${footerData.contacts.hours}</li>
-      </ul>
-    </div>
-    <div class="footer-column" data-animate>
-      <h3>Быстрые ссылки</h3>
-      <ul class="footer-links">
-        ${footerData.links.map(link => 
-          `<li><a href="${link.href}">${link.name}</a></li>`
-        ).join('')}
-      </ul>
-    </div>
-  `;
-  
-  document.getElementById('copyrightText').innerHTML = footerData.copyright;
-}
-
-function initializeAnimations() {
+(function(){
   // Mobile menu functionality
   const mobileMenu = document.getElementById('mobileMenu');
   const navLinks = document.getElementById('navLinks');
@@ -1465,10 +1415,7 @@ function initializeAnimations() {
       }
     });
   });
-}
-
-// Initialize the website when DOM is loaded
-document.addEventListener('DOMContentLoaded', loadWebsiteData);
+})();
 </script>
 </body>
 </html>
