@@ -201,7 +201,7 @@
         "description": "Сертифицированный специалист с 8-летним опытом работы в индустрии красоты. Прошла обучение у ведущих мировых брендов. Создает индивидуальные образы, подчеркивающие естественную красоту.",
         "socialLinks": [
           {"icon": "fab fa-instagram", "href": "#"},
-          {"icon": "fab fa-telegram", "href": "#"},
+          {"icon": "fab fa-telegram", "href": "https://web.telegram.org/k/#@juli_makee"},
           {"icon": "fab fa-whatsapp", "href": "#"}
         ]
       }
