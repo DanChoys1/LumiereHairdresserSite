@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Lumière - Салон красоты премиум-класса</title>
+<link href="c63635fba1eb11f0a547b62e65e43737_1.jpg" rel="icon"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --primary:#d4af37;
+  --primary-dark:#b8941f;
+  --dark:#1a1a1a;
+  --light:#f8f5f0;
+  --gray:#8a8a8a;
+  --transition: all 0.3s ease;
+}
+body{
+  font-family:'Inter',sans-serif;
+  color:var(--dark);
+  background:var(--light);
+  line-height:1.6;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4,h5{font-family:'Playfair Display',serif;font-weight:600}
+.container{width:90%;max-width:1200px;margin:0 auto;padding:0 20px}
+
+/* ---------------- HEADER ---------------- */
+header{
+  position:fixed;top:0;left:0;width:100%;z-index:1000;
+  background:rgba(255,255,255,0.96);backdrop-filter:blur(8px);
+  padding:18px 0;transition:var(--transition)
+}
+header.scrolled{box-shadow:0 6px 24px rgba(0,0,0,0.08);padding:14px 0}
+.navbar{display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:'Playfair Display';font-size:26px;color:var(--dark);text-decoration:none;font-weight:700;display:flex;gap:6px;align-items:center}
+.logo span{color:var(--primary)}
+.nav-links{display:flex;list-style:none;gap:24px;align-items:center}
+.nav-links a{color:var(--dark);text-decoration:none;font-weight:500;font-size:15px;position:relative}
+.nav-links a:after{content:'';position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--primary);transition:var(--transition)}
+.nav-links a:hover:after{width:100%}
+.ms_booking{background:var(--primary);color:#fff;padding:10px 20px;border-radius:30px;text-decoration:none;font-weight:700;display:inline-block;white-space:nowrap}
+.ms_booking:hover{background:var(--primary-dark);transform:translateY(-3px)}
+.mobile-menu{display:none;background:none;border:0;font-size:22px;cursor:pointer;color:var(--dark)}
+
+/* ---------------- HERO ---------------- */
+.hero{
+  height:100vh;
+  display:flex;align-items:center;
+  background:linear-gradient(135deg, rgba(26,26,26,0.75), rgba(26,26,26,0.45)),
+  url('eebebd35a1d711f0988e4ec14a599804_1.jpg') center/cover no-repeat;
+  color:#fff;
+}
+.hero-content{max-width:680px;z-index:2}
+.hero h1{font-size:clamp(2.2rem,5vw,3.6rem);margin-bottom:18px;line-height:1.05;text-shadow:0 0 18px rgba(212,175,55,0.25)}
+.hero p{font-size:clamp(1rem,2.2vw,1.15rem);color:rgba(255,255,255,0.92);margin-bottom:28px}
+.hero .ms_booking{background:var(--primary);border:none;color:#fff;padding:14px 28px;font-size:1.1rem;border-radius:30px}
+
+/* ---------------- SECTIONS ---------------- */
+.section{padding:clamp(48px,6vw,90px) 0}
+.section-title{text-align:center;margin-bottom:clamp(24px,4vw,48px)}
+.section-title h2{font-size:clamp(1.6rem,4vw,2.4rem);display:inline-block;position:relative}
+.section-title h2:after{content:'';position:absolute;left:50%;transform:translateX(-50%);bottom:-12px;width:80px;height:3px;background:var(--primary)}
+.section-title p{color:var(--gray);margin-top:10px;max-width:700px;margin:auto}
+
+/* ---------------- SERVICES ---------------- */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:24px}
+.service-card{background:#fff;border-radius:14px;padding:24px;box-shadow:0 12px 30px rgba(0,0,0,0.06);display:flex;flex-direction:column}
+.service-content{display:flex;flex-direction:column;flex:1}
+.service-content h3{margin-bottom:8px;font-size:1.15rem;color:var(--dark)}
+.service-duration{color:var(--gray);font-size:0.95rem;margin-bottom:10px;display:flex;gap:8px;align-items:center}
+.service-duration i{color:var(--primary)}
+.service-content p{color:var(--gray);margin-bottom:12px;flex-grow:1}
+.service-price{color:var(--primary);font-weight:700;text-align:center;margin-top:auto;padding-top:12px;border-top:1px solid rgba(0,0,0,0.04);font-size:1.05rem}
+.price-range{display:block;color:var(--gray);font-size:0.9rem;margin-top:6px;font-weight:400}
+
+/* ---------------- PORTFOLIO ---------------- */
+.portfolio-scroll{display:flex;gap:18px;overflow-x:auto;padding:12px 0;-webkit-overflow-scrolling:touch;scroll-behavior:smooth}
+.portfolio-scroll::-webkit-scrollbar{height:8px}
+.portfolio-scroll::-webkit-scrollbar-thumb{background:var(--primary);border-radius:6px}
+.portfolio-item{min-width:280px;height:360px;border-radius:12px;overflow:hidden;flex-shrink:0;position:relative;box-shadow:0 10px 30px rgba(0,0,0,0.06)}
+.portfolio-item video{width:100%;height:100%;object-fit:cover;display:block;transition:opacity 0.3s}
+
+
+/* ---------------- HOME CARE ---------------- */
+.home-care-scroll{display:flex;gap:22px;overflow-x:auto;padding:18px 0;-webkit-overflow-scrolling:touch;scroll-behavior:smooth}
+.home-care-scroll::-webkit-scrollbar{height:8px}
+.home-care-scroll::-webkit-scrollbar-thumb{background:var(--primary);border-radius:6px}
+.product-card{width:350px;flex:0 0 auto;background:#fff;border-radius:14px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 12px 32px rgba(0,0,0,0.06);transition:var(--transition)}
+.product-card:hover{transform:translateY(-6px)}
+.product-image{flex:0 0 420px;height:420px;background:#f8f5f0;overflow:hidden}
+.product-image img{width:100%;height:100%;object-fit:cover;display:block;transition:var(--transition)}
+.product-card:hover .product-image img{transform:scale(1.05)}
+.product-content{padding:20px;display:flex;flex-direction:column;flex:1 1 auto;min-height:0}
+.product-description{color:var(--gray);font-size:0.98rem;flex:1;margin-bottom:10px}
+.product-price{color:var(--primary);font-weight:700;font-size:1.25rem;text-align:center;margin-top:auto;padding-top:12px;border-top:1px solid rgba(0,0,0,0.04);background:#fff}
+
+/* ---------------- TEAM ---------------- */
+.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;align-items:start;justify-items:center}
+.team-card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 12px 30px rgba(0,0,0,0.06);display:flex;flex-direction:column;width:100%;max-width:420px;align-self:start}
+.team-image{height:320px;background:url('fa729392-cd15-468b-8839-547d0e1f800b.jpg') center/cover no-repeat}
+.team-info{padding:20px;text-align:center}
+.team-info h3{font-size:1.25rem;margin-bottom:6px}
+.team-info .specialty{color:var(--primary);display:block;margin-bottom:10px;font-weight:600}
+.social-links{display:flex;justify-content:center;gap:14px}
+.social-links a{color:var(--dark);font-size:1.2rem;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(212,175,55,0.06);transition:var(--transition)}
+.social-links a:hover{background:var(--primary);color:#fff}
+
+/* ---------------- FOOTER ---------------- */
+footer{background:var(--dark);color:#fff;padding:48px 0 28px}
+.footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;margin-bottom:24px}
+.footer-links{list-style:none;padding:0}
+.footer-links a{color:#ccc;text-decoration:none}
+.footer-links a:hover{color:#fff}
+.copyright{text-align:center;color:#bfbfbf;font-size:0.9rem;padding-top:12px;border-top:1px solid rgba(255,255,255,0.04)}
+
+/* ---------------- RESPONSIVE ---------------- */
+@media (max-width:992px){
+  .product-card{width:300px}
+  .product-image{height:360px}
+}
+@media (max-width:768px){
+  .mobile-menu{display:block}
+  .nav-links{display:none}
+}
+
+
+/* FIX: pin service prices to bottom */
+.service-card { display: flex; flex-direction: column; }
+.service-content { display: flex; flex-direction: column; flex: 1; }
+.service-price { margin-top: auto; }
+
+/* Ensure smooth native scrolling on touch */
+.home-care-scroll, .portfolio-scroll {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Portfolio video displayed with poster until play */
+.portfolio-item { position: relative; overflow: hidden; }
+.portfolio-item video { width:100%; height:100%; object-fit:cover; display:block; }
+</style>
+</head>
+<body>
+<header id="header">
+<div class="container">
+<nav class="navbar">
+<a class="logo" href="#">Lumi<span>ère</span></a>
+<ul class="nav-links">
+<li><a href="#home">Главная</a></li>
+<li><a href="#services">Услуги</a></li>
+<li><a href="#portfolio">Портфолио</a></li>
+<li><a href="#home-care">Домашний уход</a></li>
+<li><a href="#team">Мастер</a></li>
+<li><a href="#contact">Контакты</a></li>
+</ul>
+<a class="ms_booking" data-yclients-widget="" href="#">Записаться онлайн</a>
+<button class="mobile-menu" id="mobileMenu"><i class="fas fa-bars"></i></button>
+</nav>
+</div>
+</header>
+<section class="hero" id="home">
+<div class="container">
+<div class="hero-content">
+<h1>Искусство в каждой прядке</h1>
+<p>Добро пожаловать в салон красоты Lumière, где мы создаем стиль, который подчеркивает вашу индивидуальность и красоту.</p>
+<a class="ms_booking" data-yclients-widget="" href="#" style=";display:inline-block !important; visibility:visible !important;">Записаться онлайн</a>
+</div>
+</div>
+</section>
+<section class="section" id="services">
+<div class="container">
+<div class="section-title"><h2>Наши услуги</h2></div>
+<div class="services-grid">
+<div class="service-card">
+<div class="service-content">
+<h3>Сложное окрашивание Airtouch | Шатуш</h3>
+<div class="service-duration"><i class="fas fa-clock"></i> 4 часа</div>
+<p>Создание естественных переходов цвета с учетом вашего стиля.</p>
+<div class="service-price">от 15 000 ₽<span class="price-range">Короткие: 15 000 ₽ • Средние: 16 500 ₽ • Длинные: 18 000 ₽</span></div>
+</div>
+</div>
+<div class="service-card">
+<div class="service-content">
+<h3>Стрижка и укладка</h3>
+<div class="service-duration"><i class="fas fa-clock"></i> 1.5 часа</div>
+<p>Профессиональная стрижка и укладка с учетом структуры волос.</p>
+<div class="service-price">от 3 500 ₽</div>
+</div>
+</div>
+<div class="service-card">
+<div class="service-content">
+<h3>Лечение и восстановление</h3>
+<div class="service-duration"><i class="fas fa-clock"></i> 2 часа</div>
+<p>Глубокое восстановление и лечение поврежденных волос.</p>
+<div class="service-price">от 5 000 ₽</div>
+</div>
+</div>
+<div class="service-card">
+<div class="service-content">
+<h3>Уходовые процедуры</h3>
+<div class="service-duration"><i class="fas fa-clock"></i> 2.5 часа</div>
+<p>SPA-уход и профессиональные маски для здоровья волос.</p>
+<div class="service-price">от 4 500 ₽</div>
+</div>
+</div>
+<div class="service-card">
+<div class="service-content">
+<h3>Окрашивание в один тон</h3>
+<div class="service-duration"><i class="fas fa-clock"></i> 2.5 часа</div>
+<p>Качественное окрашивание с подбором идеального оттенка.</p>
+<div class="service-price">от 7 000 ₽</div>
+</div>
+</div>
+<div class="service-card">
+<div class="service-content">
+<h3>Мелирование</h3>
+<div class="service-duration"><i class="fas fa-clock"></i> 3 часа</div>
+<p>Классическое мелирование для создания объема и яркости.</p>
+<div class="service-price">от 9 000 ₽</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="section" id="portfolio">
+<div class="container">
+<div class="section-title"><h2>Наши работы</h2></div>
+<div class="portfolio-scroll">
+<div class="portfolio-item">
+<video muted="" playsinline="" poster="eebebd35a1d711f0988e4ec14a599804_1.jpg" preload="metadata">
+<source src="IMG_6538.MOV" type="video/mp4"/>
+</video>
+</div>
+<div class="portfolio-item">
+<video muted="" playsinline="" poster="preview2.jpg" preload="metadata">
+<source src="work2.mp4" type="video/mp4"/>
+</video>
+</div>
+<div class="portfolio-item">
+<video muted="" playsinline="" poster="preview3.jpg" preload="metadata">
+<source src="work3.mp4" type="video/mp4"/>
+</video>
+</div>
+<div class="portfolio-item">
+<video muted="" playsinline="" poster="preview4.jpg" preload="metadata">
+<source src="work4.mp4" type="video/mp4"/>
+</video>
+</div>
+</div>
+</div>
+</section>
+<section class="section" id="home-care">
+<div class="container">
+<div class="section-title"><h2>Домашний уход</h2></div>
+<div class="home-care-scroll">
+<div class="product-card">
+<div class="product-image"><img alt="Lebel Care" src="https://via.placeholder.com/320x420"/></div>
+<div class="product-content">
+<h3>Lebel Care</h3>
+<div class="product-description"><p>Профессиональный уход для восстановления и питания волос.</p></div>
+<div class="product-price">4 500 ₽</div>
+</div>
+</div>
+<div class="product-card">
+<div class="product-image"><img alt="Kérastase" src="https://via.placeholder.com/320x420"/></div>
+<div class="product-content">
+<h3>Kérastase</h3>
+<div class="product-description"><p>Элитная косметика для профессионального ухода за волосами.</p></div>
+<div class="product-price">3 800 ₽</div>
+</div>
+</div>
+<div class="product-card">
+<div class="product-image"><img alt="Olaplex" src="https://via.placeholder.com/320x420"/></div>
+<div class="product-content">
+<h3>Olaplex</h3>
+<div class="product-description"><p>Инновационная система восстановления поврежденных волос.</p></div>
+<div class="product-price">5 200 ₽</div>
+</div>
+</div>
+<div class="product-card">
+<div class="product-image"><img alt="Moroccanoil" src="https://via.placeholder.com/320x420"/></div>
+<div class="product-content">
+<h3>Moroccanoil</h3>
+<div class="product-description"><p>Продукты с аргановым маслом для блеска и силы волос.</p></div>
+<div class="product-price">4 100 ₽</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="section" id="team">
+<div class="container">
+<div class="section-title"><h2>Наш мастер</h2></div>
+<div class="team-grid">
+<div class="team-card">
+<div class="team-image"></div>
+<div class="team-info">
+<h3>Юлия Абдрахманова</h3>
+<span class="specialty">Топ-стилист</span>
+<p>Сертифицированный специалист с 8-летним опытом работы в индустрии красоты. Прошла обучение у ведущих мировых брендов.</p>
+<div class="social-links">
+<a href="#"><i class="fab fa-instagram"></i></a>
+<a href="#"><i class="fab fa-telegram"></i></a>
+<a href="#"><i class="fab fa-whatsapp"></i></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<footer id="contact">
+<div class="container">
+<div class="footer-content">
+<div>
+<h3>Lumière</h3>
+<p>Салон красоты премиум-класса в центре Санкт-Петербурга.</p>
+</div>
+<div>
+<h3>Контакты</h3>
+<p>+7 (912) 352-77-20<br/>info@lumiere-salon.ru</p>
+</div>
+<div>
+<h3>Адрес</h3>
+<p>Санкт-Петербург,<br/>Невский проспект, 150</p>
+</div>
+<div>
+<h3>Часы работы</h3>
+<p>Пн-Пт: 10:00-21:00<br/>Сб-Вс: 10:00-20:00</p>
+</div>
+</div>
+<div class="copyright">© 2025 Lumière</div>
+</div>
+</footer>
+
+<script charset="UTF-8" src="https://w948450.yclients.com/widgetJS"></script>
+<script>
+(function(){
+  // Play on hover (mouse); touch devices can tap to play
+  document.querySelectorAll('.portfolio-item video').forEach(function(v){
+    // ensure paused initially and show poster
+    v.pause();
+    v.currentTime = 0;
+    v.addEventListener('mouseenter', function(){ v.play(); });
+    v.addEventListener('mouseleave', function(){ v.pause(); v.currentTime = 0; });
+    // also stop playing when scrolled out of view
+    document.addEventListener('scroll', function(){
+      if(v.paused) return;
+      var rect = v.getBoundingClientRect();
+      if(rect.bottom < 0 || rect.top > (window.innerHeight || document.documentElement.clientHeight)){
+        v.pause(); v.currentTime = 0;
+      }
+    }, {passive:true});
+  });
+})();
+</script></body>
+</html>
