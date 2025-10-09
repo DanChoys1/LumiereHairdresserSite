@@ -110,6 +110,52 @@ header.scrolled{box-shadow:0 6px 24px rgba(0,0,0,0.08);padding:14px 0}
 .social-links a{color:var(--dark);font-size:1.2rem;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(212,175,55,0.06);transition:var(--transition)}
 .social-links a:hover{background:var(--primary);color:#fff}
 
+/* ---------------- MAP ---------------- */
+.map-section {
+  padding: 60px 0;
+  background: var(--light);
+}
+.map-container {
+  width: 100%;
+  height: 500px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+  position: relative;
+}
+.map-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+.map-info {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  max-width: 300px;
+  z-index: 10;
+}
+.map-info h3 {
+  color: var(--primary);
+  margin-bottom: 8px;
+  font-size: 1.2rem;
+}
+.map-info p {
+  margin: 5px 0;
+  font-size: 0.9rem;
+  color: var(--dark);
+}
+.map-info i {
+  color: var(--primary);
+  margin-right: 8px;
+  width: 16px;
+}
+
 /* ---------------- FOOTER ---------------- */
 footer{background:var(--dark);color:#fff;padding:48px 0 28px}
 .footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;margin-bottom:24px}
@@ -346,6 +392,19 @@ DAVINES oi absolute </h3>
 </div>
 </div>
 </section>
+
+<!-- Map Section -->
+<section class="map-section" id="map">
+  <div class="container">
+    <div class="section-title">
+      <h2>Как нас найти</h2>
+    </div>
+    <div class="map-container">
+      <iframe src="https://yandex.ru/map-widget/v1/?l=masstransit&ll=30.385074%2C59.926586&mode=poi&poi%5Bpoint%5D=30.385000%2C59.926531&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D87088919361&z=17" width="100%" height="100%" frameborder="0" allowfullscreen="true"></iframe>
+    </div>
+  </div>
+</section>
+
     <!-- Footer -->
     <footer id="contact">
         <div class="container">
