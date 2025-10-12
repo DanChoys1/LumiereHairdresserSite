@@ -1,0 +1,154 @@
+{
+  "site": {
+    "title": "Sono - NOOOOOOOOOOO",
+    "logo": "NOOOOOOOOOOO",
+    "favicon": "c63635fba1eb11f0a547b62e65e43737_1.jpg"
+  },
+  "header": {
+    "navLinks": [
+      {"name": "Услуги", "href": "#services"},
+      {"name": "Портфолио", "href": "#portfolio"},
+      {"name": "Уход дома", "href": "#home-care"},
+      {"name": "Команда", "href": "#team"},
+      {"name": "Контакты", "href": "#contact"}
+    ],
+    "bookingButton": "Записаться"
+  },
+  "hero": {
+    "title": "Sono - NOOOOOOOOOOO красоты премиум-класса",
+    "description": "Исключительное качество и внимание к деталям в сердце города",
+    "button": "Записаться онлайн"
+  },
+  "services": {
+    "title": "NOOOOOOOOOOO услуги",
+    "description": "Широкий спектр услуг для вашей красоты и ухода",
+    "items": [
+      {
+        "title": "Стрижка и укладка",
+        "duration": "1-2 часа",
+        "description": "Профессиональная стрижка и укладка от наших мастеров",
+        "price": "от 1500 руб."
+      },
+      {
+        "title": "Окрашивание",
+        "duration": "2-3 часа",
+        "description": "Качественное окрашивание с использованием премиальных материалов",
+        "price": "от 3000 руб."
+      },
+      {
+        "title": "Уход за кожей",
+        "duration": "1 час",
+        "description": "Процедуры по уходу за кожей лица для здорового сияния",
+        "price": "от 2500 руб."
+      },
+      {
+        "title": "Маникюр и педикюр",
+        "duration": "1.5-2 часа",
+        "description": "Профессиональный уход за ногтями и кожей рук",
+        "price": "от 2000 руб."
+      }
+    ]
+  },
+  "portfolio": {
+    "title": "Наши работы",
+    "description": "Примеры наших работ и довольных клиентов",
+    "videos": [
+      {
+        "src": "portfolio1.mp4",
+        "type": "video/mp4"
+      },
+      {
+        "src": "portfolio2.mp4",
+        "type": "video/mp4"
+      },
+      {
+        "src": "portfolio3.mp4",
+        "type": "video/mp4"
+      }
+    ]
+  },
+  "homeCare": {
+    "title": "Уход дома",
+    "description": "Профессиональные средства для ухода в домашних условиях",
+    "products": [
+      {
+        "title": "Шампунь для объема",
+        "description": "Профессиональный шампунь для придания объема волосам",
+        "price": "1200 руб.",
+        "image": "product1.jpg",
+        "alt": "Шампунь для объема"
+      },
+      {
+        "title": "Кондиционер-уход",
+        "description": "Глубокий уход и восстановление структуры волос",
+        "price": "1400 руб.",
+        "image": "product2.jpg",
+        "alt": "Кондиционер-уход"
+      },
+      {
+        "title": "Сыворотка для волос",
+        "description": "Защита и питание волос от повреждений",
+        "price": "1800 руб.",
+        "image": "product3.jpg",
+        "alt": "Сыворотка для волос"
+      }
+    ]
+  },
+  "team": {
+    "title": "Наша команда",
+    "description": "Профессиональные мастера с многолетним опытом",
+    "members": [
+      {
+        "name": "Анна Иванова",
+        "specialty": "Стилист-колорист",
+        "description": "Специалист по окрашиванию и сложным стрижкам с опытом более 8 лет",
+        "socialLinks": [
+          {"icon": "fab fa-instagram", "href": "#"},
+          {"icon": "fab fa-vk", "href": "#"}
+        ]
+      },
+      {
+        "name": "Мария Петрова",
+        "specialty": "Визажист",
+        "description": "Эксперт в области макияжа и ухода за кожей с опытом 6 лет",
+        "socialLinks": [
+          {"icon": "fab fa-instagram", "href": "#"},
+          {"icon": "fab fa-vk", "href": "#"}
+        ]
+      },
+      {
+        "name": "Елена Сидорова",
+        "specialty": "Мастер маникюра",
+        "description": "Специалист по ногтевому сервису и дизайну ногтей",
+        "socialLinks": [
+          {"icon": "fab fa-instagram", "href": "#"},
+          {"icon": "fab fa-vk", "href": "#"}
+        ]
+      }
+    ]
+  },
+  "map": {
+    "title": "Как нас найти",
+    "description": "Мы находимся в центре города, ждем вас!",
+    "iframe": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2245.6063705356146!2d37.61575731580857!3d55.75202698055106!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54a50b315e573%3A0xa886bf5a3d9b2e68!2z0JzQvtGB0LrQstCw!5e0!3m2!1sru!2sru!4v1620000000000!5m2!1sru!2sru"
+  },
+  "footer": {
+    "company": {
+      "name": "Sono",
+      "description": "Салон красоты премиум-класса с индивидуальным подходом к каждому клиенту."
+    },
+    "contacts": {
+      "address": "ул. Примерная, 123, Москва",
+      "phone": "+7 (495) 123-45-67",
+      "email": "info@sono.ru",
+      "hours": "Пн-Вс: 9:00 - 21:00"
+    },
+    "links": [
+      {"name": "Услуги", "href": "#services"},
+      {"name": "Портфолио", "href": "#portfolio"},
+      {"name": "Команда", "href": "#team"},
+      {"name": "Контакты", "href": "#contact"}
+    ],
+    "copyright": "&copy; 2023 Sono. Все права защищены."
+  }
+}
