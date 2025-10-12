@@ -266,7 +266,7 @@
   "map": {
     "title": "Как нас найти",
     "description": "Мы находимся в самом сердце Санкт-Петербурга",
-    "iframe": "https://yandex.ru/maps/-/CLRfUTIX"
+    "iframe": "https://yandex.ru/map-widget/v1/?l=masstransit&ll=30.385074%2C59.926586&mode=poi&poi%5Bpoint%5D=30.385000%2C59.926531&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D87088919361&z=17"
   },
   "footer": {
     "company": {
