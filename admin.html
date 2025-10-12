@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Панель администратора - Sono</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <title>Админ-панель Sono</title>
     <style>
         * {
             margin: 0;
@@ -13,9 +12,9 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background: #f8f5f0;
-            color: #1a1a1a;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            color: #333;
             line-height: 1.6;
         }
 
@@ -26,138 +25,148 @@
         }
 
         .admin-header {
-            background: #d4af37;
+            background: linear-gradient(135deg, #d4b896, #b89a7a);
             color: white;
-            padding: 20px;
-            border-radius: 10px;
+            padding: 30px;
+            border-radius: 15px;
             margin-bottom: 30px;
             text-align: center;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
         }
 
         .admin-header h1 {
-            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
             margin-bottom: 10px;
         }
 
-        .admin-nav {
+        .admin-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .tabs {
             display: flex;
-            gap: 10px;
+            background: white;
+            border-radius: 15px;
+            padding: 10px;
             margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             flex-wrap: wrap;
         }
 
-        .nav-btn {
-            background: white;
-            border: 2px solid #d4af37;
-            color: #1a1a1a;
-            padding: 10px 20px;
-            border-radius: 25px;
+        .tab {
+            padding: 12px 24px;
+            background: none;
+            border: none;
+            border-radius: 10px;
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: 500;
+            margin: 5px;
         }
 
-        .nav-btn.active,
-        .nav-btn:hover {
-            background: #d4af37;
+        .tab.active {
+            background: #d4b896;
             color: white;
         }
 
-        .section {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-            display: none;
+        .tab:hover:not(.active) {
+            background: #f5f0ea;
         }
 
-        .section.active {
+        .tab-content {
+            display: none;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .tab-content.active {
             display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             font-weight: 600;
-            color: #1a1a1a;
+            color: #555;
         }
 
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
+        .form-control {
             width: 100%;
-            padding: 10px;
-            border: 2px solid #e8e5e0;
-            border-radius: 5px;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
             font-size: 16px;
-            transition: border-color 0.3s ease;
+            transition: all 0.3s ease;
         }
 
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
+        .form-control:focus {
             outline: none;
-            border-color: #d4af37;
+            border-color: #d4b896;
+            box-shadow: 0 0 0 3px rgba(212, 184, 150, 0.1);
         }
 
-        .form-group textarea {
+        textarea.form-control {
             min-height: 100px;
             resize: vertical;
         }
 
         .array-item {
-            background: #f8f5f0;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
             padding: 20px;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            border-left: 4px solid #d4af37;
+            margin-bottom: 20px;
+            position: relative;
         }
 
-        .array-actions {
+        .array-item-header {
             display: flex;
-            gap: 10px;
-            margin-top: 10px;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .array-item-title {
+            font-weight: 600;
+            color: #495057;
         }
 
         .btn {
             padding: 10px 20px;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 14px;
+            font-weight: 500;
             transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .btn-primary {
-            background: #d4af37;
+            background: #d4b896;
             color: white;
         }
 
         .btn-primary:hover {
-            background: #b8941f;
-        }
-
-        .btn-secondary {
-            background: #6c757d;
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background: #545b62;
-        }
-
-        .btn-danger {
-            background: #dc3545;
-            color: white;
-        }
-
-        .btn-danger:hover {
-            background: #c82333;
+            background: #b89a7a;
+            transform: translateY(-2px);
         }
 
         .btn-success {
@@ -167,64 +176,166 @@
 
         .btn-success:hover {
             background: #218838;
+            transform: translateY(-2px);
         }
 
-        .actions-bar {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #545b62;
+            transform: translateY(-2px);
+        }
+
+        .actions {
             display: flex;
             gap: 10px;
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            justify-content: flex-end;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e9ecef;
         }
 
-        .status-message {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px 20px;
-            border-radius: 5px;
-            color: white;
-            font-weight: 500;
-            transform: translateX(400px);
-            transition: transform 0.3s ease;
+        .section-title {
+            font-size: 1.5rem;
+            color: #d4b896;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
         }
 
-        .status-message.show {
-            transform: translateX(0);
+        .social-links-container {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 10px;
+            align-items: end;
         }
 
-        .status-success {
-            background: #28a745;
+        .file-input-container {
+            position: relative;
         }
 
-        .status-error {
-            background: #dc3545;
+        .file-input {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-input-label {
+            display: block;
+            padding: 10px 15px;
+            background: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .file-input-label:hover {
+            border-color: #d4b896;
+            background: #f5f0ea;
         }
 
         .preview-image {
             max-width: 200px;
             max-height: 150px;
+            border-radius: 8px;
             margin-top: 10px;
-            border-radius: 5px;
-            display: block;
+            border: 2px solid #e9ecef;
+        }
+
+        .status-message {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .status-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+        }
+
+        .instructions {
+            background: #e7f3ff;
+            border: 2px solid #b3d9ff;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .instructions h3 {
+            color: #0066cc;
+            margin-bottom: 15px;
+        }
+
+        .instructions ol {
+            margin-left: 20px;
+        }
+
+        .instructions li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .instructions code {
+            background: #f1f1f1;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .hidden {
+            display: none;
         }
 
         @media (max-width: 768px) {
-            .admin-container {
-                padding: 10px;
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
             }
             
-            .section {
-                padding: 20px;
+            .tabs {
+                flex-direction: column;
             }
             
-            .actions-bar {
-                position: static;
-                margin-top: 20px;
+            .tab {
+                width: 100%;
+                text-align: center;
             }
         }
     </style>
@@ -232,536 +343,721 @@
 <body>
     <div class="admin-container">
         <div class="admin-header">
-            <h1><i class="fas fa-crown"></i> Панель администратора Sono</h1>
-            <p>Редактирование контента сайта</p>
+            <h1>Админ-панель Sono</h1>
+            <p>Управление контентом сайта салона красоты</p>
         </div>
 
-        <div class="admin-nav">
-            <button class="nav-btn active" data-section="hero">Главная</button>
-            <button class="nav-btn" data-section="services">Услуги</button>
-            <button class="nav-btn" data-section="portfolio">Портфолио</button>
-            <button class="nav-btn" data-section="home-care">Домашний уход</button>
-            <button class="nav-btn" data-section="team">Мастер</button>
-            <button class="nav-btn" data-section="map">Карта</button>
-            <button class="nav-btn" data-section="footer">Футер</button>
+        <!-- Инструкция для GitHub Pages -->
+        <div class="instructions">
+            <h3>📖 Инструкция по обновлению данных на GitHub Pages</h3>
+            <ol>
+                <li><strong>Скачайте обновленный файл:</strong> Нажмите кнопку "Сохранить изменения" чтобы скачать новый файл data.json</li>
+                <li><strong>Зайдите в репозиторий на GitHub:</strong> Перейдите в ваш репозиторий с сайтом</li>
+                <li><strong>Найдите файл data.json:</strong> В корневой папке репозитория найдите текущий файл data.json</li>
+                <li><strong>Загрузите новый файл:</strong>
+                    <ul>
+                        <li>Нажмите на файл data.json</li>
+                        <li>Нажмите иконку карандаша (Edit)</li>
+                        <li>Удалите весь старый текст</li>
+                        <li>Откройте скачанный файл в текстовом редакторе, скопируйте всё содержимое</li>
+                        <li>Вставьте новое содержимое в редактор на GitHub</li>
+                        <li>Прокрутите вниз, напишите комментарий коммита (например: "Update site data")</li>
+                        <li>Нажмите "Commit changes"</li>
+                    </ul>
+                </li>
+                <li><strong>Или через загрузку файла:</strong>
+                    <ul>
+                        <li>В репозитории нажмите "Add file" → "Upload files"</li>
+                        <li>Перетащите скачанный data.json или выберите его</li>
+                        <li>Нажмите "Commit changes"</li>
+                    </ul>
+                </li>
+                <li><strong>Подождите обновления:</strong> GitHub Pages автоматически обновит сайт в течение 1-10 минут</li>
+            </ol>
+            <p><strong>Важно:</strong> После загрузки обновите страницу сайта (Ctrl+F5) чтобы увидеть изменения!</p>
         </div>
 
-        <!-- Секция Главная -->
-        <div class="section active" id="hero-section">
-            <h2>Главная секция</h2>
-            <div class="form-group">
-                <label>Заголовок</label>
-                <input type="text" id="hero-title" placeholder="Введите заголовок">
-            </div>
-            <div class="form-group">
-                <label>Описание</label>
-                <textarea id="hero-description" placeholder="Введите описание"></textarea>
-            </div>
-            <div class="form-group">
-                <label>Текст кнопки</label>
-                <input type="text" id="hero-button" placeholder="Текст кнопки">
-            </div>
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('site')">Основные настройки</button>
+            <button class="tab" onclick="switchTab('hero')">Главная страница</button>
+            <button class="tab" onclick="switchTab('services')">Услуги</button>
+            <button class="tab" onclick="switchTab('portfolio')">Портфолио</button>
+            <button class="tab" onclick="switchTab('homecare')">Домашний уход</button>
+            <button class="tab" onclick="switchTab('team')">Команда</button>
+            <button class="tab" onclick="switchTab('footer')">Футер и контакты</button>
         </div>
 
-        <!-- Секция Услуги -->
-        <div class="section" id="services-section">
-            <h2>Услуги</h2>
-            <div class="form-group">
-                <label>Заголовок раздела</label>
-                <input type="text" id="services-title" placeholder="Заголовок раздела">
-            </div>
-            <div class="form-group">
-                <label>Описание раздела</label>
-                <textarea id="services-description" placeholder="Описание раздела"></textarea>
-            </div>
-            
-            <h3>Список услуг</h3>
-            <div id="services-list">
-                <!-- Список услуг будет генерироваться динамически -->
-            </div>
-            <button class="btn btn-success" onclick="addService()">
-                <i class="fas fa-plus"></i> Добавить услугу
-            </button>
-        </div>
+        <form id="adminForm">
+            <!-- Основные настройки -->
+            <div class="tab-content active" id="site-tab">
+                <h2 class="section-title">Основные настройки сайта</h2>
+                
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label for="siteTitle">Название сайта</label>
+                        <input type="text" id="siteTitle" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="siteLogo">Логотип</label>
+                        <input type="text" id="siteLogo" class="form-control" placeholder="Текст логотипа">
+                    </div>
+                </div>
 
-        <!-- Секция Портфолио -->
-        <div class="section" id="portfolio-section">
-            <h2>Портфолио</h2>
-            <div class="form-group">
-                <label>Заголовок раздела</label>
-                <input type="text" id="portfolio-title" placeholder="Заголовок раздела">
-            </div>
-            <div class="form-group">
-                <label>Описание раздела</label>
-                <textarea id="portfolio-description" placeholder="Описание раздела"></textarea>
-            </div>
-            
-            <h3>Видео портфолио</h3>
-            <div id="portfolio-list">
-                <!-- Список видео будет генерироваться динамически -->
-            </div>
-            <button class="btn btn-success" onclick="addPortfolioItem()">
-                <i class="fas fa-plus"></i> Добавить видео
-            </button>
-        </div>
+                <div class="form-group">
+                    <label for="favicon">Фавикон (URL)</label>
+                    <input type="text" id="favicon" class="form-control">
+                </div>
 
-        <!-- Секция Домашний уход -->
-        <div class="section" id="home-care-section">
-            <h2>Домашний уход</h2>
-            <div class="form-group">
-                <label>Заголовок раздела</label>
-                <input type="text" id="home-care-title" placeholder="Заголовок раздела">
+                <div class="form-group">
+                    <label for="yclientsLink">Ссылка на виджет YClients</label>
+                    <input type="text" id="yclientsLink" class="form-control">
+                </div>
             </div>
-            <div class="form-group">
-                <label>Описание раздела</label>
-                <textarea id="home-care-description" placeholder="Описание раздела"></textarea>
-            </div>
-            
-            <h3>Товары</h3>
-            <div id="products-list">
-                <!-- Список товаров будет генерироваться динамически -->
-            </div>
-            <button class="btn btn-success" onclick="addProduct()">
-                <i class="fas fa-plus"></i> Добавить товар
-            </button>
-        </div>
 
-        <!-- Секция Мастер -->
-        <div class="section" id="team-section">
-            <h2>Информация о мастере</h2>
-            <div class="form-group">
-                <label>Заголовок раздела</label>
-                <input type="text" id="team-title" placeholder="Заголовок раздела">
-            </div>
-            <div class="form-group">
-                <label>Описание раздела</label>
-                <textarea id="team-description" placeholder="Описание раздела"></textarea>
-            </div>
-            
-            <h3>Данные мастера</h3>
-            <div class="form-group">
-                <label>Имя</label>
-                <input type="text" id="team-name" placeholder="Имя мастера">
-            </div>
-            <div class="form-group">
-                <label>Специализация</label>
-                <input type="text" id="team-specialty" placeholder="Специализация">
-            </div>
-            <div class="form-group">
-                <label>Описание</label>
-                <textarea id="team-bio" placeholder="Описание мастера"></textarea>
-            </div>
-        </div>
+            <!-- Главная страница -->
+            <div class="tab-content" id="hero-tab">
+                <h2 class="section-title">Главная страница</h2>
+                
+                <div class="form-group">
+                    <label for="heroBackground">Фоновое изображение (URL)</label>
+                    <input type="text" id="heroBackground" class="form-control">
+                </div>
 
-        <!-- Секция Карта -->
-        <div class="section" id="map-section">
-            <h2>Карта и контакты</h2>
-            <div class="form-group">
-                <label>Заголовок раздела</label>
-                <input type="text" id="map-title" placeholder="Заголовок раздела">
-            </div>
-            <div class="form-group">
-                <label>Описание раздела</label>
-                <textarea id="map-description" placeholder="Описание раздела"></textarea>
-            </div>
-            <div class="form-group">
-                <label>Код iframe карты</label>
-                <textarea id="map-iframe" placeholder="Вставьте код iframe карты"></textarea>
-            </div>
-        </div>
+                <div class="form-group">
+                    <label for="heroTitle">Заголовок</label>
+                    <input type="text" id="heroTitle" class="form-control" required>
+                </div>
 
-        <!-- Секция Футер -->
-        <div class="section" id="footer-section">
-            <h2>Футер и контакты</h2>
-            <div class="form-group">
-                <label>Описание компании</label>
-                <textarea id="footer-description" placeholder="Описание компании в футере"></textarea>
+                <div class="form-group">
+                    <label for="heroDescription">Описание</label>
+                    <textarea id="heroDescription" class="form-control" required></textarea>
+                </div>
             </div>
-            <div class="form-group">
-                <label>Адрес</label>
-                <input type="text" id="footer-address" placeholder="Адрес">
-            </div>
-            <div class="form-group">
-                <label>Телефон</label>
-                <input type="text" id="footer-phone" placeholder="Телефон">
-            </div>
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" id="footer-email" placeholder="Email">
-            </div>
-            <div class="form-group">
-                <label>Время работы</label>
-                <input type="text" id="footer-hours" placeholder="Время работы">
-            </div>
-        </div>
 
-        <div class="actions-bar">
-            <button class="btn btn-primary" onclick="saveData()">
-                <i class="fas fa-save"></i> Сохранить изменения
-            </button>
-            <button class="btn btn-secondary" onclick="loadData()">
-                <i class="fas fa-sync"></i> Загрузить данные
-            </button>
-            <button class="btn btn-success" onclick="goToSite()">
-                <i class="fas fa-eye"></i> Посмотреть сайт
-            </button>
-        </div>
+            <!-- Услуги -->
+            <div class="tab-content" id="services-tab">
+                <h2 class="section-title">Услуги</h2>
+                
+                <div class="form-group">
+                    <label for="servicesTitle">Заголовок раздела</label>
+                    <input type="text" id="servicesTitle" class="form-control" required>
+                </div>
 
-        <div class="status-message" id="status-message"></div>
+                <div class="form-group">
+                    <label for="servicesDescription">Описание раздела</label>
+                    <textarea id="servicesDescription" class="form-control" required></textarea>
+                </div>
+
+                <h3>Список услуг</h3>
+                <div id="servicesList"></div>
+                
+                <button type="button" class="btn btn-success" onclick="addService()">
+                    <i class="fas fa-plus"></i> Добавить услугу
+                </button>
+            </div>
+
+            <!-- Портфолио -->
+            <div class="tab-content" id="portfolio-tab">
+                <h2 class="section-title">Портфолио</h2>
+                
+                <div class="form-group">
+                    <label for="portfolioTitle">Заголовок раздела</label>
+                    <input type="text" id="portfolioTitle" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="portfolioDescription">Описание раздела</label>
+                    <textarea id="portfolioDescription" class="form-control" required></textarea>
+                </div>
+
+                <h3>Видео работы</h3>
+                <div id="portfolioList"></div>
+                
+                <button type="button" class="btn btn-success" onclick="addPortfolioItem()">
+                    <i class="fas fa-plus"></i> Добавить видео
+                </button>
+            </div>
+
+            <!-- Домашний уход -->
+            <div class="tab-content" id="homecare-tab">
+                <h2 class="section-title">Домашний уход</h2>
+                
+                <div class="form-group">
+                    <label for="homeCareTitle">Заголовок раздела</label>
+                    <input type="text" id="homeCareTitle" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="homeCareDescription">Описание раздела</label>
+                    <textarea id="homeCareDescription" class="form-control" required></textarea>
+                </div>
+
+                <h3>Товары</h3>
+                <div id="productsList"></div>
+                
+                <button type="button" class="btn btn-success" onclick="addProduct()">
+                    <i class="fas fa-plus"></i> Добавить товар
+                </button>
+            </div>
+
+            <!-- Команда -->
+            <div class="tab-content" id="team-tab">
+                <h2 class="section-title">Команда</h2>
+                
+                <div class="form-group">
+                    <label for="teamTitle">Заголовок раздела</label>
+                    <input type="text" id="teamTitle" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="teamDescription">Описание раздела</label>
+                    <textarea id="teamDescription" class="form-control" required></textarea>
+                </div>
+
+                <h3>Члены команды</h3>
+                <div id="teamList"></div>
+                
+                <button type="button" class="btn btn-success" onclick="addTeamMember()">
+                    <i class="fas fa-plus"></i> Добавить члена команды
+                </button>
+            </div>
+
+            <!-- Футер и контакты -->
+            <div class="tab-content" id="footer-tab">
+                <h2 class="section-title">Футер и контакты</h2>
+                
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label for="companyName">Название компании</label>
+                        <input type="text" id="companyName" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="companyDescription">Описание компании</label>
+                        <textarea id="companyDescription" class="form-control" required></textarea>
+                    </div>
+                </div>
+
+                <h3>Контактная информация</h3>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label for="contactAddress">Адрес</label>
+                        <input type="text" id="contactAddress" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contactPhone">Телефон</label>
+                        <input type="text" id="contactPhone" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contactEmail">Email</label>
+                        <input type="email" id="contactEmail" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contactHours">Часы работы</label>
+                        <input type="text" id="contactHours" class="form-control" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="copyrightText">Текст копирайта</label>
+                    <input type="text" id="copyrightText" class="form-control" required>
+                </div>
+            </div>
+
+            <div class="actions">
+                <div class="file-input-container">
+                    <label class="file-input-label">
+                        <i class="fas fa-folder-open"></i> Выберите файл data.json
+                        <input type="file" id="fileInput" class="file-input" accept=".json" onchange="handleFileSelect(event)">
+                    </label>
+                </div>
+                
+                <button type="button" class="btn btn-secondary" onclick="document.getElementById('fileInput').click()">
+                    <i class="fas fa-upload"></i> Загрузить данные
+                </button>
+                
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Сохранить изменения
+                </button>
+            </div>
+        </form>
+
+        <div id="statusMessage"></div>
     </div>
 
     <script>
-        let siteData = {};
+        // Шаблоны для динамических элементов
+        const serviceTemplate = `
+            <div class="array-item" data-index="{{index}}">
+                <div class="array-item-header">
+                    <span class="array-item-title">Услуга #{{number}}</span>
+                    <button type="button" class="btn btn-danger" onclick="removeItem(this, 'services')">
+                        <i class="fas fa-trash"></i> Удалить
+                    </button>
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Название услуги</label>
+                        <input type="text" class="form-control" name="serviceTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Длительность</label>
+                        <input type="text" class="form-control" name="serviceDuration" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Описание</label>
+                    <textarea class="form-control" name="serviceDescription" required></textarea>
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Цена</label>
+                        <input type="text" class="form-control" name="servicePrice" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Диапазон цен (опционально)</label>
+                        <input type="text" class="form-control" name="servicePriceRange">
+                    </div>
+                </div>
+            </div>
+        `;
 
-        // Загрузка данных при старте
-        document.addEventListener('DOMContentLoaded', function() {
-            loadData();
-            setupNavigation();
+        const portfolioTemplate = `
+            <div class="array-item" data-index="{{index}}">
+                <div class="array-item-header">
+                    <span class="array-item-title">Видео #{{number}}</span>
+                    <button type="button" class="btn btn-danger" onclick="removeItem(this, 'portfolio')">
+                        <i class="fas fa-trash"></i> Удалить
+                    </button>
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Видео файл (URL)</label>
+                        <input type="text" class="form-control" name="portfolioSrc" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Тип видео</label>
+                        <select class="form-control" name="portfolioType" required>
+                            <option value="video/mp4">MP4</option>
+                            <option value="video/webm">WebM</option>
+                            <option value="video/ogg">Ogg</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Постер (URL изображения)</label>
+                    <input type="text" class="form-control" name="portfolioPoster">
+                </div>
+            </div>
+        `;
+
+        const productTemplate = `
+            <div class="array-item" data-index="{{index}}">
+                <div class="array-item-header">
+                    <span class="array-item-title">Товар #{{number}}</span>
+                    <button type="button" class="btn btn-danger" onclick="removeItem(this, 'products')">
+                        <i class="fas fa-trash"></i> Удалить
+                    </button>
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Изображение товара (URL)</label>
+                        <input type="text" class="form-control" name="productImage" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Alt текст</label>
+                        <input type="text" class="form-control" name="productAlt" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Название товара</label>
+                    <input type="text" class="form-control" name="productTitle" required>
+                </div>
+                <div class="form-group">
+                    <label>Описание</label>
+                    <textarea class="form-control" name="productDescription" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Цена</label>
+                    <input type="text" class="form-control" name="productPrice" required>
+                </div>
+            </div>
+        `;
+
+        const teamTemplate = `
+            <div class="array-item" data-index="{{index}}">
+                <div class="array-item-header">
+                    <span class="array-item-title">Член команды #{{number}}</span>
+                    <button type="button" class="btn btn-danger" onclick="removeItem(this, 'team')">
+                        <i class="fas fa-trash"></i> Удалить
+                    </button>
+                </div>
+                <div class="form-group">
+                    <label>Фото (URL)</label>
+                    <input type="text" class="form-control" name="teamImage" required>
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Имя</label>
+                        <input type="text" class="form-control" name="teamName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Специальность</label>
+                        <input type="text" class="form-control" name="teamSpecialty" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Описание</label>
+                    <textarea class="form-control" name="teamDescription" required></textarea>
+                </div>
+                <h4>Социальные сети</h4>
+                <div id="socialLinks-{{index}}"></div>
+                <button type="button" class="btn btn-success" onclick="addSocialLink({{index}})">
+                    <i class="fas fa-plus"></i> Добавить соцсеть
+                </button>
+            </div>
+        `;
+
+        const socialLinkTemplate = `
+            <div class="social-links-container" style="margin-bottom: 10px;">
+                <div class="form-group">
+                    <label>Иконка (Font Awesome класс)</label>
+                    <input type="text" class="form-control" name="socialIcon" placeholder="fab fa-instagram" required>
+                </div>
+                <div class="form-group">
+                    <label>Ссылка</label>
+                    <input type="text" class="form-control" name="socialHref" required>
+                </div>
+                <button type="button" class="btn btn-danger" onclick="this.parentElement.remove()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        `;
+
+        // Функции для работы с вкладками
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            document.getElementById(tabName + '-tab').classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Функции для добавления элементов
+        function addService() {
+            const container = document.getElementById('servicesList');
+            const index = container.children.length;
+            const html = serviceTemplate
+                .replace(/{{index}}/g, index)
+                .replace(/{{number}}/g, index + 1);
+            container.insertAdjacentHTML('beforeend', html);
+        }
+
+        function addPortfolioItem() {
+            const container = document.getElementById('portfolioList');
+            const index = container.children.length;
+            const html = portfolioTemplate
+                .replace(/{{index}}/g, index)
+                .replace(/{{number}}/g, index + 1);
+            container.insertAdjacentHTML('beforeend', html);
+        }
+
+        function addProduct() {
+            const container = document.getElementById('productsList');
+            const index = container.children.length;
+            const html = productTemplate
+                .replace(/{{index}}/g, index)
+                .replace(/{{number}}/g, index + 1);
+            container.insertAdjacentHTML('beforeend', html);
+        }
+
+        function addTeamMember() {
+            const container = document.getElementById('teamList');
+            const index = container.children.length;
+            const html = teamTemplate
+                .replace(/{{index}}/g, index)
+                .replace(/{{number}}/g, index + 1);
+            container.insertAdjacentHTML('beforeend', html);
+        }
+
+        function addSocialLink(teamIndex) {
+            const container = document.getElementById('socialLinks-' + teamIndex);
+            container.insertAdjacentHTML('beforeend', socialLinkTemplate);
+        }
+
+        function removeItem(button, type) {
+            const item = button.closest('.array-item');
+            item.remove();
+            // Перенумеровать оставшиеся элементы
+            const container = document.getElementById(type + 'List');
+            Array.from(container.children).forEach((child, index) => {
+                child.setAttribute('data-index', index);
+                const title = child.querySelector('.array-item-title');
+                if (title) {
+                    const itemType = type === 'services' ? 'Услуга' : 
+                                   type === 'portfolio' ? 'Видео' : 
+                                   type === 'products' ? 'Товар' : 'Член команды';
+                    title.textContent = `${itemType} #${index + 1}`;
+                }
+            });
+        }
+
+        // Обработка выбора файла
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    populateForm(data);
+                    showStatus('Файл успешно загружен!', 'success');
+                } catch (error) {
+                    showStatus('Ошибка: Неверный формат JSON файла', 'error');
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        // Заполнение формы данными
+        function populateForm(data) {
+            // Основные настройки
+            document.getElementById('siteTitle').value = data.site.title || '';
+            document.getElementById('siteLogo').value = data.site.logo || '';
+            document.getElementById('favicon').value = data.site.favicon || '';
+            document.getElementById('yclientsLink').value = data.site.yclientsLink || '';
+
+            // Главная страница
+            document.getElementById('heroBackground').value = data.hero.background || '';
+            document.getElementById('heroTitle').value = data.hero.title || '';
+            document.getElementById('heroDescription').value = data.hero.description || '';
+
+            // Услуги
+            document.getElementById('servicesTitle').value = data.services.title || '';
+            document.getElementById('servicesDescription').value = data.services.description || '';
+            
+            const servicesList = document.getElementById('servicesList');
+            servicesList.innerHTML = '';
+            data.services.items.forEach((service, index) => {
+                addService();
+                const item = servicesList.lastElementChild;
+                item.querySelector('[name="serviceTitle"]').value = service.title || '';
+                item.querySelector('[name="serviceDuration"]').value = service.duration || '';
+                item.querySelector('[name="serviceDescription"]').value = service.description || '';
+                item.querySelector('[name="servicePrice"]').value = service.price || '';
+                item.querySelector('[name="servicePriceRange"]').value = service.priceRange || '';
+            });
+
+            // Портфолио
+            document.getElementById('portfolioTitle').value = data.portfolio.title || '';
+            document.getElementById('portfolioDescription').value = data.portfolio.description || '';
+            
+            const portfolioList = document.getElementById('portfolioList');
+            portfolioList.innerHTML = '';
+            data.portfolio.videos.forEach((video, index) => {
+                addPortfolioItem();
+                const item = portfolioList.lastElementChild;
+                item.querySelector('[name="portfolioSrc"]').value = video.src || '';
+                item.querySelector('[name="portfolioType"]').value = video.type || 'video/mp4';
+                item.querySelector('[name="portfolioPoster"]').value = video.poster || '';
+            });
+
+            // Домашний уход
+            document.getElementById('homeCareTitle').value = data.homeCare.title || '';
+            document.getElementById('homeCareDescription').value = data.homeCare.description || '';
+            
+            const productsList = document.getElementById('productsList');
+            productsList.innerHTML = '';
+            data.homeCare.products.forEach((product, index) => {
+                addProduct();
+                const item = productsList.lastElementChild;
+                item.querySelector('[name="productImage"]').value = product.image || '';
+                item.querySelector('[name="productAlt"]').value = product.alt || '';
+                item.querySelector('[name="productTitle"]').value = product.title || '';
+                item.querySelector('[name="productDescription"]').value = product.description || '';
+                item.querySelector('[name="productPrice"]').value = product.price || '';
+            });
+
+            // Команда
+            document.getElementById('teamTitle').value = data.team.title || '';
+            document.getElementById('teamDescription').value = data.team.description || '';
+            
+            const teamList = document.getElementById('teamList');
+            teamList.innerHTML = '';
+            data.team.members.forEach((member, index) => {
+                addTeamMember();
+                const item = teamList.lastElementChild;
+                item.querySelector('[name="teamImage"]').value = member.image || '';
+                item.querySelector('[name="teamName"]').value = member.name || '';
+                item.querySelector('[name="teamSpecialty"]').value = member.specialty || '';
+                item.querySelector('[name="teamDescription"]').value = member.description || '';
+                
+                // Социальные сети
+                const socialContainer = document.getElementById('socialLinks-' + index);
+                socialContainer.innerHTML = '';
+                (member.socialLinks || []).forEach(social => {
+                    addSocialLink(index);
+                    const socialItem = socialContainer.lastElementChild;
+                    socialItem.querySelector('[name="socialIcon"]').value = social.icon || '';
+                    socialItem.querySelector('[name="socialHref"]').value = social.href || '';
+                });
+            });
+
+            // Футер
+            document.getElementById('companyName').value = data.footer.company.name || '';
+            document.getElementById('companyDescription').value = data.footer.company.description || '';
+            document.getElementById('contactAddress').value = data.footer.contacts.address || '';
+            document.getElementById('contactPhone').value = data.footer.contacts.phone || '';
+            document.getElementById('contactEmail').value = data.footer.contacts.email || '';
+            document.getElementById('contactHours').value = data.footer.contacts.hours || '';
+            document.getElementById('copyrightText').value = data.footer.copyright || '';
+        }
+
+        // Сохранение данных
+        document.getElementById('adminForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const data = {
+                site: {
+                    title: document.getElementById('siteTitle').value,
+                    favicon: document.getElementById('favicon').value,
+                    logo: document.getElementById('siteLogo').value,
+                    yclientsLink: document.getElementById('yclientsLink').value
+                },
+                header: {
+                    navLinks: [
+                        {"name": "Главная", "href": "#home"},
+                        {"name": "Услуги", "href": "#services"},
+                        {"name": "Портфолио", "href": "#portfolio"},
+                        {"name": "Домашний уход", "href": "#home-care"},
+                        {"name": "Мастер", "href": "#team"},
+                        {"name": "Контакты", "href": "#contact"}
+                    ]
+                },
+                hero: {
+                    background: document.getElementById('heroBackground').value,
+                    title: document.getElementById('heroTitle').value,
+                    description: document.getElementById('heroDescription').value
+                },
+                services: {
+                    title: document.getElementById('servicesTitle').value,
+                    description: document.getElementById('servicesDescription').value,
+                    items: Array.from(document.getElementById('servicesList').children).map(item => ({
+                        title: item.querySelector('[name="serviceTitle"]').value,
+                        duration: item.querySelector('[name="serviceDuration"]').value,
+                        description: item.querySelector('[name="serviceDescription"]').value,
+                        price: item.querySelector('[name="servicePrice"]').value,
+                        priceRange: item.querySelector('[name="servicePriceRange"]').value
+                    }))
+                },
+                portfolio: {
+                    title: document.getElementById('portfolioTitle').value,
+                    description: document.getElementById('portfolioDescription').value,
+                    videos: Array.from(document.getElementById('portfolioList').children).map(item => ({
+                        src: item.querySelector('[name="portfolioSrc"]').value,
+                        type: item.querySelector('[name="portfolioType"]').value,
+                        poster: item.querySelector('[name="portfolioPoster"]').value
+                    }))
+                },
+                homeCare: {
+                    title: document.getElementById('homeCareTitle').value,
+                    description: document.getElementById('homeCareDescription').value,
+                    products: Array.from(document.getElementById('productsList').children).map(item => ({
+                        image: item.querySelector('[name="productImage"]').value,
+                        alt: item.querySelector('[name="productAlt"]').value,
+                        title: item.querySelector('[name="productTitle"]').value,
+                        description: item.querySelector('[name="productDescription"]').value,
+                        price: item.querySelector('[name="productPrice"]').value
+                    }))
+                },
+                team: {
+                    title: document.getElementById('teamTitle').value,
+                    description: document.getElementById('teamDescription').value,
+                    members: Array.from(document.getElementById('teamList').children).map((item, index) => ({
+                        image: item.querySelector('[name="teamImage"]').value,
+                        name: item.querySelector('[name="teamName"]').value,
+                        specialty: item.querySelector('[name="teamSpecialty"]').value,
+                        description: item.querySelector('[name="teamDescription"]').value,
+                        socialLinks: Array.from(document.getElementById('socialLinks-' + index).children).map(social => ({
+                            icon: social.querySelector('[name="socialIcon"]').value,
+                            href: social.querySelector('[name="socialHref"]').value
+                        }))
+                    }))
+                },
+                map: {
+                    title: "Как нас найти",
+                    description: "Мы находимся в самом сердце Санкт-Петербурга",
+                    iframe: "https://yandex.ru/map-widget/v1/?l=masstransit&ll=30.385074%2C59.926586&mode=poi&poi%5Bpoint%5D=30.385000%2C59.926531&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D87088919361&z=17"
+                },
+                footer: {
+                    company: {
+                        name: document.getElementById('companyName').value,
+                        description: document.getElementById('companyDescription').value
+                    },
+                    contacts: {
+                        address: document.getElementById('contactAddress').value,
+                        phone: document.getElementById('contactPhone').value,
+                        email: document.getElementById('contactEmail').value,
+                        hours: document.getElementById('contactHours').value
+                    },
+                    links: [
+                        {"name": "Главная", "href": "#home"},
+                        {"name": "Услуги", "href": "#services"},
+                        {"name": "Портфолио", "href": "#portfolio"},
+                        {"name": "Домашний уход", "href": "#home-care"},
+                        {"name": "Мастер", "href": "#team"},
+                        {"name": "Как нас найти", "href": "#map"}
+                    ],
+                    copyright: document.getElementById('copyrightText').value
+                }
+            };
+
+            try {
+                const jsonString = JSON.stringify(data, null, 2);
+                const blob = new Blob([jsonString], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'data.json';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                showStatus('Файл data.json успешно скачан! Следуйте инструкции выше для обновления на GitHub Pages.', 'success');
+            } catch (error) {
+                showStatus('Ошибка сохранения: ' + error.message, 'error');
+            }
         });
 
-        function setupNavigation() {
-            const navButtons = document.querySelectorAll('.nav-btn');
-            navButtons.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    // Убираем активный класс у всех кнопок
-                    navButtons.forEach(b => b.classList.remove('active'));
-                    // Скрываем все секции
-                    document.querySelectorAll('.section').forEach(section => {
-                        section.classList.remove('active');
-                    });
-                    // Активируем текущую кнопку и секцию
-                    this.classList.add('active');
-                    const sectionId = this.getAttribute('data-section') + '-section';
-                    document.getElementById(sectionId).classList.add('active');
-                });
-            });
-        }
-
-        async function loadData() {
-            try {
-                const response = await fetch('data.json');
-                siteData = await response.json();
-                populateForms();
-                showStatus('Данные успешно загружены', 'success');
-            } catch (error) {
-                console.error('Ошибка загрузки данных:', error);
-                showStatus('Ошибка загрузки данных', 'error');
-            }
-        }
-
-        function populateForms() {
-            // Заполняем форму главной секции
-            document.getElementById('hero-title').value = siteData.hero?.title || '';
-            document.getElementById('hero-description').value = siteData.hero?.description || '';
-            document.getElementById('hero-button').value = siteData.hero?.button || '';
-
-            // Заполняем форму услуг
-            document.getElementById('services-title').value = siteData.services?.title || '';
-            document.getElementById('services-description').value = siteData.services?.description || '';
-            populateServices();
-
-            // Заполняем форму портфолио
-            document.getElementById('portfolio-title').value = siteData.portfolio?.title || '';
-            document.getElementById('portfolio-description').value = siteData.portfolio?.description || '';
-            populatePortfolio();
-
-            // Заполняем форму домашнего ухода
-            document.getElementById('home-care-title').value = siteData.homeCare?.title || '';
-            document.getElementById('home-care-description').value = siteData.homeCare?.description || '';
-            populateProducts();
-
-            // Заполняем форму мастера
-            document.getElementById('team-title').value = siteData.team?.title || '';
-            document.getElementById('team-description').value = siteData.team?.description || '';
-            if (siteData.team?.members?.[0]) {
-                document.getElementById('team-name').value = siteData.team.members[0].name || '';
-                document.getElementById('team-specialty').value = siteData.team.members[0].specialty || '';
-                document.getElementById('team-bio').value = siteData.team.members[0].description || '';
-            }
-
-            // Заполняем форму карты
-            document.getElementById('map-title').value = siteData.map?.title || '';
-            document.getElementById('map-description').value = siteData.map?.description || '';
-            document.getElementById('map-iframe').value = siteData.map?.iframe || '';
-
-            // Заполняем форму футера
-            document.getElementById('footer-description').value = siteData.footer?.company?.description || '';
-            document.getElementById('footer-address').value = siteData.footer?.contacts?.address || '';
-            document.getElementById('footer-phone').value = siteData.footer?.contacts?.phone || '';
-            document.getElementById('footer-email').value = siteData.footer?.contacts?.email || '';
-            document.getElementById('footer-hours').value = siteData.footer?.contacts?.hours || '';
-        }
-
-        function populateServices() {
-            const servicesList = document.getElementById('services-list');
-            servicesList.innerHTML = '';
-            
-            if (siteData.services?.items) {
-                siteData.services.items.forEach((service, index) => {
-                    const serviceHtml = `
-                        <div class="array-item">
-                            <div class="form-group">
-                                <label>Название услуги</label>
-                                <input type="text" value="${service.title || ''}" 
-                                       onchange="updateService(${index}, 'title', this.value)">
-                            </div>
-                            <div class="form-group">
-                                <label>Длительность</label>
-                                <input type="text" value="${service.duration || ''}" 
-                                       onchange="updateService(${index}, 'duration', this.value)">
-                            </div>
-                            <div class="form-group">
-                                <label>Описание</label>
-                                <textarea onchange="updateService(${index}, 'description', this.value)">${service.description || ''}</textarea>
-                            </div>
-                            <div class="form-group">
-                                <label>Цена</label>
-                                <input type="text" value="${service.price || ''}" 
-                                       onchange="updateService(${index}, 'price', this.value)">
-                            </div>
-                            <div class="array-actions">
-                                <button class="btn btn-danger" onclick="removeService(${index})">
-                                    <i class="fas fa-trash"></i> Удалить
-                                </button>
-                            </div>
-                        </div>
-                    `;
-                    servicesList.innerHTML += serviceHtml;
-                });
-            }
-        }
-
-        function populatePortfolio() {
-            const portfolioList = document.getElementById('portfolio-list');
-            portfolioList.innerHTML = '';
-            
-            if (siteData.portfolio?.videos) {
-                siteData.portfolio.videos.forEach((video, index) => {
-                    const portfolioHtml = `
-                        <div class="array-item">
-                            <div class="form-group">
-                                <label>Путь к видео</label>
-                                <input type="text" value="${video.src || ''}" 
-                                       onchange="updatePortfolioItem(${index}, 'src', this.value)">
-                            </div>
-                            <div class="form-group">
-                                <label>Тип видео</label>
-                                <input type="text" value="${video.type || ''}" 
-                                       onchange="updatePortfolioItem(${index}, 'type', this.value)">
-                            </div>
-                            <div class="array-actions">
-                                <button class="btn btn-danger" onclick="removePortfolioItem(${index})">
-                                    <i class="fas fa-trash"></i> Удалить
-                                </button>
-                            </div>
-                        </div>
-                    `;
-                    portfolioList.innerHTML += portfolioHtml;
-                });
-            }
-        }
-
-        function populateProducts() {
-            const productsList = document.getElementById('products-list');
-            productsList.innerHTML = '';
-            
-            if (siteData.homeCare?.products) {
-                siteData.homeCare.products.forEach((product, index) => {
-                    const productHtml = `
-                        <div class="array-item">
-                            <div class="form-group">
-                                <label>Название товара</label>
-                                <input type="text" value="${product.title || ''}" 
-                                       onchange="updateProduct(${index}, 'title', this.value)">
-                            </div>
-                            <div class="form-group">
-                                <label>Описание</label>
-                                <textarea onchange="updateProduct(${index}, 'description', this.value)">${product.description || ''}</textarea>
-                            </div>
-                            <div class="form-group">
-                                <label>Цена</label>
-                                <input type="text" value="${product.price || ''}" 
-                                       onchange="updateProduct(${index}, 'price', this.value)">
-                            </div>
-                            <div class="form-group">
-                                <label>Путь к изображению</label>
-                                <input type="text" value="${product.image || ''}" 
-                                       onchange="updateProduct(${index}, 'image', this.value)">
-                            </div>
-                            <div class="array-actions">
-                                <button class="btn btn-danger" onclick="removeProduct(${index})">
-                                    <i class="fas fa-trash"></i> Удалить
-                                </button>
-                            </div>
-                        </div>
-                    `;
-                    productsList.innerHTML += productHtml;
-                });
-            }
-        }
-
-        // Функции для работы с услугами
-        function addService() {
-            if (!siteData.services) siteData.services = {};
-            if (!siteData.services.items) siteData.services.items = [];
-            
-            siteData.services.items.push({
-                title: 'Новая услуга',
-                duration: '1 час',
-                description: 'Описание услуги',
-                price: '0 ₽'
-            });
-            
-            populateServices();
-            showStatus('Услуга добавлена', 'success');
-        }
-
-        function updateService(index, field, value) {
-            if (siteData.services?.items?.[index]) {
-                siteData.services.items[index][field] = value;
-            }
-        }
-
-        function removeService(index) {
-            if (siteData.services?.items) {
-                siteData.services.items.splice(index, 1);
-                populateServices();
-                showStatus('Услуга удалена', 'success');
-            }
-        }
-
-        // Функции для работы с портфолио
-        function addPortfolioItem() {
-            if (!siteData.portfolio) siteData.portfolio = {};
-            if (!siteData.portfolio.videos) siteData.portfolio.videos = [];
-            
-            siteData.portfolio.videos.push({
-                src: 'new-video.mp4',
-                type: 'video/mp4'
-            });
-            
-            populatePortfolio();
-            showStatus('Видео добавлено', 'success');
-        }
-
-        function updatePortfolioItem(index, field, value) {
-            if (siteData.portfolio?.videos?.[index]) {
-                siteData.portfolio.videos[index][field] = value;
-            }
-        }
-
-        function removePortfolioItem(index) {
-            if (siteData.portfolio?.videos) {
-                siteData.portfolio.videos.splice(index, 1);
-                populatePortfolio();
-                showStatus('Видео удалено', 'success');
-            }
-        }
-
-        // Функции для работы с товарами
-        function addProduct() {
-            if (!siteData.homeCare) siteData.homeCare = {};
-            if (!siteData.homeCare.products) siteData.homeCare.products = [];
-            
-            siteData.homeCare.products.push({
-                title: 'Новый товар',
-                description: 'Описание товара',
-                price: '0 ₽',
-                image: 'product.jpg',
-                alt: 'Товар'
-            });
-            
-            populateProducts();
-            showStatus('Товар добавлен', 'success');
-        }
-
-        function updateProduct(index, field, value) {
-            if (siteData.homeCare?.products?.[index]) {
-                siteData.homeCare.products[index][field] = value;
-            }
-        }
-
-        function removeProduct(index) {
-            if (siteData.homeCare?.products) {
-                siteData.homeCare.products.splice(index, 1);
-                populateProducts();
-                showStatus('Товар удален', 'success');
-            }
-        }
-
-        async function saveData() {
-            try {
-                // Собираем данные из форм
-                updateDataFromForms();
-                
-                // В реальном проекте здесь был бы запрос к серверу
-                // Для демонстрации просто показываем сообщение
-                showStatus('Изменения сохранены (в реальном проекте данные бы сохранились на сервере)', 'success');
-                
-                // Для тестирования можно вывести данные в консоль
-                console.log('Обновленные данные:', siteData);
-                
-            } catch (error) {
-                console.error('Ошибка сохранения:', error);
-                showStatus('Ошибка сохранения', 'error');
-            }
-        }
-
-        function updateDataFromForms() {
-            // Обновляем данные из форм
-            if (!siteData.hero) siteData.hero = {};
-            siteData.hero.title = document.getElementById('hero-title').value;
-            siteData.hero.description = document.getElementById('hero-description').value;
-            siteData.hero.button = document.getElementById('hero-button').value;
-
-            if (!siteData.services) siteData.services = {};
-            siteData.services.title = document.getElementById('services-title').value;
-            siteData.services.description = document.getElementById('services-description').value;
-
-            if (!siteData.portfolio) siteData.portfolio = {};
-            siteData.portfolio.title = document.getElementById('portfolio-title').value;
-            siteData.portfolio.description = document.getElementById('portfolio-description').value;
-
-            if (!siteData.homeCare) siteData.homeCare = {};
-            siteData.homeCare.title = document.getElementById('home-care-title').value;
-            siteData.homeCare.description = document.getElementById('home-care-description').value;
-
-            if (!siteData.team) siteData.team = {};
-            siteData.team.title = document.getElementById('team-title').value;
-            siteData.team.description = document.getElementById('team-description').value;
-            if (!siteData.team.members) siteData.team.members = [{}];
-            siteData.team.members[0].name = document.getElementById('team-name').value;
-            siteData.team.members[0].specialty = document.getElementById('team-specialty').value;
-            siteData.team.members[0].description = document.getElementById('team-bio').value;
-
-            if (!siteData.map) siteData.map = {};
-            siteData.map.title = document.getElementById('map-title').value;
-            siteData.map.description = document.getElementById('map-description').value;
-            siteData.map.iframe = document.getElementById('map-iframe').value;
-
-            if (!siteData.footer) siteData.footer = {};
-            if (!siteData.footer.company) siteData.footer.company = {};
-            if (!siteData.footer.contacts) siteData.footer.contacts = {};
-            siteData.footer.company.description = document.getElementById('footer-description').value;
-            siteData.footer.contacts.address = document.getElementById('footer-address').value;
-            siteData.footer.contacts.phone = document.getElementById('footer-phone').value;
-            siteData.footer.contacts.email = document.getElementById('footer-email').value;
-            siteData.footer.contacts.hours = document.getElementById('footer-hours').value;
-        }
-
         function showStatus(message, type) {
-            const statusEl = document.getElementById('status-message');
-            statusEl.textContent = message;
-            statusEl.className = `status-message status-${type} show`;
+            const statusDiv = document.getElementById('statusMessage');
+            statusDiv.textContent = message;
+            statusDiv.className = `status-message status-${type}`;
+            statusDiv.style.display = 'block';
             
             setTimeout(() => {
-                statusEl.classList.remove('show');
-            }, 3000);
+                statusDiv.style.display = 'none';
+            }, 10000);
         }
 
-        function goToSite() {
-            window.open('index.html', '_blank');
-        }
+        // Загружаем данные при загрузке страницы (если есть файл по умолчанию)
+        document.addEventListener('DOMContentLoaded', function() {
+            // Можно добавить загрузку данных по умолчанию, если нужно
+            console.log('Админ-панель готова к работе');
+        });
     </script>
+
+    <!-- Font Awesome для иконок -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </body>
 </html>
