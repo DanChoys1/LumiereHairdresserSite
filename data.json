@@ -2,7 +2,8 @@
   "site": {
     "title": "Sono - Салон красоты премиум-класса",
     "favicon": "cb5f8c0a77311f0966f164668478d73_1.jpeg",
-    "logo": "Sono"
+    "logo": "Sono",
+    "yclientsLink": "https://w948450.yclients.com/widgetJS"
   },
   "header": {
     "navLinks": [
@@ -12,14 +13,12 @@
       {"name": "Домашний уход", "href": "#home-care"},
       {"name": "Мастер", "href": "#team"},
       {"name": "Контакты", "href": "#contact"}
-    ],
-    "bookingButton": "Записаться онлайн"
+    ]
   },
   "hero": {
     "background": "guy-long-hair.gif",
     "title": "Искусство в каждой прядке",
-    "description": "Добро пожаловать в салон красоты Sono, где мы создаем стиль, который подчеркивает вашу индивидуальность и красоту.",
-    "button": "Записаться онлайн"
+    "description": "Добро пожаловать в салон красоты Sono, где мы создаем стиль, который подчеркивает вашу индивидуальность и красоту."
   },
   "services": {
   "title": "Наши услуги",
