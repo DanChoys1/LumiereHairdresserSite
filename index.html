@@ -379,10 +379,10 @@ async function loadWebsiteData() {
     document.querySelector('link[rel="icon"]').href = data.site.favicon;
     
     // Load YClients widget script from data.json
-    if (data.site.yclientsWidget) {
+    if (data.site.yclientsLink) {
       const script = document.createElement('script');
       script.charset = 'UTF-8';
-      script.src = data.site.yclientsWidget;
+      script.src = data.site.yclientsLink;
       script.onload = function() {
         console.log('YClients widget script loaded successfully');
         initializeBookingWidget();
