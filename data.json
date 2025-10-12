@@ -150,10 +150,10 @@
     "title": "Наши работы",
     "description": "Вдохновляйтесь результатами нашего творчества",
     "videos": [
-      {"src": "IMG_6538.MOV", "type": "video/mp4"},
-      {"src": "IMG_0376 (1).mov", "type": "video/mp4"},
-      {"src": "IMG_0822.MOV", "type": "video/mp4"},
-      {"src": "IMG_6537 (1).MOV", "type": "video/mp4"}
+      {"src": "IMG_6538.MOV", "type": "video/mp4", "poster": "c63635fba1eb11f0a547b62e65e43737_1.jpg"},
+      {"src": "IMG_0376 (1).mov", "type": "video/mp4", "poster": "c63635fba1eb11f0a547b62e65e43737_1.jpg"},
+      {"src": "IMG_0822.MOV", "type": "video/mp4", "poster": "c63635fba1eb11f0a547b62e65e43737_1.jpg"},
+      {"src": "IMG_6537 (1).MOV", "type": "video/mp4", "poster": "c63635fba1eb11f0a547b62e65e43737_1.jpg"}
     ]
   },
   "homeCare": {
