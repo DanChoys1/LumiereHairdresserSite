@@ -464,7 +464,6 @@ function populatePortfolio(videos) {
       <video muted playsinline preload="metadata" poster="${posterSrc}">
         <source src="${video.src}" type="${video.type}"/>
       </video>
-      ${posterSrc ? `<img src="${posterSrc}" class="portfolio-poster" alt="Постер видео">` : ''}
       <button class="play-button">
         <i class="fas fa-play"></i>
       </button>
