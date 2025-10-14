@@ -113,7 +113,7 @@
         "priceRange": ""
       },
       {
-        "title": "Сложное окрашивание Airtouch | Шатуш (средние волосы)",
+        "title": "Сложное окрашивание Airtouch | Шатуш",
         "duration": "4 часа",
         "description": "Создание естественных переходов цвета на волосах средней длины.",
         "price": "16 500 ₽ – 18 000 ₽",
@@ -311,7 +311,7 @@
         "socialLinks": [
           {
             "icon": "fab fa-instagram",
-            "href": "#"
+            "href": "https://www.instagram.com/julia.abdrakhmanova?igsh=MXQyeDNvZ2R1djhtZg%3D%3D&utm_source=qr"
           },
           {
             "icon": "fab fa-telegram",
@@ -319,16 +319,9 @@
           },
           {
             "icon": "fab fa-whatsapp",
-            "href": "#"
+            "href": "https://wa.me/89123527720"
           }
         ]
-      },
-      {
-        "image": "One More Test",
-        "name": "One More Test",
-        "specialty": "One More Test",
-        "description": "One More Test",
-        "socialLinks": []
       }
     ]
   },
