@@ -223,32 +223,8 @@
             align-items: end;
         }
 
-        .file-input-container {
-            position: relative;
-        }
-
         .file-input {
-            position: absolute;
-            opacity: 0;
-            width: 100%;
-            height: 100%;
-            cursor: pointer;
-        }
-
-        .file-input-label {
-            display: block;
-            padding: 10px 15px;
-            background: #f8f9fa;
-            border: 2px dashed #dee2e6;
-            border-radius: 8px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .file-input-label:hover {
-            border-color: #d4b896;
-            background: #f5f0ea;
+            display: none;
         }
 
         .preview-image {
@@ -337,6 +313,10 @@
                 width: 100%;
                 text-align: center;
             }
+            
+            .actions {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -354,6 +334,7 @@
             <button class="tab" onclick="switchTab('portfolio')">Портфолио</button>
             <button class="tab" onclick="switchTab('homecare')">Домашний уход</button>
             <button class="tab" onclick="switchTab('team')">Команда</button>
+            <button class="tab" onclick="switchTab('map')">Карта</button>
             <button class="tab" onclick="switchTab('footer')">Футер и контакты</button>
         </div>
 
@@ -493,6 +474,29 @@
                 </button>
             </div>
 
+            <!-- Карта -->
+            <div class="tab-content" id="map-tab">
+                <h2 class="section-title">Карта и контакты</h2>
+                
+                <div class="form-group">
+                    <label for="mapTitle">Заголовок раздела карты</label>
+                    <input type="text" id="mapTitle" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="mapDescription">Описание раздела карты</label>
+                    <textarea id="mapDescription" class="form-control" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="mapUrl">Ссылка на карту</label>
+                    <input type="text" id="mapUrl" class="form-control" required placeholder="https://yandex.ru/map-widget/v1/...">
+                    <small style="color: #666; margin-top: 5px; display: block;">
+                        Вставьте ссылку на карту из Яндекс.Карт или Google Maps
+                    </small>
+                </div>
+            </div>
+
             <!-- Футер и контакты -->
             <div class="tab-content" id="footer-tab">
                 <h2 class="section-title">Футер и контакты</h2>
@@ -539,9 +543,11 @@
             </div>
 
             <div class="actions">
+                <input type="file" id="fileInput" class="file-input" accept=".json" onchange="handleFileSelect(event)">
                 <button type="button" class="btn btn-secondary" onclick="document.getElementById('fileInput').click()">
                     <i class="fas fa-upload"></i> Загрузить данные
                 </button>
+                
                 <button type="submit" class="btn btn-primary">
                     <i class="fas fa-save"></i> Сохранить изменения
                 </button>
@@ -904,6 +910,11 @@
                 });
             });
 
+            // Карта
+            document.getElementById('mapTitle').value = data.map.title || '';
+            document.getElementById('mapDescription').value = data.map.description || '';
+            document.getElementById('mapUrl').value = data.map.iframe || '';
+
             // Футер
             document.getElementById('companyName').value = data.footer.company.name || '';
             document.getElementById('companyDescription').value = data.footer.company.description || '';
@@ -986,9 +997,9 @@
                     }))
                 },
                 map: {
-                    title: "Как нас найти",
-                    description: "Мы находимся в самом сердце Санкт-Петербурга",
-                    iframe: "https://yandex.ru/map-widget/v1/?l=masstransit&ll=30.385074%2C59.926586&mode=poi&poi%5Bpoint%5D=30.385000%2C59.926531&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D87088919361&z=17"
+                    title: document.getElementById('mapTitle').value,
+                    description: document.getElementById('mapDescription').value,
+                    iframe: document.getElementById('mapUrl').value
                 },
                 footer: {
                     company: {
@@ -1025,7 +1036,7 @@
                 document.body.removeChild(a);
                 URL.revokeObjectURL(url);
                 
-                showStatus('Файл data.json успешно скачан! Следуйте инструкции выше для обновления на GitHub Pages.', 'success');
+                showStatus('Файл data.json успешно скачан! Следуйте инструкции ниже для обновления на GitHub Pages.', 'success');
             } catch (error) {
                 showStatus('Ошибка сохранения: ' + error.message, 'error');
             }
