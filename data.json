@@ -37,8 +37,9 @@
     "title": "Искусство в каждой прядке",
     "description": "Добро пожаловать в салон красоты Sono, где мы создаем стиль, который подчеркивает вашу индивидуальность и красоту.",
     "backgroundPoster": "IMG_6963.webp",
-    "backgroundSource": "IMG_6963.webm",
-    "backgroundType": "video/webm"
+    "backgroundSources": [
+      {"src": "IMG_6963.webm", "type": "video/webm"}
+    ]
   },
   "services": {
     "title": "Наши услуги",
@@ -121,44 +122,52 @@
     "description": "Вдохновляйтесь результатами нашего творчества",
     "videos": [
       {
-        "src": "IMG_6070.MOV",
-        "type": "video/mp4",
-        "poster": "IMG_6070.png"
+        "poster": "IMG_6070.png",
+        "sources": [
+          {"src": "IMG_6070.MOV", "type": "video/quicktime"}
+        ]
       },
       {
-        "src": "IMG_4349.MOV",
-        "type": "video/mp4",
-        "poster": "IMG_4349.png"
+        "poster": "IMG_4349.png",
+        "sources": [
+          {"src": "IMG_4349.MOV", "type": "video/quicktime"}
+        ]
       },
       {
-        "src": "IMG_6314.MOV",
-        "type": "video/mp4",
-        "poster": "IMG_6314.png"
+        "poster": "IMG_6314.png",
+        "sources": [
+          {"src": "IMG_6314.MOV", "type": "video/quicktime"}
+        ]
       },
       {
-        "src": "IMG_6791.MOV",
-        "type": "video/mp4",
-        "poster": "IMG_6791.png"
+        "poster": "IMG_6791.png",
+        "sources": [
+          {"src": "IMG_6791.MOV", "type": "video/quicktime"}
+        ]
       },
       {
-        "src": "IMG_6538.MOV",
-        "type": "video/mp4",
-        "poster": "IMG_6538.png"
+        "poster": "IMG_6538.png",
+        "sources": [
+          {"src": "IMG_6538.MOV", "type": "video/quicktime"}
+        ]
       },
       {
-        "src": "IMG_0376 (1).mov",
-        "type": "video/mp4",
-        "poster": "IMG_0376 (1).png"
+        "poster": "IMG_0376 (1).png",
+        "sources": [
+          {"src": "IMG_0376 (1).MOV", "type": "video/quicktime"}
+        ]
       },
       {
-        "src": "IMG_0822.MOV",
-        "type": "video/mp4",
-        "poster": "IMG_0822.png"
+        "poster": "IMG_0822.png",
+        "sources": [
+          {"src": "IMG_0822.MOV", "type": "video/quicktime"}
+        ]
       },
       {
-        "src": "IMG_6537 (1).MOV",
-        "type": "video/mp4",
-        "poster": "IMG_6537 (1).png"
+        "poster": "IMG_6537 (1).png",
+        "sources": [
+          {"src": "IMG_6537 (1).MOV", "type": "video/quicktime"}
+        ]
       }
     ]
   },

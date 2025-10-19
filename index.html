@@ -417,21 +417,28 @@ async function loadWebsiteData() {
     document.getElementById('heroDescription').textContent = data.hero.description;
     
     // Set hero background from data.json - support both image and video
-    if (data.hero.backgroundSource) {
+    if (data.hero.backgroundSources) {
       const heroSection = document.querySelector('.hero');
       const heroVideo = document.getElementById('heroVideo');
       
       // Clear any existing sources
-      const sourceElement = document.createElement('source');
-      sourceElement.src = data.hero.backgroundSource;
-      sourceElement.type = data.hero.backgroundType;
-
       heroVideo.innerHTML = '';
-      heroVideo.appendChild(sourceElement);
-      heroVideo.poster = data.hero.backgroundPoster;
-      heroVideo.style.display = 'block';
+      
+      // Add video sources for different formats
+      data.hero.backgroundSources.forEach(source => {
+        const sourceElement = document.createElement('source');
+        sourceElement.src = source.src;
+        sourceElement.type = source.type;
+        heroVideo.appendChild(sourceElement);
+      });
+      
+      // Set poster if available
+      if (data.hero.backgroundPoster) {
+        heroVideo.poster = data.hero.backgroundPoster;
+      }
       
       // Ensure video is visible and plays correctly
+      heroVideo.style.display = 'block';
       heroVideo.load();
     }
     
@@ -510,11 +517,12 @@ function populatePortfolio(videos) {
     const portfolioItem = document.createElement('div');
     portfolioItem.className = 'portfolio-item';
     portfolioItem.setAttribute('data-animate', '');
-    
-      // Create video with multiple sources
+    // Create video with multiple sources
     portfolioItem.innerHTML = `
       <video muted playsinline preload="metadata" poster="${video.poster || ''}">
-        ${`<source src="${video.src}" type="${video.type}"/>`}
+        ${video.sources.map(source => 
+          `<source src="${source.src}" type="${source.type}"/>`
+        ).join('')}
       </video>
       <button class="play-button">
         <i class="fas fa-play"></i>
