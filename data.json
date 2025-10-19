@@ -34,9 +34,11 @@
     ]
   },
   "hero": {
-    "background": "previw.gif",
     "title": "Искусство в каждой прядке",
-    "description": "Добро пожаловать в салон красоты Sono, где мы создаем стиль, который подчеркивает вашу индивидуальность и красоту."
+    "description": "Добро пожаловать в салон красоты Sono, где мы создаем стиль, который подчеркивает вашу индивидуальность и красоту.",
+    "backgroundPoster": "IMG_6963.webp",
+    "backgroundSource": "IMG_6963.webm",
+    "backgroundType": "video/webm"
   },
   "services": {
     "title": "Наши услуги",

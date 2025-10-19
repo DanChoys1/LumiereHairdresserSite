@@ -91,6 +91,17 @@ header.scrolled{box-shadow:var(--shadow-md);padding:12px 0;background:rgba(255,2
 .hero p{font-size:clamp(1.1rem,2.5vw,1.25rem);color:rgba(255,255,255,0.95);margin-bottom:32px;animation:fadeInUp 1s ease-out 0.2s both}
 .hero .ms_booking{background:var(--primary);border:none;color:var(--dark);padding:16px 36px;font-size:1.1rem;border-radius:30px;animation:fadeInUp 1s ease-out 0.4s both}
 
+/* Hero video background */
+.hero-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
 /* ---------------- SECTIONS ---------------- */
 .section{padding:clamp(60px,8vw,120px) 0;position:relative}
 .section-light{background:var(--light)}
@@ -236,6 +247,10 @@ footer:before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;b
 <a class="ms_booking" data-yclients-widget="" href="#" style="display:inline-block !important; visibility:visible !important;" data-animate id="heroButton">Записаться онлайн</a>
 </div>
 </div>
+<!-- Hero video background -->
+<video class="hero-video" autoplay muted loop playsinline id="heroVideo">
+  <!-- Video sources will be populated by JavaScript -->
+</video>
 </section>
 
 <!-- Divider 1 -->
@@ -401,10 +416,23 @@ async function loadWebsiteData() {
     document.getElementById('heroTitle').textContent = data.hero.title;
     document.getElementById('heroDescription').textContent = data.hero.description;
     
-    // Set hero background from data.json
-    if (data.hero.background) {
+    // Set hero background from data.json - support both image and video
+    if (data.hero.backgroundSource) {
       const heroSection = document.querySelector('.hero');
-      heroSection.style.background = `linear-gradient(135deg, rgba(44,44,44,0.65), rgba(44,44,44,0.45)), url('${data.hero.background}') center/cover no-repeat`;
+      const heroVideo = document.getElementById('heroVideo');
+      
+      // Clear any existing sources
+      const sourceElement = document.createElement('source');
+      sourceElement.src = data.hero.backgroundSource;
+      sourceElement.type = data.hero.backgroundSourceType;
+
+      heroVideo.innerHTML = '';
+      heroVideo.appendChild(sourceElement);
+      heroVideo.poster = data.hero.backgroundPoster;
+      heroVideo.style.display = 'block';
+      
+      // Ensure video is visible and plays correctly
+      heroVideo.load();
     }
     
     // Populate services
@@ -483,14 +511,11 @@ function populatePortfolio(videos) {
     portfolioItem.className = 'portfolio-item';
     portfolioItem.setAttribute('data-animate', '');
     
-    // Создаем постер из первого кадра видео или используем готовый постер
-    const posterSrc = video.poster || video.src.replace('.mp4', '.jpg') || '';
-    
+      // Create video with multiple sources
     portfolioItem.innerHTML = `
-      <video muted playsinline preload="metadata" poster="${posterSrc}">
-        <source src="${video.src}" type="${video.type}"/>
+      <video muted playsinline preload="metadata" poster="${video.poster || ''}">
+        ${`<source src="${video.src}" type="${video.type}"/>`}
       </video>
-      ${posterSrc ? `<img src="${posterSrc}" class="portfolio-poster" alt="Постер видео">` : ''}
       <button class="play-button">
         <i class="fas fa-play"></i>
       </button>
