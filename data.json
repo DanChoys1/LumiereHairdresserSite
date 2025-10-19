@@ -124,49 +124,49 @@
       {
         "poster": "IMG_6070.png",
         "sources": [
-          {"src": "IMG_6070.MOV", "type": "video/quicktime"}
+          {"src": "IMG_6070.MOV", "type": "video/mp4"}
         ]
       },
       {
         "poster": "IMG_4349.png",
         "sources": [
-          {"src": "IMG_4349.MOV", "type": "video/quicktime"}
+          {"src": "IMG_4349.MOV", "type": "video/mp4"}
         ]
       },
       {
         "poster": "IMG_6314.png",
         "sources": [
-          {"src": "IMG_6314.MOV", "type": "video/quicktime"}
+          {"src": "IMG_6314.MOV", "type": "video/mp4"}
         ]
       },
       {
         "poster": "IMG_6791.png",
         "sources": [
-          {"src": "IMG_6791.MOV", "type": "video/quicktime"}
+          {"src": "IMG_6791.MOV", "type": "video/mp4"}
         ]
       },
       {
         "poster": "IMG_6538.png",
         "sources": [
-          {"src": "IMG_6538.MOV", "type": "video/quicktime"}
+          {"src": "IMG_6538.MOV", "type": "video/mp4"}
         ]
       },
       {
         "poster": "IMG_0376 (1).png",
         "sources": [
-          {"src": "IMG_0376 (1).MOV", "type": "video/quicktime"}
+          {"src": "IMG_0376 (1).MOV", "type": "video/mp4"}
         ]
       },
       {
         "poster": "IMG_0822.png",
         "sources": [
-          {"src": "IMG_0822.MOV", "type": "video/quicktime"}
+          {"src": "IMG_0822.MOV", "type": "video/mp4"}
         ]
       },
       {
         "poster": "IMG_6537 (1).png",
         "sources": [
-          {"src": "IMG_6537 (1).MOV", "type": "video/quicktime"}
+          {"src": "IMG_6537 (1).MOV", "type": "video/mp4"}
         ]
       }
     ]
