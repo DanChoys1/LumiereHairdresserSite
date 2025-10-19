@@ -424,7 +424,7 @@ async function loadWebsiteData() {
       // Clear any existing sources
       const sourceElement = document.createElement('source');
       sourceElement.src = data.hero.backgroundSource;
-      sourceElement.type = data.hero.backgroundSourceType;
+      sourceElement.type = data.hero.backgroundType;
 
       heroVideo.innerHTML = '';
       heroVideo.appendChild(sourceElement);
