@@ -113,8 +113,11 @@ header.scrolled{box-shadow:var(--shadow-md);padding:12px 0;background:rgba(255,2
 .section-title p{color:var(--gray);margin-top:16px;max-width:700px;margin:24px auto 0;font-size:1.1rem}
 
 /* ---------------- SERVICES ---------------- */
-.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:32px}
-.service-card{background:#fff;border-radius:20px;padding:32px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;transition:var(--transition);border:1px solid rgba(212,184,150,0.1);position:relative;overflow:hidden}
+.services-scroll{display:flex;gap:28px;overflow-x:auto;padding:24px 0;-webkit-overflow-scrolling:touch;scroll-behavior:smooth;cursor:grab}
+.services-scroll:active{cursor:grabbing}
+.services-scroll::-webkit-scrollbar{height:8px}
+.services-scroll::-webkit-scrollbar-thumb{background:linear-gradient(90deg,var(--primary),var(--primary-dark));border-radius:6px}
+.service-card{width:380px;flex:0 0 auto;background:#fff;border-radius:20px;padding:32px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;transition:var(--transition);border:1px solid rgba(212,184,150,0.1);position:relative;overflow:hidden}
 .service-card:before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,var(--primary-light),transparent);transition:var(--transition)}
 .service-card:hover:before{left:100%}
 .service-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-lg);border-color:rgba(212,184,150,0.2)}
@@ -133,7 +136,7 @@ header.scrolled{box-shadow:var(--shadow-md);padding:12px 0;background:rgba(255,2
 .portfolio-scroll:active{cursor:grabbing}
 .portfolio-scroll::-webkit-scrollbar{height:8px}
 .portfolio-scroll::-webkit-scrollbar-thumb{background:linear-gradient(90deg,var(--primary),var(--primary-dark));border-radius:6px}
-.portfolio-item{min-width:320px;height:520px;border-radius:16px;overflow:hidden;flex-shrink:0;position:relative;box-shadow:var(--shadow-md);transition:var(--transition);background:var(--light-dark)}
+.portfolio-item{min-width:280px;height:400px;border-radius:16px;overflow:hidden;flex-shrink:0;position:relative;box-shadow:var(--shadow-md);transition:var(--transition);background:var(--light-dark)}
 .portfolio-item:hover{transform:scale(1.02);box-shadow:var(--shadow-lg)}
 .portfolio-item video{width:100%;height:100%;object-fit:cover;display:block;transition:var(--transition)}
 .portfolio-poster{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:2;transition:opacity 0.3s ease}
@@ -154,8 +157,10 @@ header.scrolled{box-shadow:var(--shadow-md);padding:12px 0;background:rgba(255,2
 .product-card:hover .product-image:before{opacity:1}
 .product-image img{width:100%;height:100%;object-fit:cover;display:block;transition:var(--transition)}
 .product-card:hover .product-image img{transform:scale(1.05)}
-.product-content{padding:24px;display:flex;flex-direction:column;flex:1 1 auto;min-height:0;position:relative}
-.product-description{color:var(--gray);font-size:1rem;flex:1;margin-bottom:16px;line-height:1.6}
+.product-content{padding:24px;display:flex;flex-direction:column;flex:1 1 auto;min-height:0;position:relative;overflow:hidden}
+.product-description{color:var(--gray);font-size:1rem;flex:1;margin-bottom:16px;line-height:1.6;overflow-y:auto;max-height:120px;padding-right:8px}
+.product-description::-webkit-scrollbar{width:4px}
+.product-description::-webkit-scrollbar-thumb{background:var(--primary-light);border-radius:4px}
 .product-price{color:var(--primary);font-weight:700;font-size:1.4rem;text-align:center;margin-top:auto;padding-top:20px;border-top:1px solid rgba(212,184,150,0.2);background:#fff;position:relative}
 .home-care-button-container{text-align:center;margin-top:40px;padding-top:40px;border-top:1px solid rgba(212,184,150,0.2)}
 .home-care-button{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:var(--dark);padding:16px 48px;border-radius:30px;text-decoration:none;font-weight:600;font-size:1.1rem;display:inline-block;transition:var(--transition);box-shadow:var(--shadow-sm);position:relative;overflow:hidden}
@@ -206,13 +211,13 @@ footer:before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;b
 @media (max-width:1200px){.product-card{width:350px}.product-image{height:250px}}
 @media (max-width:992px){.product-card{width:400px}.product-image{height:240px}.map-container{height:450px}.nav-links{gap:24px}.section-divider{height:80px}}
 @media (max-width:768px){.mobile-menu{display:block}.nav-links{display:none;position:absolute;top:100%;left:0;width:100%;background:rgba(255,255,255,0.98);backdrop-filter:blur(20px);flex-direction:column;padding:32px;box-shadow:var(--shadow-lg);text-align:center;gap:20px;border-top:1px solid rgba(212,184,150,0.1)}.nav-links.active{display:flex;animation:fadeInUp 0.5s ease-out}.nav-links li{width:100%}.nav-links a{display:block;padding:16px 0;font-size:17px;border-bottom:1px solid rgba(212,184,150,0.1)}.nav-links a:last-child{border-bottom:none}.ms_booking{width:100%;text-align:center;margin-top:16px;padding:16px 32px}.map-container{height:400px}.section{padding:clamp(48px,6vw,80px) 0}.section-divider{height:60px}.play-button{width:50px;height:50px;font-size:20px}.home-care-button{padding:14px 40px;font-size:1rem}}
-@media (max-width:480px){.map-container{height:350px}.product-card{width:350px}.product-image{height:220px}.portfolio-item{min-width:280px;height:450px}.service-card{padding:24px}.hero h1{font-size:2.2rem}.section-divider{height:50px}.play-button{width:45px;height:45px;font-size:18px}.home-care-button{padding:12px 36px;font-size:0.95rem}}
+@media (max-width:480px){.map-container{height:350px}.product-card{width:350px}.product-image{height:220px}.portfolio-item{min-width:260px;height:360px}.service-card{padding:24px}.hero h1{font-size:2.2rem}.section-divider{height:50px}.play-button{width:45px;height:45px;font-size:18px}.home-care-button{padding:12px 36px;font-size:0.95rem}}
 
 /* FIX: pin service prices to bottom */
 .service-card{display:flex;flex-direction:column}
 .service-content{display:flex;flex-direction:column;flex:1}
 .service-price{margin-top:auto}
-.home-care-scroll,.portfolio-scroll{scroll-behavior:smooth;-webkit-overflow-scrolling:touch}
+.home-care-scroll,.portfolio-scroll,.services-scroll{scroll-behavior:smooth;-webkit-overflow-scrolling:touch}
 .portfolio-item{position:relative;overflow:hidden}
 .portfolio-item video{width:100%;height:100%;object-fit:cover;display:block}
 .loading-shimmer{background:linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%);background-size:1000px 100%;animation:shimmer 2s infinite linear}
@@ -271,7 +276,7 @@ footer:before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;b
 <h2 id="servicesTitle"></h2>
 <p id="servicesDescription"></p>
 </div>
-<div class="services-grid" id="servicesGrid">
+<div class="services-scroll" id="servicesScroll">
 <!-- Services will be populated by JavaScript -->
 </div>
 </div>
@@ -450,12 +455,12 @@ async function loadWebsiteData() {
     // Populate portfolio
     document.getElementById('portfolioTitle').textContent = data.portfolio.title;
     document.getElementById('portfolioDescription').textContent = data.portfolio.description;
-    populatePortfolio(data.portfolio.videos);
+    populatePortfolio(data.portfolio.items);
     
     // Populate home care
     document.getElementById('homeCareTitle').textContent = data.homeCare.title;
     document.getElementById('homeCareDescription').textContent = data.homeCare.description;
-    populateHomeCare(data.homeCare.products);
+    populateHomeCare(data.homeCare.items);
     
     // Populate team
     document.getElementById('teamTitle').textContent = data.team.title;
@@ -465,205 +470,239 @@ async function loadWebsiteData() {
     // Populate map
     document.getElementById('mapTitle').textContent = data.map.title;
     document.getElementById('mapDescription').textContent = data.map.description;
-    document.getElementById('mapContainer').innerHTML = `<iframe src="${data.map.iframe}" width="100%" height="100%" frameborder="0" allowfullscreen="true"></iframe>`;
+    document.getElementById('mapContainer').innerHTML = data.map.iframe;
     
     // Populate footer
+    document.getElementById('copyrightText').textContent = data.footer.copyright;
     populateFooter(data.footer);
     
-    // Initialize animations after content is loaded
-    initializeAnimations();
+    // Initialize animations
+    initAnimations();
     
+    // Initialize mobile menu
+    initMobileMenu();
+    
+    // Initialize scroll effects
+    initScrollEffects();
+    
+    // Initialize portfolio videos
+    initPortfolioVideos();
+    
+    console.log('Website data loaded successfully');
   } catch (error) {
     console.error('Error loading website data:', error);
   }
 }
 
-function populateNavigation(headerData) {
-  const navLinks = document.getElementById('navLinks');
-  
-  // Add regular navigation links
-  headerData.navLinks.forEach(link => {
-    const li = document.createElement('li');
-    li.innerHTML = `<a href="${link.href}">${link.name}</a>`;
-    navLinks.appendChild(li);
-  });
+// Initialize booking widget after script loads
+function initializeBookingWidget() {
+  if (typeof yclients !== 'undefined' && yclients.wigdet) {
+    // Initialize booking widgets for all elements with data-yclients-widget attribute
+    yclients.wigdet();
+    console.log('YClients widget initialized');
+  } else {
+    console.error('YClients widget not found');
+  }
 }
 
+// Populate navigation
+function populateNavigation(navData) {
+  const navLinks = document.getElementById('navLinks');
+  navLinks.innerHTML = '';
+  
+  navData.links.forEach(link => {
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = link.href;
+    a.textContent = link.text;
+    li.appendChild(a);
+    navLinks.appendChild(li);
+  });
+  
+  // Add booking button
+  const li = document.createElement('li');
+  const a = document.createElement('a');
+  a.className = 'ms_booking';
+  a.href = '#';
+  a.textContent = navData.bookingButton.text;
+  a.setAttribute('data-yclients-widget', '');
+  li.appendChild(a);
+  navLinks.appendChild(li);
+}
+
+// Populate services
 function populateServices(services) {
-  const servicesGrid = document.getElementById('servicesGrid');
+  const servicesScroll = document.getElementById('servicesScroll');
+  servicesScroll.innerHTML = '';
   
   services.forEach(service => {
     const serviceCard = document.createElement('div');
     serviceCard.className = 'service-card';
-    serviceCard.setAttribute('data-animate', '');
-    
     serviceCard.innerHTML = `
       <div class="service-content">
-        <h3>${service.title}</h3>
-        <div class="service-duration"><i class="fas fa-clock"></i> ${service.duration}</div>
+        <h3>${service.name}</h3>
+        <div class="service-duration">
+          <i class="far fa-clock"></i>
+          <span>${service.duration}</span>
+        </div>
         <p>${service.description}</p>
-        <div class="service-price">${service.price}${service.priceRange ? `<span class="price-range">${service.priceRange}</span>` : ''}</div>
+        <div class="service-price">
+          ${service.price}
+          ${service.priceRange ? `<span class="price-range">${service.priceRange}</span>` : ''}
+        </div>
       </div>
     `;
-    
-    servicesGrid.appendChild(serviceCard);
+    servicesScroll.appendChild(serviceCard);
   });
 }
 
-function populatePortfolio(videos) {
+// Populate portfolio
+function populatePortfolio(portfolioItems) {
   const portfolioScroll = document.getElementById('portfolioScroll');
+  portfolioScroll.innerHTML = '';
   
-  videos.forEach(video => {
+  portfolioItems.forEach(item => {
     const portfolioItem = document.createElement('div');
     portfolioItem.className = 'portfolio-item';
-    portfolioItem.setAttribute('data-animate', '');
-    // Create video with multiple sources
     portfolioItem.innerHTML = `
-      <video muted playsinline preload="metadata" poster="${video.poster || ''}">
-        ${video.sources.map(source => 
-          `<source src="${source.src}" type="${source.type}"/>`
-        ).join('')}
+      <video loop muted playsinline>
+        <source src="${item.videoSrc}" type="video/mp4">
       </video>
+      <img src="${item.posterSrc}" alt="${item.alt}" class="portfolio-poster">
       <button class="play-button">
         <i class="fas fa-play"></i>
       </button>
     `;
-    
     portfolioScroll.appendChild(portfolioItem);
   });
 }
 
+// Populate home care products
 function populateHomeCare(products) {
   const homeCareScroll = document.getElementById('homeCareScroll');
+  homeCareScroll.innerHTML = '';
   
   products.forEach(product => {
     const productCard = document.createElement('div');
     productCard.className = 'product-card';
-    productCard.setAttribute('data-animate', '');
-    
     productCard.innerHTML = `
-      <div class="product-image"><img alt="${product.alt}" src="${product.image}"/></div>
+      <div class="product-image">
+        <img src="${product.image}" alt="${product.name}" loading="lazy">
+      </div>
       <div class="product-content">
-        <h3>${product.title}</h3>
-        <div class="product-description"><p>${product.description}</p></div>
+        <h3>${product.name}</h3>
+        <div class="product-description">${product.description}</div>
         <div class="product-price">${product.price}</div>
       </div>
     `;
-    
     homeCareScroll.appendChild(productCard);
   });
 }
 
-function populateTeam(members) {
+// Populate team
+function populateTeam(teamMembers) {
   const teamGrid = document.getElementById('teamGrid');
+  teamGrid.innerHTML = '';
   
-  members.forEach(member => {
+  teamMembers.forEach(member => {
     const teamCard = document.createElement('div');
     teamCard.className = 'team-card';
-    teamCard.setAttribute('data-animate', '');
-    
-    // Используем безопасный доступ к свойствам
-    const socialLinks = member.socialLinks || [];
-    const image = member.image || '';
-    
     teamCard.innerHTML = `
-      <div class="team-image" style="background: url('${image}') center/cover no-repeat;"></div>
+      <div class="team-image">
+        <img src="${member.image}" alt="${member.name}" loading="lazy">
+      </div>
       <div class="team-info">
         <h3>${member.name}</h3>
         <span class="specialty">${member.specialty}</span>
         <p>${member.description}</p>
         <div class="social-links">
-          ${socialLinks.map(social => 
-            `<a href="${social.href || '#'}"><i class="${social.icon || 'fab fa-instagram'}"></i></a>`
-          ).join('')}
+          ${member.socialLinks.map(link => `
+            <a href="${link.url}" target="_blank" aria-label="${link.platform}">
+              <i class="${link.icon}"></i>
+            </a>
+          `).join('')}
         </div>
       </div>
     `;
-    
     teamGrid.appendChild(teamCard);
   });
 }
 
+// Populate footer
 function populateFooter(footerData) {
   const footerContent = document.getElementById('footerContent');
+  footerContent.innerHTML = '';
   
-  // Используем безопасный доступ к свойствам
-  const company = footerData.company || {};
-  const contacts = footerData.contacts || {};
-  const links = footerData.links || [];
-  
-  footerContent.innerHTML = `
-    <div class="footer-column" data-animate>
-      <h3>${company.name || 'О нас'}</h3>
-      <p>${company.description || ''}</p>
-    </div>
-    <div class="footer-column" data-animate>
-      <h3>Контакты</h3>
-      <ul class="contact-info">
-        <li><i class="fas fa-map-marker-alt"></i> ${contacts.address || ''}</li>
-        <li><i class="fas fa-phone"></i> ${contacts.phone || ''}</li>
-        <li><i class="fas fa-envelope"></i> ${contacts.email || ''}</li>
-        <li><i class="fas fa-clock"></i> ${contacts.hours || ''}</li>
-      </ul>
-    </div>
-    <div class="footer-column" data-animate>
-      <h3>Быстрые ссылки</h3>
-      <ul class="footer-links">
-        ${links.map(link => 
-          `<li><a href="${link.href || '#'}">${link.name || ''}</a></li>`
-        ).join('')}
-      </ul>
-    </div>
-  `;
-  
-  document.getElementById('copyrightText').innerHTML = footerData.copyright || '';
+  footerData.columns.forEach(column => {
+    const footerColumn = document.createElement('div');
+    footerColumn.className = 'footer-column';
+    footerColumn.innerHTML = `
+      <h3>${column.title}</h3>
+      ${column.type === 'links' ? `
+        <ul class="footer-links">
+          ${column.items.map(item => `
+            <li><a href="${item.href}">${item.text}</a></li>
+          `).join('')}
+        </ul>
+      ` : ''}
+      ${column.type === 'contact' ? `
+        <ul class="contact-info">
+          ${column.items.map(item => `
+            <li>
+              <i class="${item.icon}"></i>
+              <span>${item.text}</span>
+            </li>
+          `).join('')}
+        </ul>
+      ` : ''}
+    `;
+    footerContent.appendChild(footerColumn);
+  });
 }
 
-function initializeAnimations() {
-  // Mobile menu functionality
+// Initialize animations
+function initAnimations() {
+  const animateElements = document.querySelectorAll('[data-animate]');
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animated');
+      }
+    });
+  }, { threshold: 0.1 });
+  
+  animateElements.forEach(el => observer.observe(el));
+}
+
+// Initialize mobile menu
+function initMobileMenu() {
   const mobileMenu = document.getElementById('mobileMenu');
   const navLinks = document.getElementById('navLinks');
   
-  mobileMenu.addEventListener('click', function() {
+  mobileMenu.addEventListener('click', () => {
     navLinks.classList.toggle('active');
-    const icon = mobileMenu.querySelector('i');
-    if (navLinks.classList.contains('active')) {
-      icon.classList.remove('fa-bars');
-      icon.classList.add('fa-times');
-    } else {
-      icon.classList.remove('fa-times');
-      icon.classList.add('fa-bars');
-    }
+    mobileMenu.innerHTML = navLinks.classList.contains('active') 
+      ? '<i class="fas fa-times"></i>' 
+      : '<i class="fas fa-bars"></i>';
   });
   
-  // Close menu when clicking on a link
+  // Close mobile menu when clicking on a link
   document.querySelectorAll('.nav-links a').forEach(link => {
     link.addEventListener('click', () => {
       navLinks.classList.remove('active');
-      mobileMenu.querySelector('i').classList.remove('fa-times');
-      mobileMenu.querySelector('i').classList.add('fa-bars');
+      mobileMenu.innerHTML = '<i class="fas fa-bars"></i>';
     });
   });
+}
 
-  // Scroll animations
-  const animateOnScroll = () => {
-    const elements = document.querySelectorAll('[data-animate]');
-    elements.forEach(element => {
-      const elementTop = element.getBoundingClientRect().top;
-      const elementVisible = 150;
-      
-      if (elementTop < window.innerHeight - elementVisible) {
-        element.classList.add('animated');
-      }
-    });
-  };
-
-  // Header scroll effect
+// Initialize scroll effects
+function initScrollEffects() {
   const header = document.getElementById('header');
   const backToTop = document.querySelector('.back-to-top');
   
-  const handleScroll = () => {
-    // Header scroll
+  window.addEventListener('scroll', () => {
+    // Header scroll effect
     if (window.scrollY > 100) {
       header.classList.add('scrolled');
     } else {
@@ -676,138 +715,51 @@ function initializeAnimations() {
     } else {
       backToTop.classList.remove('visible');
     }
-    
-    // Animate on scroll
-    animateOnScroll();
-  };
-
-  // Initial check
-  animateOnScroll();
-  
-  // Event listeners
-  window.addEventListener('scroll', handleScroll);
-  window.addEventListener('load', handleScroll);
-
-  // Back to top functionality - исправлен селектор
-  backToTop.addEventListener('click', (e) => {
-    e.preventDefault();
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
   });
-
-  // Инициализация управления видео
-  initializeVideoControls();
-
-  // Инициализация YClients виджета для всех кнопок записи
-  initializeBookingWidget();
-
-  // Smooth scrolling for anchor links - исправлен селектор
-  document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(anchor => {
+  
+  // Smooth scrolling for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       e.preventDefault();
-      const targetId = this.getAttribute('href');
-      if (targetId && targetId !== '#') {
-        const target = document.querySelector(targetId);
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
       }
     });
   });
 }
 
-// Функция для инициализации YClients виджета
-function initializeBookingWidget() {
-  // Ждем загрузки YClients виджета
-  if (typeof window.yclients !== 'undefined' && window.yclients.widget) {
-    // Инициализируем виджет для всех кнопок с классом ms_booking и home-care-button
-    document.querySelectorAll('.ms_booking, .home-care-button').forEach(button => {
-      // YClients виджет должен автоматически инициализировать кнопки с data-yclients-widget
-      console.log('YClients widget initialized for button:', button);
-    });
-  } else {
-    // Если виджет еще не загружен, ждем
-    setTimeout(initializeBookingWidget, 100);
-  }
-}
-
-// Функция для управления видео
-function initializeVideoControls() {
-  const portfolioItems = document.querySelectorAll('.portfolio-item');
-  
-  portfolioItems.forEach(item => {
-    const video = item.querySelector('video');
-    const poster = item.querySelector('.portfolio-poster');
-    const playButton = item.querySelector('.play-button');
-    
-    if (!video) return;
-    
-    // Убедимся, что видео загружает метаданные для показа первого кадра
-    video.addEventListener('loadeddata', function() {
-      // На мобильных устройствах устанавливаем текущее время на 0 для показа первого кадра
-      if (window.innerWidth <= 768) {
-        video.currentTime = 0.1; // Небольшое смещение чтобы гарантировать показ кадра
-      }
-    });
-    
-    // Воспроизведение по клику на кнопку play
-    playButton.addEventListener('click', function(e) {
-      e.stopPropagation();
-      playVideo(item, video, poster, playButton);
-    });
-    
-    // Воспроизведение по клику на само видео (для мобильных)
-    video.addEventListener('click', function(e) {
-      e.stopPropagation();
-      if (window.innerWidth <= 768) {
-        if (video.paused) {
-          playVideo(item, video, poster, playButton);
-        } else {
-          pauseVideo(item, video, poster, playButton);
-        }
-      }
-    });
-    
-    // Для десктопа - воспроизведение при наведении
-    if (window.innerWidth > 768) {
-      item.addEventListener('mouseenter', function() {
-        playVideo(item, video, poster, playButton);
-      });
+// Initialize portfolio videos
+function initPortfolioVideos() {
+  document.addEventListener('click', function(e) {
+    if (e.target.closest('.play-button')) {
+      const portfolioItem = e.target.closest('.portfolio-item');
+      const video = portfolioItem.querySelector('video');
+      const poster = portfolioItem.querySelector('.portfolio-poster');
       
-      item.addEventListener('mouseleave', function() {
-        pauseVideo(item, video, poster, playButton);
-      });
+      if (video.paused) {
+        video.play();
+        portfolioItem.classList.add('playing');
+      } else {
+        video.pause();
+        portfolioItem.classList.remove('playing');
+      }
     }
-    
-    // При окончании видео возвращаем к началу и показываем постер
+  });
+  
+  // Handle video end
+  document.querySelectorAll('.portfolio-item video').forEach(video => {
     video.addEventListener('ended', function() {
-      pauseVideo(item, video, poster, playButton);
+      const portfolioItem = this.closest('.portfolio-item');
+      portfolioItem.classList.remove('playing');
     });
   });
 }
 
-function playVideo(item, video, poster, playButton) {
-  video.play().then(() => {
-    item.classList.add('playing');
-  }).catch(error => {
-    console.log('Video play failed:', error);
-    // Если воспроизведение не удалось, показываем постер
-    item.classList.remove('playing');
-  });
-}
-
-function pauseVideo(item, video, poster, playButton) {
-  video.pause();
-  video.currentTime = 0;
-  item.classList.remove('playing');
-}
-
-// Initialize the website when DOM is loaded
+// Load the website data when DOM is ready
 document.addEventListener('DOMContentLoaded', loadWebsiteData);
 </script>
 </body>
